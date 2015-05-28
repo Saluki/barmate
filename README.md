@@ -47,7 +47,10 @@ chmod -R 777 storage/
 ```
 
 That's it! You can now test Barmate by going to you application URL, go to the login page and enter the following credentials: 
-**admin@barmate.com** and **password**. 
+```
+admin@barmate.com
+password
+```
 
 ## Copyright and license
 
