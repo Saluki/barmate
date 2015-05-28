@@ -6,24 +6,21 @@
 |--------------------------------------------------------------------------
 */
 
-// #Laravel5
-// Controller's root namespace in routes.php is defined at App\Http\Controllers
-// So... you don't have te write 'uses'=>'App\Http\Controllers\PublicController@home'
-// but just 'uses'=>'PublicController@home'
-
-// TODO Setup more specific route params (restrict numbers, ...)
-
 // PUBLIC ROUTES
 
-Route::get('/', ['before'=>'guest', 'uses'=>'PublicController@home']);
+Route::group(['middleware'=>'guest'], function(){
 
-Route::get('login', ['before'=>'guest', 'uses'=>'LoginController@loginForm']);
+    Route::get('/', 'PublicController@home');
 
-Route::post('login', ['before'=>['guest','csrf'], 'uses'=>'LoginController@tryLogin']);
+    Route::get('login', 'LoginController@loginForm');
+
+    Route::post('login', 'LoginController@tryLogin');
+
+});
 
 // USER ROUTES
 
-Route::group(['before'=>'user', 'prefix'=>'app'], function(){
+Route::group(['prefix'=>'app', 'middleware'=>'user'], function(){
 
 	// APP MODULE
 
@@ -35,7 +32,7 @@ Route::group(['before'=>'user', 'prefix'=>'app'], function(){
 	
 	Route::get('account', 'AccountController@index');
     
-    Route::post('account', ['before'=>'csrf', 'uses'=>'AccountController@saveProfile']);
+    Route::post('account', 'AccountController@saveProfile');
 
 	Route::get('logout', 'LoginController@logout');
 
@@ -43,7 +40,7 @@ Route::group(['before'=>'user', 'prefix'=>'app'], function(){
 
 // MANAGER ROUTES
 
-Route::group(['before'=>'manager', 'prefix'=>'app'], function(){
+Route::group(['prefix'=>'app', 'middleware'=>'manager'], function(){
 
 	// STOCK MODULE
 			
@@ -57,15 +54,12 @@ Route::group(['before'=>'manager', 'prefix'=>'app'], function(){
 
 	Route::get('cash', 'CashController@dashboard');
 
-	// Since the rest API is not used for the moment...
-	/*Route::get('cash/snapshot/current', 'SnapshotController@getCurrent');
-	Route::get('cash/snapshot/{id}/details', 'SnapshotController@getDetails');
-	Route::resource('cash/snapshot', 'SnapshotController', ['only' => ['index','store','show']]);*/
-
 	Route::get('cash/register-operation', 'CashController@operationForm');
+
 	Route::post('cash/register-operation', 'CashController@registerOperation');
 
 	Route::get('cash/new-snapshot', 'CashController@snapshotForm');
+
 	Route::post('cash/new-snapshot', 'CashController@createSnapshot');
 
 	Route::get('cash/history', 'CashController@showHistory');
@@ -78,7 +72,9 @@ Route::group(['before'=>'manager', 'prefix'=>'app'], function(){
 
 // ADMIN ROUTES
 
-Route::group(['before'=>'admin', 'prefix'=>'app'], function(){
+Route::group(['prefix'=>'app', 'middleware'=>'administrator'], function(){
+
+    // USERS MODULE
 	
 	Route::get('users', 'UsersController@getActiveUsers');
 
@@ -93,6 +89,8 @@ Route::group(['before'=>'admin', 'prefix'=>'app'], function(){
 	Route::get('users/change-role/{id}', 'UsersController@changeAccountRole');
 	
 	Route::get('users/delete/{id}', 'UsersController@deleteUser');
+
+    // SETTINGS MODULE
 	
 	Route::get('settings', 'SettingsController@index');
 
