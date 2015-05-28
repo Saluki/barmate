@@ -26,4 +26,4 @@ php artisan db:seed
 
 ## Copyright and license
 
-Barmate is released under the MIT license.
+Barmate is released under the [MIT license](https://github.com/Saluki/Barmate/blob/master/LICENSE).
