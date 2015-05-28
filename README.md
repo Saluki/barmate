@@ -1,5 +1,7 @@
 # Barmate
 
+[![Build Status](https://travis-ci.org/Saluki/Barmate.svg)](https://travis-ci.org/Saluki/Barmate)
+
 Modern and intuitive POS web application written with the Laravel framework.
 
 ## Table of contents
