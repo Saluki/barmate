@@ -2,6 +2,12 @@
 
 POS web application
 
+## Table of contents
+
+- [Screenshots](#screenshots)
+- [Quick start](#quick-start)
+- [Copyright and license](#copyright-and-license)
+
 ## Screenshots
 
 ![Dashboard screenshots](http://s2.postimg.org/jobpfx4op/barmate_S1.png)
