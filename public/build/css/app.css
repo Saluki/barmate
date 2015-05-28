@@ -1,0 +1,168 @@
+#main-container {
+  display: table;
+  height: 100%;
+  width: 100%;
+  padding: 50px;
+  padding-top: 100px;
+}
+#main-container #groups-container {
+  width: 230px;
+  display: table-cell;
+  vertical-align: top;
+}
+#main-container #groups-container #groups {
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px lightgrey;
+}
+#main-container #groups-container #groups .group-item {
+  color: #203951;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #efefef;
+  letter-spacing: 1px;
+}
+#main-container #groups-container #groups .group-item:last-child {
+  border-bottom: 0px;
+}
+#main-container #stock {
+  display: table-cell;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+#main-container #stock .stock-item {
+  padding: 0px;
+  border: 0px;
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin: 10px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  background: #74baff;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #0095dd;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px lightgrey;
+}
+#main-container #ticket-container {
+  width: 300px;
+  display: table-cell;
+  vertical-align: top;
+}
+#main-container #ticket-container #ticket {
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: 0px 1px 3px lightgrey;
+}
+#main-container #ticket-container #ticket #ticket-header {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #efefef;
+}
+#main-container #ticket-container #ticket #ticket-header h2 {
+  font-size: 20px;
+  color: #203951;
+  margin: 0px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+#main-container #ticket-container #ticket #ticket-header h2 #clear-ticket {
+  font-weight: normal;
+  border-radius: 3px;
+}
+#main-container #ticket-container #ticket #ticket-body .ticket-item {
+  display: table;
+  width: 100%;
+  margin: 15px 0px;
+}
+#main-container #ticket-container #ticket #ticket-body .ticket-item .qt {
+  display: table-cell;
+  vertical-align: middle;
+  width: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+#main-container #ticket-container #ticket #ticket-body .ticket-item .title {
+  display: table-cell;
+  vertical-align: middle;
+  font-weight: bold;
+}
+#main-container #ticket-container #ticket #ticket-body .ticket-item .close {
+  display: table-cell;
+  vertical-align: middle;
+  width: 20px;
+  text-align: right;
+}
+#main-container #ticket-container #ticket #ticket-footer #ticket-price {
+  margin: 20px 0px;
+  text-align: right;
+  font-size: 30px;
+}
+#main-container #ticket-container #ticket #ticket-footer .btn {
+  width: 48%;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#payment-container {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(77, 77, 77, 0.56);
+}
+#payment-container #payment {
+  display: table;
+  width: 550px;
+  margin: 100px auto;
+  background: #ffffff;
+  padding: 30px;
+  color: #203951;
+  box-shadow: 0px 0px 10px grey;
+}
+#payment-container #payment #left-side {
+  display: table-cell;
+  width: 60%;
+}
+#payment-container #payment #left-side .btn-payment {
+  margin: 0px;
+  background: #efefef;
+  border: 0px;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 35px;
+}
+#payment-container #payment #right-side {
+  display: table-cell;
+  width: 40%;
+  vertical-align: top;
+}
+#payment-container #payment #right-side #cancel-payment-container {
+  margin-bottom: 20px;
+}
+#payment-container #payment #right-side #cancel-payment-container #cancel-payment {
+  border-radius: 3px;
+}
+#payment-container #payment #right-side #payment-sum,
+#payment-container #payment #right-side #payment-rest {
+  text-align: right;
+  font-size: 30px;
+}
+#payment-container #payment #right-side #send-payment {
+  margin-top: 70px;
+  font-weight: bold;
+}

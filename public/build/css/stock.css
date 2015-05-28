@@ -1,0 +1,65 @@
+/* STOCK APP STYLESHEET */
+#category-list {
+  margin-top: 15px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.category-item {
+  padding: 5px;
+  border-bottom: 1px solid lightgrey;
+}
+.category-item.active {
+  background: #f9f9f9;
+}
+.category-item.active .title {
+  cursor: default;
+  color: #0095dd;
+}
+.category-item:last-child {
+  border-bottom: 0px;
+}
+.category-item .title {
+  cursor: pointer;
+}
+#new-category-form {
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 10px;
+  border-top: 0px;
+  margin-bottom: 15px;
+}
+#new-category-form input[type="text"] {
+  padding: 5px;
+  width: 75%;
+  height: 34px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+#new-category-form input[type="text"]:focus {
+  border: 1px solid #0095dd;
+}
+#new-category-form button {
+  width: 20%;
+  float: right;
+  border-radius: 3px;
+}
+#product-list {
+  margin-top: 15px;
+}
+#product-list .product {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 1px solid lightgrey;
+}
+#product-list .product:last-child {
+  border-bottom: 0px;
+}
+#product-list .product.active {
+  color: #0095dd;
+  font-weight: bold;
+}

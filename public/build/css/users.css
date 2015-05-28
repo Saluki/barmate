@@ -1,0 +1,7 @@
+/* USERS COMPONENTS STYLESHEET */
+#users-table tr:first-child td {
+  border-top: 0px;
+}
+#users-table td {
+  vertical-align: middle;
+}

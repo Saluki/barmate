@@ -1,0 +1,11 @@
+{
+  "name": "Saluki/Barmate",
+  "dependencies": {
+    "alertify-js": "latest",
+    "backbone": "latest",
+    "bootstrap": "latest",
+    "fontawesome": "latest",
+    "chartjs": "latest",
+    "less": "latest"
+  }
+}

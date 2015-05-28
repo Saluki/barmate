@@ -1,0 +1,62 @@
+
+@import "variables";
+
+// HEADER
+
+header {
+    
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 60px;
+    display: table;
+    padding-left: 5px;
+    padding-right: 15px;
+    background:@mainColor;
+    color:white;
+    box-shadow: 0px 0px 5px white;
+        
+    .item {
+        
+        display: table-cell;
+        vertical-align: middle;
+        padding-left:15px;
+        padding-right: 15px;
+    }
+    
+    .icon {
+        
+        width: 50px;
+        font-size: 23px;
+        cursor: pointer;
+        
+        &:hover {
+            
+            color: #ededed;
+        }
+    }
+    
+    a {
+        
+        color: #ffffff;
+        
+        &:hover {
+            
+            color: #ededed;
+        }
+    }
+    
+    #title {
+        
+        font-family: Droid Sans;
+        font-size: 28px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-style: italic;
+        width: 100px;
+    }
+
+}
+
+// STYLESHEET END

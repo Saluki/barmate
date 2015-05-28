@@ -1,0 +1,96 @@
+
+@import "variables";
+
+/* STOCK APP STYLESHEET */
+
+#category-list {
+
+	margin-top: 15px;
+	border: 1px solid lightgrey;
+	border-radius: 3px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.category-item {
+	
+	padding:5px;
+	border-bottom:1px solid lightgrey;
+
+	&.active {
+
+		background: @hoverGrey;
+
+		.title {
+
+			cursor: default;
+			color: @mainColor;
+		}
+	}
+
+	&:last-child {
+
+		border-bottom: 0px;
+	}
+
+	.title {
+
+		cursor: pointer;
+	}
+}
+
+#new-category-form {
+
+	border: 1px solid lightgrey;
+	border-radius: 3px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	padding: 10px;
+	border-top:0px;
+	margin-bottom: 15px;
+
+	input[type="text"] {
+
+		padding: 5px;
+		width: 75%;
+		height: 34px;
+		border: 1px solid lightgrey;
+		border-radius: 3px;
+		transition: all 0.3s ease;
+
+		&:focus {
+
+			border: 1px solid @mainColor;
+		}
+	}
+
+	button {
+
+		width: 20%;
+		float: right;
+		border-radius: 3px;
+	}
+}
+
+#product-list {
+
+	margin-top: 15px;
+
+	.product {
+
+		cursor: pointer;
+		padding:10px;
+		border-bottom:1px solid lightgrey;
+
+		&:last-child {
+
+			border-bottom: 0px;
+		}
+
+		&.active {
+
+			color: @mainColor;
+			font-weight: bold;
+		}
+	}
+}

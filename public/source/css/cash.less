@@ -1,0 +1,132 @@
+
+// CASH COMPONENTS LESS FILE
+
+@import "variables";
+
+.action-tile {
+	
+	background: @hoverGrey;
+	width: 160px;
+	height: 160px;
+	margin: 20px;
+	float: left;
+	cursor: pointer;
+	border: 1px solid @whiteGrey;
+	color: @darkBlueColor;
+
+	.action-icon {
+
+		padding-top: 10px;
+		font-size: 70px;
+		text-align: center;
+		height: 70%;
+
+		transition: all 0.2s ease;
+	}
+
+	.action-text {
+
+		font-size: 15px;
+		font-weight: bold;
+		text-align: center;
+		height: 30%;
+		vertical-align: middle;
+	}
+
+	&:hover {
+
+		color: @mainColor;
+		text-decoration: none;
+	}
+
+}
+
+.stat-tile {
+
+	width: 250px;
+	height: 75px;
+	margin: 20px;
+	float:left;
+
+	.stat-title {
+
+		font-size: 20px;
+		color: @textGrey;
+	}
+
+	.stat-number {
+
+		font-size: 50px;
+		color: @mainColor;
+		font-weight: bold;
+	}
+}
+
+.group-title {
+
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+	.group-title-text {
+
+		font-size: 17px;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.group-title-line {
+
+		border-bottom: 1px solid @whiteGrey;
+		margin-top: 13px;
+	}
+}
+
+#current-snapshot {
+
+	height: 300px;
+
+	.row {
+
+		height: 100%;
+	}
+
+	#current-snapshot-graph {
+
+		height: 100%;
+	}
+
+	#current-snapshot-details {
+
+		height: 100%;
+		padding-left: 25px;
+
+		h3 {
+
+			text-transform: uppercase;
+			font-weight: bold;
+		}
+
+		i {
+
+			color: @textGrey;
+		}
+	}
+}
+
+.empty-announcement {
+
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	color: @textGrey;
+
+	.fa {
+
+		font-size: 80px;
+	}
+
+	h2 {
+
+		font-size: 30px;
+	}
+}

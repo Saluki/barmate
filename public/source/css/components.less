@@ -1,0 +1,190 @@
+
+@import "variables";
+
+body {
+    
+    background: @backgroundColor;
+}
+
+.paper {
+
+	margin:100px auto; 
+	width:960px; 
+	background:#fff;
+	box-shadow:0px 1px 3px @paperShadow;
+	padding: 0px;
+
+	.paper-header {
+
+		background: #90CAF9;
+		color: #ffffff;
+		padding: 10px;
+
+		h2 {
+
+			padding: 0px;
+			margin: 0px;
+			font-size: 20px;
+			margin: 10px;
+		}
+
+		a {
+
+			color: #ffffff;
+
+			&:hover {
+
+				color: #ffffff;
+				text-decoration: none;
+			}
+
+			&.btn-back {
+
+				float: right;
+				color: #ffffff;
+				text-transform: uppercase;
+				padding: 5px 10px;
+				border: 2px solid #ffffff;
+				display: block;
+				font-size: 14px;
+				border-radius: 3px;
+				margin-top: -3px;
+				font-weight: bold;
+				background: rgba(255, 255, 255, 0.1);
+			}
+
+			&.btn-back:hover {
+
+				background: rgba(255, 255, 255, 0.4);
+			}
+		}
+	}
+
+	.paper-notify {
+
+		padding: 10px;
+		color: #ffffff;
+		font-weight: bold;
+		text-align: center;
+
+		&.success {
+			background: #6EDE6E;
+		}
+
+		&.error {
+			background: #FB9595;
+		}
+	}
+
+	.paper-body {
+
+		padding:15px;
+		background:#fff;
+		min-height:500px;
+	}
+}
+
+label {
+	margin-top: 10px;
+}
+
+input[type="text"].form-control, input[type="password"].form-control, textarea.form-control, select.form-control {
+	
+	border: 1px solid #CCCCCC;
+	box-shadow: none;
+	resize: none;
+	margin-bottom:20px;
+
+	&.input-lg {
+
+		font-size: 22px;
+	}
+
+	&.inline {
+
+		margin: 0px;
+		padding: 3px;
+		padding-left: 0px;
+		font-size: 14px;
+		display: inline;
+		width: 200px;
+	}
+
+	&:focus {
+
+		border-color: @mainColor;
+		box-shadow: none;
+	}
+
+	&[disabled] {
+
+		padding-left: 10px;
+	}
+}
+
+/*.btn {
+    
+    border-radius: 0px;
+    
+}
+
+.btn-primary {
+    
+    background: @mainColor;
+}
+
+label {
+	
+	font-weight: normal;
+	color: @textGrey;
+	margin-top: 10px;
+	font-size: 14px;
+}
+
+input[type="text"].form-control, input[type="password"].form-control, textarea.form-control {
+	
+	border: 0px;
+	border-radius: 0px;
+	border-bottom: 2px solid @whiteGrey;
+	box-shadow: none;
+	padding-left: 0px;
+	resize: none;
+	font-size: 16px;
+	margin-bottom:30px;
+
+	&.input-lg {
+
+		font-size: 22px;
+	}
+
+	&.inline {
+
+		margin: 0px;
+		padding: 3px;
+		padding-left: 0px;
+		font-size: 14px;
+		display: inline;
+		width: 200px;
+	}
+
+	&:focus {
+
+		border-color: @mainColor;
+		box-shadow: none;
+	}
+
+	&[disabled] {
+
+		padding-left: 10px;
+	}
+}
+
+.radio-group {
+	
+	margin-bottom: 30px;
+
+	input[type="radio"] {
+		
+		margin-right: 5px;
+	}
+}*/

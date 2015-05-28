@@ -1,0 +1,88 @@
+.action-tile {
+  background: #f9f9f9;
+  width: 160px;
+  height: 160px;
+  margin: 20px;
+  float: left;
+  cursor: pointer;
+  border: 1px solid #efefef;
+  color: #203951;
+}
+.action-tile .action-icon {
+  padding-top: 10px;
+  font-size: 70px;
+  text-align: center;
+  height: 70%;
+  transition: all 0.2s ease;
+}
+.action-tile .action-text {
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  height: 30%;
+  vertical-align: middle;
+}
+.action-tile:hover {
+  color: #0095dd;
+  text-decoration: none;
+}
+.stat-tile {
+  width: 250px;
+  height: 75px;
+  margin: 20px;
+  float: left;
+}
+.stat-tile .stat-title {
+  font-size: 20px;
+  color: #919191;
+}
+.stat-tile .stat-number {
+  font-size: 50px;
+  color: #0095dd;
+  font-weight: bold;
+}
+.group-title {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.group-title .group-title-text {
+  font-size: 17px;
+  font-weight: bold;
+  text-align: center;
+}
+.group-title .group-title-line {
+  border-bottom: 1px solid #efefef;
+  margin-top: 13px;
+}
+#current-snapshot {
+  height: 300px;
+}
+#current-snapshot .row {
+  height: 100%;
+}
+#current-snapshot #current-snapshot-graph {
+  height: 100%;
+}
+#current-snapshot #current-snapshot-details {
+  height: 100%;
+  padding-left: 25px;
+}
+#current-snapshot #current-snapshot-details h3 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#current-snapshot #current-snapshot-details i {
+  color: #919191;
+}
+.empty-announcement {
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #919191;
+}
+.empty-announcement .fa {
+  font-size: 80px;
+}
+.empty-announcement h2 {
+  font-size: 30px;
+}
