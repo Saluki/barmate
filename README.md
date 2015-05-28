@@ -27,7 +27,10 @@ composer install
 npm install
 bower install
 ```
-* Copy **.env.example** to **.env** and adapt the values to your configuration
+* Copy **.env.example** to **.env** and adapt the values to your configuration (application URL and database)
+```
+cp .env.example .env
+```
 * Set the application key with
 ```
 php artisan key:generate
@@ -38,6 +41,14 @@ php artisan migrate
 php artisan db:seed
 ```
 
+Note that on some configurations, you need to specify the correct rights for the storage folder:
+```
+chmod -R 777 storage/
+```
+
+That's it! You can now test Barmate by going to you application URL, go to the login page and enter the following credentials: 
+**admin@barmate.com** and **password**. 
+
 ## Copyright and license
 
-Barmate is released under the [MIT license](https://github.com/Saluki/Barmate/blob/master/LICENSE).
+Barmate is released under the [MIT license](https://github.com/Saluki/Barmate/blob/master/LICENSE). Feel free to suggest a feature, report a bug, or ask something: [https://github.com/Saluki/Barmate/issues](https://github.com/Saluki/Barmate/issues)
