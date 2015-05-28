@@ -1,6 +1,6 @@
 # Barmate
 
-POS web application
+Modern and intuitive POS web application written with the Laravel framework.
 
 ## Table of contents
 
