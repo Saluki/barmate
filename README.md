@@ -4,11 +4,11 @@ POS web application
 
 ## Screenshots
 
-![Dashboard screenshots](http://postimg.org/image/nkp1bwpo5/)
+![Dashboard screenshots](http://s2.postimg.org/jobpfx4op/barmate_S1.png)
 
-![Menu screenshot](http://postimg.org/image/hv8srljhx/)
+![Menu screenshot](http://s2.postimg.org/rfsfeh8u1/barmate_S2.png)
 
-![Users screenshot](http://postimg.org/image/40ai94p2t/)
+![Users screenshot](http://s2.postimg.org/eacx8deyh/barmate_S3.png)
 
 ## Quick start
 
