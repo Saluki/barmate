@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Categories;
+use App\Repositories\RepositoryException;
 use App\Repositories\SalesRepository;
 use Illuminate\Http\Request;
+use League\Flysystem\Exception;
+use \Response;
 
 class BarController extends Controller {
 	
@@ -23,10 +26,19 @@ class BarController extends Controller {
     
     public function registerSale(Request $request)
     {
-    	var_dump($request->all());
-    	die();
-    	
-    	$this->saleRepository->register(null);
+        try
+        {
+            foreach ($request->all() as $sale)
+            {
+                $this->saleRepository->register($sale);
+            }
+        }
+        catch(RepositoryException $e)
+        {
+            return $e->jsonResponse();
+        }
+
+        return Response::json(["status"=>1], 200);
     }
     
 }

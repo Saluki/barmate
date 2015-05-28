@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-use \Exception;
+use \Exception, \Response;
 
 class RepositoryException extends Exception {
 
@@ -13,26 +13,21 @@ class RepositoryException extends Exception {
 	const RESOURCE_NOT_FOUND = 23;
 	const RESOURCE_DENIED = 24;
 
-	// Matching status
+	// Matching HTTP status
 	private static $httpStatus = [  self::DATABASE_ERROR      => 503,
 							   		self::INCORRECT_PARAMETER => 400,
 									self::VALIDATION_FAILED   => 400,
 									self::RESOURCE_NOT_FOUND  => 404,
 									self::RESOURCE_DENIED     => 403 ];
 
-	public function APIFormat() {
-
+	public function APIFormat()
+    {
 		return ['code' => $this->code, 'message' => $this->message ];
 	}
 
-	public function jsonResponse() {
-
-		$statusCode = 500;
-
-		if( isset( $httpStatus[$this->code] ) ) 
-		{
-			$statusCode = $httpStatus[ $this->code ];
-		}
+	public function jsonResponse()
+    {
+		$statusCode = ( isset(self::$httpStatus[$this->code]) ? self::$httpStatus[$this->code] : 500 );
 
 		return Response::json( $this->APIFormat(), $statusCode);
 	}

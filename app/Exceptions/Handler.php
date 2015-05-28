@@ -36,13 +36,21 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		if($this->isHttpException($e))
+        if($this->isHttpException($e))
 		{
 			return $this->renderHttpException($e);
 		}
 
-		if(config('app.debug'))
+		if( config('app.debug') )
 		{
+            if($request->isXmlHttpRequest())
+            {
+                return response(['message' => $e->getMessage(),
+                                    'code' => $e->getCode(),
+                                    'file' => $e->getFile(),
+                                    'line' => $e->getLine()], 500);
+            }
+
 			return $this->renderExceptionWithWhoops($e);
 		}
 

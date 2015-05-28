@@ -360,7 +360,7 @@ var app = app || {};
                 items     : app.ticket.toJSON(),
                 price     : app.ticket.getPrice(),
                 cash      : this.sum,
-                timestamp : (new Date).getTime(),
+                timestamp : Math.floor(Date.now() / 1000),
                 free      : false
             });
             
@@ -528,7 +528,7 @@ var app = app || {};
                 items     : app.ticket.toJSON(),
                 price     : app.ticket.getPrice(),
                 cash      : 0,
-                timestamp : (new Date).getTime(),
+                timestamp : Math.floor(Date.now() / 1000),
                 free      : true
             });
             

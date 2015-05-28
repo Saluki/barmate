@@ -44,6 +44,18 @@ app.collection.Categories = Backbone.Collection.extend({
 
 	currentID: -1,
 
+	resetCurrentID: function() {
+
+		if( this.length == 0 ) {
+			this.currentID = -1;
+		}
+		else {
+			this.currentID = this.last().id;
+		}
+
+		this.trigger('changed');
+	},
+
 	changeCurrentID: function(id) {
 
 		var formatttedID = parseInt(id);
@@ -58,6 +70,7 @@ app.collection.Categories = Backbone.Collection.extend({
 
 app.categories = new app.collection.Categories();
 
+
 app.collection = app.collection || {};
 
 app.collection.Products = Backbone.Collection.extend({
@@ -70,7 +83,7 @@ app.collection.Products = Backbone.Collection.extend({
 
 });
 
-app.products = new app.collection.Products();
+app.products   = new app.collection.Products();
 
 app.views = app.views || {};
 
@@ -148,7 +161,10 @@ app.views.CategoryItem = Backbone.View.extend({
 	templateDefault : _.template( $('#template-category').html() ),
 	templateEdit    : _.template( $('#template-category-edit').html() ),
 
-	initialize: function(){},
+	initialize: function(){
+
+		this.listenTo(app.categories, 'changed', this.setInactive);
+	},
 
 	events: {
 
@@ -160,6 +176,8 @@ app.views.CategoryItem = Backbone.View.extend({
 	},
 
 	render: function(){
+
+		this.$el.html();
 
 		if( this.editMode == false )
 			var content = this.templateDefault( this.model.toJSON() );
@@ -173,6 +191,7 @@ app.views.CategoryItem = Backbone.View.extend({
 	changeCurrentCategory: function(event){
 
 		app.categories.changeCurrentID( this.model.get('id') );
+		this.$el.addClass('active');
 	},
 
 	deleteCategory: function(event){
@@ -181,9 +200,14 @@ app.views.CategoryItem = Backbone.View.extend({
 		this.model.destroy({
 
 			success: function(model, response) {
+
 				currentView.remove();
+				app.categories.resetCurrentID();
+
+				alertify.success('Category <i>'+ model.get('title') +'</i> deleted');
 			},
 			error: function(model, response) {
+
 				alertify.error(response.responseJSON.error);
 			}
 		});
@@ -231,6 +255,12 @@ app.views.CategoryItem = Backbone.View.extend({
 
 		this.editMode = false;
 		this.render();
+	},
+
+	setInactive: function(){
+
+		this.$el.removeClass('active');
+		this.cancelEdit();
 	}
 
 });
@@ -343,11 +373,25 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var newName        = $('#product-update-name').val();
 		var newDescription = $('#product-update-description').val();
-		var newPrice       = parseInt( $('#product-update-price').val() );
+		var newPrice       = parseFloat( $('#product-update-price').val() );
 		var newQt          = parseInt( $('#product-update-qt').val() );
 
-		if( newName == "" )
+		if( newName.length < 1 || newName.length > 50 )
+			var errorMessage = 'Product name must be between 1 and 50 characters';
+
+		if( newDescription.length > 250 )
+			var errorMessage = 'Description may not be longer than 250 characters';
+
+		if( isNaN(newPrice) || newPrice < 0 )
+			var errorMessage = 'Price must be a positive number';
+
+		if( isNaN(newQt) || newQt < 0 )
+			var errorMessage = 'Quantity must be a positive integer';
+
+		if( errorMessage != undefined ) {
+			alertify.error(errorMessage);
 			return;
+		}
 
 		productModel.set({'name':newName,'description':newDescription,'price':newPrice,'quantity':newQt});
 
@@ -357,10 +401,13 @@ app.views.ProductDisplay = Backbone.View.extend({
 			success: function(model, response){
 
 				currentView.displayMode();
+				app.productList.render();
+
+				alertify.success('Product <i>'+ model.get('name') +'</i> updated');
 			},
 			error: function(model,response){
 
-				console.log(response);
+				alertify.error( response.responseJSON.message );
 			}
 		});
 	},
@@ -404,6 +451,7 @@ app.views.ProductForm = Backbone.View.extend({
 		this.$inputQt = $('#p-quantity');
 
 		this.listenTo(app.productDisplay, 'render', this.hide);
+		this.listenTo(app.categories, 'change', this.hide);
 	},
 
 	render: function() {
@@ -425,11 +473,28 @@ app.views.ProductForm = Backbone.View.extend({
 
 		var pName = this.$inputName.val();
 		var pDescription = this.$inputDescription.val();
-		var pPrice = parseInt( this.$inputPrice.val() );
+		var pPrice = parseFloat( this.$inputPrice.val() );
 		var pQt = parseInt( this.$inputQt.val() );
 
 		if( app.categories.currentID == undefined || app.categories.currentID == -1 )
 			return;
+
+		if( pName.length < 1 || pName.length > 50 )
+			var errorMessage = 'Product name must be between 1 and 50 characters';
+
+		if( pDescription.length > 250 )
+			var errorMessage = 'Description may not be longer than 250 characters';
+
+		if( isNaN(pPrice) || pPrice < 0 )
+			var errorMessage = 'Price must be a positive number';
+
+		if( isNaN(pQt) || pQt < 0 )
+			var errorMessage = 'Quantity must be a positive integer';
+
+		if( errorMessage != undefined ) {
+			alertify.error(errorMessage);
+			return;
+		}
 
 		var p = new app.model.Product({
 
@@ -490,9 +555,16 @@ app.views.ProductList = Backbone.View.extend({
 
 	render: function() {
 
-		var products = app.products.where({ category:app.categories.currentID });
+		if( app.categories.currentID == -1 ) {
 
-		var content = this.template( {'products':products} );
+			var content = '';
+		}
+		else {
+
+			var products = app.products.where({ category:app.categories.currentID });
+
+			var content = this.template( {'products':products} );
+		}
 
 		app.productForm.hide();
 		this.$el.html( content );
@@ -526,7 +598,7 @@ $(document).ready(function(){
 	alertify.set('notifier','position', 'top-right');
 	alertify.defaults.glossary.title = 'Barmate';
 
-	// Creating views who are already linked to existing HTML elements
+	// Creating views who are already linked to existing DOM elements
 	app.categoryList   = new app.views.CategoryList();
 	app.categoryForm   = new app.views.CategoryForm();
 	app.productList    = new app.views.ProductList();
@@ -535,6 +607,6 @@ $(document).ready(function(){
 
 	// Seeding products/categories collections with data from the server
 	app.categories.reset( categoryData );
-	app.products.fetch({reset:true});
+	app.products.fetch( {reset:true} );
 	
 });
