@@ -2,6 +2,14 @@
 
 POS web application
 
+## Screenshots
+
+![Dashboard screenshots](http://postimg.org/image/nkp1bwpo5/)
+
+![Menu screenshot](http://postimg.org/image/hv8srljhx/)
+
+![Users screenshot](http://postimg.org/image/40ai94p2t/)
+
 ## Quick start
 
 Follow these instructions to install Barmate:
