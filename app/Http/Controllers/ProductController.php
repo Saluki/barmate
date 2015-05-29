@@ -7,6 +7,8 @@ use \Response, \Input;
 
 class ProductController extends Controller {
 
+    protected $repository;
+
 	public function __construct(ProductRepository $repository) 
 	{
 		$this->repository = $repository;
