@@ -1,12 +1,7 @@
 <?php
 
-class ExampleTest extends TestCase {
+class MinimalTest extends TestCase {
 
-	/**
-	 * A basic functional test example.
-	 *
-	 * @return void
-	 */
 	public function testBasicExample()
 	{
 		$response = $this->call('GET', '/');
