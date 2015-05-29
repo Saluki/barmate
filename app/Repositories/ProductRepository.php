@@ -1,15 +1,23 @@
 <?php namespace App\Repositories;
 
+use App\Exceptions\RepositoryException;
 use App\Models\Products;
-use App\Repositories\RepositoryException;
-use \Session, \stdClass, \Validator, \DB;
+use DB;
+use Session;
+use stdClass;
+use Validator;
 
-class ProductRepository {
-	
+class ProductRepository extends Repository {
+
+    function getModelName()
+    {
+        return 'App\Models\Products';
+    }
+
 	public function all() {
 
 		try {
-			return Products::group( Session::get('groupID') )->get();
+			return $this->model->group( Session::get('groupID') )->get();
 		}
 		catch(\Exception $e) {
 			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
@@ -21,14 +29,14 @@ class ProductRepository {
 		$this->validateID($id);
 
 		try {
-			return Products::group( Session::get('groupID') )->where('product_id', $id)->first();
+			return $this->model->group( Session::get('groupID') )->where('product_id', $id)->first();
 		}
 		catch(\Exception $e) {
 			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
 		}
 	}
 
-	public function store($data) {
+	public function store(array $data) {
 
 		$this->validate($data);
 		$product = $this->createModel($data);
@@ -44,15 +52,13 @@ class ProductRepository {
 		return $product;
 	}
 
-	public function update($id, $data) {
+	public function update($id, array $data) {
 
 		$this->validateID($id);
 		$this->validate($data, false);
 
-		$product;
 		try {
-			
-			$product = Products::group( Session::get('groupID') )->withTrashed()->find($id);
+			$product = $this->model->group( Session::get('groupID') )->withTrashed()->find($id);
 		}
 		catch(\Exception $e) {
 			throw new RepositoryException('Database error while fetching'.$e->getMessage(), RepositoryException::DATABASE_ERROR);
@@ -80,9 +86,8 @@ class ProductRepository {
 
 		$this->validateID($id);
 
-		$product;
 		try {
-			$product = Products::group( Session::get('groupID') )->withTrashed()->find($id);
+			$product = $this->model->group( Session::get('groupID') )->withTrashed()->find($id);
 		}
 		catch(\Exception $e) {
 			throw new RepositoryException('Database error while fetching', RepositoryException::DATABASE_ERROR);
@@ -161,7 +166,7 @@ class ProductRepository {
 	 *
 	 * @param  	array 	$data  	Data array with the new data
 	 * @param  	object  $model  Existing Eloquent model to update. If NULL, a new model will be created
-	 * @return  $object 		The new or updated Eloquent model
+	 * @return  null|$object 	The new or updated Eloquent model
 	 */
 	private function createModel($data, $model=NULL) {
 

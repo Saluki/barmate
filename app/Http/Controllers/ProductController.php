@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Repositories\ProductRepository;
-use App\Repositories\RepositoryException;
-use \Response, \Input;
+use App\Exceptions\RepositoryException;
+use Input;
+use Response;
 
 class ProductController extends Controller {
 

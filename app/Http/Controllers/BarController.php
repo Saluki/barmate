@@ -1,25 +1,26 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Categories;
-use App\Repositories\RepositoryException;
+use App\Exceptions\RepositoryException;
+use App\Repositories\CategoryRepository;
 use App\Repositories\SalesRepository;
 use Illuminate\Http\Request;
-use League\Flysystem\Exception;
-use \Response;
+use Response;
 
 class BarController extends Controller {
-	
+
+    private $categoryRepository;
+
 	private $saleRepository;
 	
-	public function __construct(SalesRepository $repository)
+	public function __construct(CategoryRepository $categoryRepository, SalesRepository $saleRepository)
 	{
-		$this->saleRepository = $repository;
+        $this->categoryRepository = $categoryRepository;
+		$this->saleRepository = $saleRepository;
 	}
 
     public function app() 
     {
-        $stock = Categories::allProducts();
+        $stock = $this->categoryRepository->allWithProducts();
 
         return view('app.app')->withStock( $stock );
     }

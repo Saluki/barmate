@@ -1,8 +1,8 @@
 <?php namespace App\Repositories;
 
+use App\Exceptions\RepositoryException;
 use App\Models\SnapshotDetails;
-use App\Repositories\RepositoryException;
-use \Session;
+use Session;
 
 class SnapshotDetailsRepository {
 	

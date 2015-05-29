@@ -58,20 +58,5 @@ class Categories extends Model {
 
 		return $this->hasMany('App\Models\Products', 'category_id', 'category_id');
 	}
-
-	/**
-	 * Returns all categories and products from a group
-	 *
-	 */
-	public static function allProducts() {
-
-		$query = 'SELECT p.product_id as "id", p.product_name as "name", c.category_title as "group", p.price
-					FROM categories c, products p
-					WHERE c.category_id = p.category_id
-					AND p.deleted_at IS NULL
-					AND c.group_id = ?';
-
-		return DB::select($query, [ Session::get('groupID') ]);
-	}
 	
 }

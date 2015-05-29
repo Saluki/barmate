@@ -1,10 +1,17 @@
 <?php namespace App\Repositories;
 
+use App\Exceptions\RepositoryException;
 use App\Models\Sales;
-use App\Repositories\RepositoryException;
-use \Auth, \DB, \Session;
+use Auth;
+use DB;
+use Session;
 
-class SalesRepository {
+class SalesRepository extends Repository {
+
+    function getModelName()
+    {
+        return 'App\Models\Sales';
+    }
 
 	public function register($tempSale)
 	{
@@ -29,5 +36,4 @@ class SalesRepository {
             throw new RepositoryException('Could not save sale in database: '.$e->getMessage(), RepositoryException::DATABASE_ERROR);
         }
 	}
-	
 }

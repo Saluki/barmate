@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Repositories\SnapshotRepository;
+use App\Exceptions\RepositoryException;
 use App\Repositories\SnapshotDetailsRepository;
-use App\Repositories\RepositoryException;
-use \Input, \Redirect, \Validator;
+use App\Repositories\SnapshotRepository;
+use Input;
+use Redirect;
+use Validator;
 
 class CashController extends Controller {
 

@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Categories;
-use \Validator, \Input, \Session, \Response, \DB;
+use DB;
+use Input;
+use Response;
+use Session;
+use Validator;
 
 class CategoryController extends Controller {
 

@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Exceptions\RepositoryException;
 use App\Repositories\UserRepository;
-use App\Repositories\RepositoryException;
-use \Input;
+use Input;
 
 class UsersController extends Controller {
 	

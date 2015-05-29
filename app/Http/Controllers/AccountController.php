@@ -1,8 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App;
 use App\User;
-use \App, \Redirect, \Validator, \Input, \Auth, \Hash;
+use Auth;
+use Hash;
+use Input;
+use Redirect;
+use Validator;
 
 class AccountController extends Controller {
 

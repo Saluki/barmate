@@ -1,7 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\User;
-use App\Repositories\RepositoryException;
+use App\Exceptions\RepositoryException;
 use \Session, \Exception, \Hash, \DB, \Validator;
 
 class UserRepository {

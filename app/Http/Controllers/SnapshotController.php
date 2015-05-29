@@ -1,5 +1,11 @@
 <?php
 
+use App\Exceptions\RepositoryException;
+use App\Repositories\SnapshotDetailsRepository;
+use App\Repositories\SnapshotRepository;
+use Input;
+use Response;
+
 class SnapshotController extends \Controller {
 
 	public function __construct(SnapshotRepository $repository)

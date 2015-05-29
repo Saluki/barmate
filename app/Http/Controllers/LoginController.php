@@ -1,11 +1,15 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use \Validator, \Input, \Hash, \Request, \Auth, \Session, \Redirect;
-use App\User;
 use App\Models\ConnectHistory;
+use App\Exceptions\RepositoryException;
 use App\Repositories\UserRepository;
-use App\Repositories\RepositoryException;
+use Auth;
+use Hash;
+use Input;
+use Redirect;
+use Request;
+use Session;
+use Validator;
 
 class LoginController extends Controller {
 	

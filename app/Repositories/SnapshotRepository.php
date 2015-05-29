@@ -1,8 +1,12 @@
 <?php namespace App\Repositories;
 
+use App\Exceptions\RepositoryException;
 use App\Models\CashSnapshots;
-use App\Repositories\RepositoryException;
-use \Session, \Exception, \Validator, \Auth, \DB;
+use Auth;
+use DB;
+use Exception;
+use Session;
+use Validator;
 
 class SnapshotRepository {
 	
