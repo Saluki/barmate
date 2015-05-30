@@ -7,6 +7,8 @@ use Input;
 use Response;
 
 class SnapshotController extends \Controller {
+	
+	protected $repository;
 
 	public function __construct(SnapshotRepository $repository)
 	{
@@ -15,69 +17,34 @@ class SnapshotController extends \Controller {
 
 	public function index()
 	{
-		try {
-
-			$snapshots = $this->repository->all();
-			return Response::json( $this->repository->APIFormat($snapshots), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$snapshots = $this->repository->all();
+		return Response::json( $this->repository->APIFormat($snapshots), 200);
 	}
 
 	public function store()
 	{		
-		try {
-
-			$snapshot = $this->repository->store( Input::all() );
-			return Response::json( ['id' => $snapshot->id], 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$snapshot = $this->repository->store( Input::all() );
+		return Response::json( ['id' => $snapshot->id], 200);
 	}
 
 	public function show($id)
 	{
-		try {
-
-			$snapshot = $this->repository->get($id);
-			return Response::json($this->repository->APIFormat($snapshot), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$snapshot = $this->repository->get($id);
+		return Response::json($this->repository->APIFormat($snapshot), 200);
 	}
 
 	public function getCurrent()
 	{
-		try {
-
-			$snapshot = $this->repository->current();
-			return Response::json($this->repository->APIFormat($snapshot), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$snapshot = $this->repository->current();
+		return Response::json($this->repository->APIFormat($snapshot), 200);
 	}
 
 	public function getDetails($id)
 	{
 		$repository = new SnapshotDetailsRepository();
 
-		try {
-
-			$details = $repository->fromSnapshot($id);
-			return Response::json($repository->APIFormat($details), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$details = $repository->fromSnapshot($id);
+		return Response::json($repository->APIFormat($details), 200);
 	}
 
 }

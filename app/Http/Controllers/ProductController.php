@@ -21,15 +21,8 @@ class ProductController extends Controller {
 	 */ 
 	public function index() 
 	{
-		try {
-
-			$products = $this->repository->all();
-			return Response::json( $this->repository->APIFormat($products), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$products = $this->repository->all();
+		return Response::json( $this->repository->APIFormat($products), 200);
 	}
 
 	/**
@@ -39,14 +32,8 @@ class ProductController extends Controller {
 	 */
 	public function store()
 	{
-		try {
-			$product = $this->repository->store( Input::all() );
-			return Response::json( ['id' => $product->id], 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$product = $this->repository->store( Input::all() );
+		return Response::json( ['id' => $product->id], 200);
 	}
 
 	/**
@@ -56,20 +43,13 @@ class ProductController extends Controller {
 	 */
 	public function show($id)
 	{
-		$product = null;
-		try {
-			$product = $this->repository->get($id);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$product = $this->repository->get($id);
 
 		if( $product == null )
 			return Response::json(['code'=>RepositoryException::RESOURCE_NOT_FOUND,
 				'message'=>'Product with ID '.$id.' not found'], 404);
 
-		return Response::json( $this->repository->APIFormat($product), 200);
+		return Response::json($this->repository->APIFormat($product), 200);
 	}
 
 	/**
@@ -79,17 +59,8 @@ class ProductController extends Controller {
 	 */
 	public function update($id)
 	{
-		try {
-
-			$product = $this->repository->update($id, Input::all() );
-			
-			
-			return Response::json( $this->repository->APIFormat($product), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$product = $this->repository->update($id, Input::all() );
+		return Response::json( $this->repository->APIFormat($product), 200);
 	}
 
 	/**
@@ -99,15 +70,8 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		try {
-
-			$product = $this->repository->softDelete($id);
-			return Response::json( $this->repository->APIFormat($product), 200);
-		}
-		catch(RepositoryException $e) {
-
-			return $e->jsonResponse();
-		}
+		$product = $this->repository->softDelete($id);
+		return Response::json( $this->repository->APIFormat($product), 200);
 	}
 
 }

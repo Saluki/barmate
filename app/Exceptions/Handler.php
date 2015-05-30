@@ -2,6 +2,7 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use App\Exceptions\RepositoryException;
 
 class Handler extends ExceptionHandler {
 
@@ -39,6 +40,11 @@ class Handler extends ExceptionHandler {
         if($this->isHttpException($e))
 		{
 			return $this->renderHttpException($e);
+		}
+		
+		if($e instanceof RepositoryException)
+		{
+			return $e->jsonResponse();
 		}
 
 		if( config('app.debug') )
