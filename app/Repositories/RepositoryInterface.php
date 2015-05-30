@@ -12,4 +12,8 @@ interface RepositoryInterface {
 
     public function delete($id);
 
+    public function softDelete($id);
+
+    public function validate(array $data);
+
 }

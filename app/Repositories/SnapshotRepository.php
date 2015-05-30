@@ -8,12 +8,17 @@ use Exception;
 use Session;
 use Validator;
 
-class SnapshotRepository {
-	
+class SnapshotRepository extends Repository {
+
+    function getModelName()
+    {
+        return 'App\Models\CashSnapshots';
+    }
+
 	public function all()
 	{
 		try {
-			return CashSnapshots::where('group_id', '=', Session::get('groupID') )
+			return $this->model->where('group_id', '=', Session::get('groupID') )
 									->orderBy('time','desc')
 									->get();
 		}
@@ -25,7 +30,7 @@ class SnapshotRepository {
 	public function history()
 	{
 		try {
-			return CashSnapshots::where('group_id', '=', Session::get('groupID') )
+			return $this->model->where('group_id', '=', Session::get('groupID') )
 									->where('is_closed',true)
 									->orderBy('time','desc')
 									->get();
@@ -41,7 +46,7 @@ class SnapshotRepository {
 
 		$snapshot = NULL;
 		try {
-			$snapshot = CashSnapshots::where('group_id', '=', Session::get('groupID'))
+			$snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
 										->where('cs_id', '=', $id)
 										->first();
 		}
@@ -55,7 +60,7 @@ class SnapshotRepository {
 		return $snapshot;	
 	}
 
-	public function store($data)
+	public function store(array $data)
 	{
 		$this->validate($data);
 
@@ -87,7 +92,7 @@ class SnapshotRepository {
 	{
 		$snapshot = NULL;
 		try {
-			$snapshot = CashSnapshots::where('group_id', '=', Session::get('groupID'))
+			$snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
 										->where('is_closed', '=', false)
 										->orderBy('time', 'desc')
 										->first();
@@ -104,7 +109,7 @@ class SnapshotRepository {
 
 	private function closeLastSnapshot()
 	{
-		$lastSnapshot = CashSnapshots::where('group_id','=',Session::get('groupID'))
+		$lastSnapshot = $this->model->where('group_id','=',Session::get('groupID'))
 										->where('is_closed','=',false)
 										->orderBy('time','desc')
 										->first();
@@ -120,7 +125,7 @@ class SnapshotRepository {
 
 	private function computePredictedAmount($snapshotID, $originalAmount)
 	{
-		$details = CashSnapshots::findOrFail($snapshotID)
+		$details = $this->model->findOrFail($snapshotID)
 								->details()
 								->get();
 
@@ -174,14 +179,7 @@ class SnapshotRepository {
 		return $formatted;
 	}
 
-	private function validateID($id) {
-
-		if( (bool) preg_match('/^[0-9]{1,10}$/', $id) == false ) {
-			throw new RepositoryException('Parameter must be a positive integer', RepositoryException::INCORRECT_PARAMETER);
-		}
-	}
-
-	private function validate($data)
+	public function validate(array $data)
 	{
 		$rules = CashSnapshots::$validationRules;
 

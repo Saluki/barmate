@@ -142,7 +142,7 @@ class ProductRepository extends Repository {
 	 * @return 	void
 	 * @throws 	RepositoryException 	If the validation failed
 	 */
-	private function validate($data, $required=true) {
+	public function validate(array $data, $required=true) {
 
 		$rules = Products::$validationRules;
 
@@ -189,20 +189,6 @@ class ProductRepository extends Repository {
 		}
 
 		return $model;
-	}
-
-	/**
-	 * Perform a check to see if the ID is valid and throws a RepositoryException if not
-	 *
-	 * @param  	int  	$id  			The ID variable to control
-	 * @return  void 
-	 * @throws 	RepositoryException 	If the ID is not valid
-	 */
-	private function validateID($id) {
-
-		if( (bool) preg_match('/^[0-9]{1,10}$/', $id) == false ) {
-			throw new RepositoryException('Parameter must be a positive integer', RepositoryException::INCORRECT_PARAMETER);
-		}
 	}
 
 	/**

@@ -45,4 +45,23 @@ abstract class Repository implements RepositoryInterface {
         throw new RepositoryException('Not yet implemented', RepositoryException::RESOURCE_DENIED);
     }
 
+    public function softDelete($id)
+    {
+        throw new RepositoryException('Not yet implemented', RepositoryException::RESOURCE_DENIED);
+    }
+
+    public function validate(array $data)
+    {
+        throw new RepositoryException('Not yet implemented', RepositoryException::RESOURCE_DENIED);
+    }
+
+    public function validateID($id)
+    {
+        if( (bool) preg_match('/^[0-9]{1,10}$/', $id) == false )
+        {
+            throw new RepositoryException('Parameter must be a positive integer', RepositoryException::INCORRECT_PARAMETER);
+        }
+    }
+
+
 }

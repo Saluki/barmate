@@ -4,29 +4,19 @@ use App\Exceptions\RepositoryException;
 use App\Models\SnapshotDetails;
 use Session;
 
-class SnapshotDetailsRepository {
-	
-	public function all()
-	{
-		
-	}
+class SnapshotDetailsRepository extends Repository {
 
-	public function get($id)
-	{
-			
-	}
-
-	public function store($data)
-	{
-		
-	}
+    function getModelName()
+    {
+        return 'App\Models\SnapshotDetails';
+    }
 
 	public function fromSnapshot($id)
 	{
 		$this->validateID($id);
 
 		try {
-			return SnapshotDetails::group( Session::get('groupID') )
+			return $this->model->group( Session::get('groupID') )
 									->where('snapshot_details.cs_id', '=', $id)
 									->get();
 		}
@@ -35,7 +25,7 @@ class SnapshotDetailsRepository {
 		}
 	}
 
-	public function APIFormat($object)
+    public function APIFormat($object)
 	{
 		if( !is_object($object) )
 			return null;
@@ -68,15 +58,4 @@ class SnapshotDetailsRepository {
 		return $formatted;
 	}
 
-	private function validateID($id) {
-
-		if( (bool) preg_match('/^[0-9]{1,10}$/', $id) == false ) {
-			throw new RepositoryException('Parameter must be a positive integer', RepositoryException::INCORRECT_PARAMETER);
-		}
-	}
-
-	private function validate($data)
-	{
-		
-	}
 }
