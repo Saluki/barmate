@@ -64,12 +64,12 @@ var app = app || {};
             }
             else if(action == '.') {
                
-                if( !this.sum.contains('.') )
+                if( this.sum.indexOf('.') == -1 )
                     this.sum += '.';
             }
             else {
                 
-                if( this.sum.contains('.') ) {
+                if( this.sum.indexOf('.') != -1 ) {
                     
                     var sumSplit = this.sum.split('.');
                                         
