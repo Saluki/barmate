@@ -21,23 +21,16 @@ class BarController extends Controller {
     public function app() 
     {
         $stock = $this->categoryRepository->allWithProducts();
-
+		
         return view('app.app')->withStock( $stock );
     }
     
     public function registerSale(Request $request)
     {
-        try
-        {
-            foreach ($request->all() as $sale)
-            {
-                $this->saleRepository->register($sale);
-            }
-        }
-        catch(RepositoryException $e)
-        {
-            return $e->jsonResponse();
-        }
+		foreach ($request->all() as $sale)
+		{
+			$this->saleRepository->register($sale);
+		}
 
         return Response::json(["status"=>1], 200);
     }
