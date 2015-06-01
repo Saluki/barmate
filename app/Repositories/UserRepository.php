@@ -10,7 +10,6 @@ use Validator;
 
 class UserRepository extends Repository
 {
-
     function getModelName()
     {
         return 'App\User';
@@ -119,7 +118,6 @@ class UserRepository extends Repository
 
     public function store(array $data)
     {
-
         $this->validate($data);
 
         if ($data['role'] != 'USER' && $data['role'] != 'MNGR')
@@ -131,7 +129,7 @@ class UserRepository extends Repository
         $user->lastname = $data['lastname'];
         $user->group_id = Session::get('groupID');
         $user->email = $data['email'];
-        $user->password_hash = Hash::make('password');
+        $user->password_hash = Hash::make($data['password']);
         $user->role = $data['role'];
         $user->inscription_date = date('Y-m-d H:i:s');
 

@@ -39,13 +39,11 @@ class UsersController extends Controller {
     }
     
     public function registerNewUser()
-    {    	
-    	// str_random(n) ?
-    	die('#petisLapinsQuiExplosentDansLaPrairie (pas de generation de mot de passe)');
-    	
+    {
     	try {
     		$user = $this->userRepository->store(Input::all());
-    	} catch (RepositoryException $e) {
+    	}
+        catch (RepositoryException $e) {
     		return redirect('app/users/register')->with('error', 'Could not add user: '.$e->getMessage());
     	}
     	    	

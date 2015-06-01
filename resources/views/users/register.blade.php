@@ -47,6 +47,9 @@
     				
     				<b>Email</b><br>
     				<input type="text" name="email" class="form-control" placeholder="Email address">
+
+                    <b>Password</b><br>
+                    <input type="password" name="password" class="form-control" placeholder="Password">
     				
     				<b>Account role</b><br>
     				<select class="form-control" name="role">

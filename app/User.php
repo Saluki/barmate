@@ -25,7 +25,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     
     public static $validationRules = ['firstname'=>'required|name',
     									'lastname'=>'required|name',
-    									'email' => 'required|email'];
+    									'email' => 'required|email',
+                                        'password' => 'required|password'];
 
     public static function profileData($id) {
         
