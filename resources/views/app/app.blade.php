@@ -65,7 +65,9 @@
                 <br>
                 <button class="btn-payment" data-action="." style="background: #ffffff;">,</button>
                 <button class="btn-payment" data-action="0">0</button>
-                <button class="btn-payment" data-action="R" style="background: #ffffff;"><i class="fa fa-mail-reply"></i></button>
+                <button class="btn-payment" data-action="R" style="background: #ffffff;">
+                    <i class="fa fa-mail-reply" data-action="R"></i>
+                </button>
 
             </div>
             
