@@ -64,8 +64,9 @@ var app = app || {};
             }
             else if(action == '.') {
                
-                if( this.sum.indexOf('.') == -1 )
+                if( this.sum.indexOf('.') == -1 ) {
                     this.sum += '.';
+                }
             }
             else {
                 
