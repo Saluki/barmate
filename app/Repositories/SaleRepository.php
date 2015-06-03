@@ -4,36 +4,42 @@ use App\Exceptions\RepositoryException;
 use App\Models\Sales;
 use Auth;
 use DB;
+use Exception;
 use Session;
 
-class SalesRepository extends Repository {
+class SaleRepository extends Repository {
 
     function getModelName()
     {
         return 'App\Models\Sales';
     }
 
-	public function register($tempSale)
+	public function register(array $saleData)
 	{
+        $this->validate($saleData);
+
         try
         {
             $sale = new Sales();
             $sale->group_id = Session::get('groupID');
             $sale->user_id = Auth::id();
-            $sale->time = date('Y-m-d G:i:s', $tempSale['timestamp']);
-            $sale->sum = $tempSale['price'];
-            $sale->paid = $tempSale['cash'];
+            $sale->time = date('Y-m-d G:i:s', $saleData['timestamp']);
+            $sale->sum = $saleData['price'];
+            $sale->paid = $saleData['cash'];
             $sale->is_active = true;
             $sale->save();
-            $sale_id = DB::getPdo()->lastInsertId();
 
-            // Register all sales details entries
-
-            // Generate a new snapshot detail
+            return DB::getPdo()->lastInsertId();
         }
-        catch(\Exception $e)
+        catch(Exception $e)
         {
             throw new RepositoryException('Could not save sale in database: '.$e->getMessage(), RepositoryException::DATABASE_ERROR);
         }
 	}
+
+    public function validate(array $data)
+    {
+        // TODO Validation
+    }
+
 }

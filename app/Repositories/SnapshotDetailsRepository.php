@@ -3,6 +3,7 @@
 use App\Exceptions\RepositoryException;
 use App\Models\SnapshotDetails;
 use Session;
+use Auth;
 
 class SnapshotDetailsRepository extends Repository {
 
@@ -42,7 +43,34 @@ class SnapshotDetailsRepository extends Repository {
 		return $responseArray;
 	}
 
-	private function formatRecord($object) {
+    public function store(array $data)
+    {
+        $detailType = $data['type'];
+        $detailSum = $data['sum'];
+        $detailSale = $data['sale_id'];
+        $timestamp = $data['timestamp'];
+        $snapshot = $data['snapshot_id'];
+
+        // TODO Validation
+
+        try {
+            $detail = new SnapshotDetails();
+
+            $detail->type = $detailType;
+            $detail->sum = floatval($detailSum);
+            $detail->time = date('Y-m-d G:i:s', $timestamp);
+            $detail->user_id = Auth::id();
+            $detail->sale_id = $detailSale;
+            $detail->cs_id = $snapshot;
+
+            $detail->save();
+        }
+        catch(\Exception $e) {
+            throw new RepositoryException('Could not save snapshot detail in database', RepositoryException::DATABASE_ERROR);
+        }
+    }
+
+    private function formatRecord($object) {
 
 		$formatted = new stdClass();
 			

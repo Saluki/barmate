@@ -41,11 +41,6 @@ class Handler extends ExceptionHandler {
 		{
 			return $this->renderHttpException($e);
 		}
-		
-		if($e instanceof RepositoryException)
-		{
-			return $e->jsonResponse();
-		}
 
 		if( config('app.debug') )
 		{
@@ -59,6 +54,11 @@ class Handler extends ExceptionHandler {
 
 			return $this->renderExceptionWithWhoops($e);
 		}
+
+        if($e instanceof RepositoryException)
+        {
+            return $e->jsonResponse();
+        }
 
 		return parent::render($request, $e);
 	}
