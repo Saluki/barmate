@@ -55,7 +55,7 @@ class BarController extends Controller {
 
             $currentSnapshotId = $this->snapshotRepository->current()->cs_id;
 
-            $this->snapshotDetailsRepository->store([   'type'        => 'CASH',
+            $this->snapshotDetailsRepository->store([   'type'        => 'SALE',
                                                         'sum'         => $sale['price'],
                                                         'timestamp'   => $sale['timestamp'],
                                                         'sale_id'     => $saleId,
