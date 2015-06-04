@@ -11,13 +11,7 @@ app.collection.Categories = Backbone.Collection.extend({
 
 	resetCurrentID: function() {
 
-		if( this.length == 0 ) {
-			this.currentID = -1;
-		}
-		else {
-			this.currentID = this.last().id;
-		}
-
+        this.currentID = -1;
 		this.trigger('changed');
 	},
 

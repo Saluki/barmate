@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Repositories\CategoryRepository;
 use App\Repositories\ProductRepository;
 use App\Exceptions\RepositoryException;
 use Input;
@@ -9,7 +10,7 @@ class ProductController extends Controller {
 
     protected $repository;
 
-	public function __construct(ProductRepository $repository) 
+	public function __construct(ProductRepository $repository)
 	{
 		$this->repository = $repository;
 	}
@@ -30,9 +31,13 @@ class ProductController extends Controller {
 	 *
 	 * @link 	POST 	/app/stock/product/
 	 */
-	public function store()
+	public function store(CategoryRepository $categoryRepository)
 	{
+        // If category doesn't exist, an exception will be thrown
+        $categoryRepository->get( Input::get('category') );
+
 		$product = $this->repository->store( Input::all() );
+
 		return Response::json( ['id' => $product->id], 200);
 	}
 

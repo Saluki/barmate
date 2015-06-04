@@ -39,6 +39,7 @@ class ProductRepository extends Repository {
 	public function store(array $data) {
 
 		$this->validate($data);
+
 		$product = $this->createModel($data);
 
 		try {

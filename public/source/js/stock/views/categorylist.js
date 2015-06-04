@@ -17,6 +17,9 @@ app.views.CategoryList = Backbone.View.extend({
         
         this.$el.html('');
         app.categories.each(this.addToView, this);
+
+        app.productList.render();
+
         return this;
     },
     

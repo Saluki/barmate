@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Exceptions\RepositoryException;
 use DB;
 use Session;
 
@@ -8,6 +9,24 @@ class CategoryRepository extends Repository
     function getModelName()
     {
         return 'App\Models\Categories';
+    }
+
+    public function get($id)
+    {
+        $this->validateID($id);
+
+        try {
+            $category = $this->model->find($id);
+        }
+        catch(\Exception $e) {
+            throw new RepositoryException('Could not retrieve category', RepositoryException::DATABASE_ERROR);
+        }
+
+        if( $category==NULL ) {
+            throw new RepositoryException('Category not found', RepositoryException::RESOURCE_NOT_FOUND);
+        }
+
+        return $category;
     }
 
     public function allWithProducts()
