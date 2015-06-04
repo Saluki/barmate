@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Repositories\CategoryRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\SaleDetailsRepository;
 use App\Repositories\SaleRepository;
 use App\Repositories\SnapshotDetailsRepository;
@@ -39,7 +40,7 @@ class BarController extends Controller {
         return view('app.app')->withStock( $stock );
     }
     
-    public function registerSale(Request $request)
+    public function registerSale(Request $request, ProductRepository $productRepository)
     {
         DB::beginTransaction();
 
@@ -61,6 +62,8 @@ class BarController extends Controller {
                                         'current_price' => $item['price'] ];
 
                 $this->saleDetailsRepository->store($formattedSaleDetail);
+
+                $productRepository->decrementQuantity($item['id'], $item['quantity']);
             }
 
             $this->snapshotDetailsRepository->store([   'type'        => 'SALE',

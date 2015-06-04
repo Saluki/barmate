@@ -82,6 +82,36 @@ class ProductRepository extends Repository {
 		return $product;
 	}
 
+    public function decrementQuantity($id, $number) {
+
+        $this->validateID($id);
+
+        // Not the function intended to validate numbers,
+        // but does exact the same thing: validate a positive integer
+        $this->validateID($number);
+        $number = intval($number);
+
+        try {
+            $product = $this->model->findOrFail($id);
+
+            if( ($product->quantity-$number) >= 0 )
+            {
+                $product->quantity -= $number;
+            }
+            else
+            {
+                $product->quantity = 0;
+            }
+
+            $product->save();
+        }
+        catch(\Exception $e) {
+            throw new RepositoryException('Could not decrement product number:'.$e->getMessage(), RepositoryException::DATABASE_ERROR);
+        }
+
+        return $product->quantity;
+    }
+
 	public function softDelete($id) {
 
 		$this->validateID($id);
