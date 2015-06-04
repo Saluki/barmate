@@ -4,6 +4,7 @@ use App\Exceptions\RepositoryException;
 use App\Models\SnapshotDetails;
 use Session;
 use Auth;
+use Validator;
 
 class SnapshotDetailsRepository extends Repository {
 
@@ -45,28 +46,39 @@ class SnapshotDetailsRepository extends Repository {
 
     public function store(array $data)
     {
-        $detailType = $data['type'];
-        $detailSum = $data['sum'];
-        $detailSale = $data['sale_id'];
-        $timestamp = $data['timestamp'];
-        $snapshot = $data['snapshot_id'];
-
-        // TODO Validation
+        $this->validate($data);
 
         try {
             $detail = new SnapshotDetails();
 
-            $detail->type = $detailType;
-            $detail->sum = floatval($detailSum);
-            $detail->time = date('Y-m-d G:i:s', $timestamp);
+            $detail->type    = $data['type'];
+            $detail->sum     = floatval($data['sum']);
+            $detail->time    = date('Y-m-d G:i:s', $data['time']);
             $detail->user_id = Auth::id();
-            $detail->sale_id = $detailSale;
-            $detail->cs_id = $snapshot;
+            $detail->sale_id = $data['sale_id'];
+            $detail->cs_id   = $data['cs_id'];
 
             $detail->save();
         }
         catch(\Exception $e) {
             throw new RepositoryException('Could not save snapshot detail in database', RepositoryException::DATABASE_ERROR);
+        }
+    }
+
+    public function validate(array $data)
+    {
+        $validator = Validator::make($data,
+            [
+                'type'    => 'required|in:SALE,CASH',
+                'sum'     => 'required|numeric|min:0',
+                'time'    => 'required|integer|min:0',
+                'sale_id' => 'required|integer|min:0',
+                'cs_id'   => 'required|integer|min:0'
+            ]
+        );
+
+        if( $validator->fails() ) {
+            throw new RepositoryException('Cash snapshot detail validation failed', RepositoryException::VALIDATION_FAILED);
         }
     }
 

@@ -2,6 +2,7 @@
 
 use App\Exceptions\RepositoryException;
 use App\Models\SaleDetails;
+use Validator;
 
 class SaleDetailsRepository extends Repository{
 
@@ -18,10 +19,10 @@ class SaleDetailsRepository extends Repository{
         {
             $detail = new SaleDetails();
 
-            $detail->sale_id = intval($data['sale']);
-            $detail->product_id = intval($data['id']);
-            $detail->quantity = intval($data['quantity']);
-            $detail->current_price = floatval($data['price']);
+            $detail->sale_id       = intval($data['sale_id']);
+            $detail->product_id    = intval($data['product_id']);
+            $detail->quantity      = intval($data['quantity']);
+            $detail->current_price = floatval($data['current_price']);
 
             $detail->save();
         }
@@ -33,7 +34,18 @@ class SaleDetailsRepository extends Repository{
 
     public function validate(array $data)
     {
-        // TODO Validation
+        $validator = Validator::make($data,
+            [
+                'sale_id'       => 'required|integer|min:0',
+                'product_id'    => 'required|integer|min:0',
+                'quantity'      => 'required|integer|min:0',
+                'current_price' => 'required|numeric|min:0'
+            ]
+        );
+
+        if( $validator->fails() ) {
+            throw new RepositoryException('Sale detail validation failed', RepositoryException::VALIDATION_FAILED);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ use Auth;
 use DB;
 use Exception;
 use Session;
+use Validator;
 
 class SaleRepository extends Repository {
 
@@ -21,12 +22,14 @@ class SaleRepository extends Repository {
         try
         {
             $sale = new Sales();
-            $sale->group_id = Session::get('groupID');
-            $sale->user_id = Auth::id();
-            $sale->time = date('Y-m-d G:i:s', $saleData['timestamp']);
-            $sale->sum = $saleData['price'];
-            $sale->paid = $saleData['cash'];
+
+            $sale->group_id  = Session::get('groupID');
+            $sale->user_id   = Auth::id();
+            $sale->time      = date('Y-m-d G:i:s', $saleData['time']);
+            $sale->sum       = floatval($saleData['sum']);
+            $sale->paid      = floatval($saleData['paid']);
             $sale->is_active = true;
+
             $sale->save();
 
             return DB::getPdo()->lastInsertId();
@@ -39,7 +42,17 @@ class SaleRepository extends Repository {
 
     public function validate(array $data)
     {
-        // TODO Validation
+        $validator = Validator::make($data,
+            [
+                'time' => 'required|integer|min:0',
+                'sum' => 'required|numeric|min:0',
+                'paid' => 'required|numeric|min:0'
+            ]
+        );
+
+        if( $validator->fails() ) {
+            throw new RepositoryException('Sale data validation failed', RepositoryException::VALIDATION_FAILED);
+        }
     }
 
 }

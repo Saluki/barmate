@@ -43,27 +43,35 @@ class BarController extends Controller {
     {
         DB::beginTransaction();
 
+        $currentSnapshotId = $this->snapshotRepository->current()->cs_id;
+
 		foreach ($request->all() as $sale)
 		{
-			$saleId = $this->saleRepository->register($sale);
+            $formattedSaleDate = [  'time' => $sale['timestamp'],
+                                    'sum'  => $sale['price'],
+                                    'paid' => $sale['cash'] ];
+
+			$saleId = $this->saleRepository->register($formattedSaleDate);
 
             foreach($sale['items'] as $item)
             {
-                $item['sale'] = $saleId;
-                $this->saleDetailsRepository->store($item);
-            }
+                $formattedSaleDetail = ['sale_id'       => $saleId,
+                                        'product_id'    => $item['id'],
+                                        'quantity'      => $item['quantity'],
+                                        'current_price' => $item['price'] ];
 
-            $currentSnapshotId = $this->snapshotRepository->current()->cs_id;
+                $this->saleDetailsRepository->store($formattedSaleDetail);
+            }
 
             $this->snapshotDetailsRepository->store([   'type'        => 'SALE',
                                                         'sum'         => $sale['price'],
-                                                        'timestamp'   => $sale['timestamp'],
+                                                        'time'        => $sale['timestamp'],
                                                         'sale_id'     => $saleId,
-                                                        'snapshot_id' => $currentSnapshotId]);
+                                                        'cs_id'       => $currentSnapshotId]);
 		}
 
         DB::commit();
 
-        return Response::json(["status"=>1], 200);
+        return Response::json(['status' => 1], 200);
     }
 }
