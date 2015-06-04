@@ -66,9 +66,7 @@ var app = app || {};
 	'use strict';
 	
 	app.Stock = Backbone.Collection.extend({
-        
-        url: 'stock.php',
-		
+
 		model: app.Item
 		
 	});
@@ -405,9 +403,13 @@ var app = app || {};
         },
         
         addOne: function(item) {
+
+            if (item.get('id') == null || item.get('name') == null || item.get('price') == null) {
+                return;
+            }
             
             if( item.get('group') === app.groupView.currentGroup ) {
-                
+
                 this.$list.append('<button class="stock-item" data-id=' + item.id + ' >' + item.get('name') + '</button>');
             }
         },

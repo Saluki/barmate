@@ -6,9 +6,7 @@ var app = app || {};
 	'use strict';
 	
 	app.Stock = Backbone.Collection.extend({
-        
-        url: 'stock.php',
-		
+
 		model: app.Item
 		
 	});
