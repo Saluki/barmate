@@ -22,7 +22,7 @@ class User {
             }
             else
             {
-                return redirect()->guest('login');
+                return redirect()->guest('/');
             }
         }
 

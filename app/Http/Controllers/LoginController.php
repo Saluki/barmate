@@ -37,7 +37,7 @@ class LoginController extends Controller {
                 
         if( $validator->fails() ) {
 
-            return Redirect::to('login')->withError('Credentials have wrong format')
+            return Redirect::to('/')->withError('Credentials have wrong format')
                                         ->withEmail( $email );
         }
 
@@ -47,13 +47,13 @@ class LoginController extends Controller {
         }
         catch (RepositoryException $e)
         {
-        	return Redirect::to('login')->withError('Incorrect credentials')
+        	return Redirect::to('/')->withError('Incorrect credentials')
         								->withEmail( $email );
         }
                         
         if( !Hash::check(Input::get('password'), $user->password_hash) ) 
         {
-            return Redirect::to('login')->withError('Incorrect credentials')
+            return Redirect::to('/')->withError('Incorrect credentials')
                                         ->withEmail( $email );
         }
         
@@ -76,7 +76,7 @@ class LoginController extends Controller {
     {
         Auth::logout();
         
-        return Redirect::to('login');
+        return Redirect::to('/');
     }
 
 }

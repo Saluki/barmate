@@ -8,11 +8,7 @@
     </head>
     <body>
         
-        <header>
-            @include('public.header')
-        </header>
-        
-        <div class="container" style="margin-top:70px;">
+        <div class="container" style="margin-top:180px;">
             @yield('content', '<i>Nothing to display</i>')
         </div>
         
