@@ -5,9 +5,7 @@
 @stop
 
 @section('custom-css')
-
     <link rel="stylesheet" type="text/css" href="{{ url('build/css/cash.css') }}">
-
 @stop
 
 @section('content')
@@ -23,11 +21,15 @@
 
     	<div class="paper-body">
 
-           <b>Hello There. Time to create a new snapshot</b>
+            <div id="init-container">
+                <div class="fa fa-bank"></div>
 
-           <br><br>
+                <div class="intro-text">
+                    Start registering your sales by creating a new cash snapshot.
+                </div>
 
-           <a href="{{ url('app/cash/new-snapshot') }}">Create a new snapshot</a>
+                <a href="{{ url('app/cash/new-snapshot') }}" class="btn btn-primary btn-lg">Create a cash snapshot</a>
+            </div>
 
     	</div>
 

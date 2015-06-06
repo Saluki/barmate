@@ -84,7 +84,8 @@ class CashController extends Controller {
             $this->repository->store( Input::all() );
         }
         catch(RepositoryException $e) {
-            return Redirect::to('app/cash/new-snapshot')->with('error', 'Error while creating snapshot');
+            return Redirect::to('app/cash/new-snapshot')->with('error', 'Error while creating snapshot: '.$e->getMessage())
+                                                        ->withInput();
         }
 
         return Redirect::to('app/cash')->with('success', "Cash snapshot <i>$title</i> created");

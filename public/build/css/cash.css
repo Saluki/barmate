@@ -1,3 +1,18 @@
+#init-container {
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+#init-container .fa {
+  color: #919191;
+  font-size: 90px;
+  display: block;
+  margin-top: 30px;
+}
+#init-container .intro-text {
+  margin: 40px;
+  font-size: 18px;
+}
 .action-tile {
   background: #f9f9f9;
   width: 160px;
