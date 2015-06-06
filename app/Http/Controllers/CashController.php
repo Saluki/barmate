@@ -20,27 +20,39 @@ class CashController extends Controller {
 		$this->detailsRepository = $detailsRepository;
 	}
 
-    public function dashboard()
+    public function dashboard($requestedSnapshot=null)
     {
-        try {
-
-    	   $currentRepository = $this->repository->current();
-    	   $snapshotDetails = $this->detailsRepository->fromSnapshot( $currentRepository->cs_id );
+        if( isset($requestedSnapshot) )     // Search snapshot in history
+        {
+            $snapshot = $this->repository->get($requestedSnapshot);
         }
-        catch(RepositoryException $e) {
-
-            if( $e->getCode() == RepositoryException::RESOURCE_NOT_FOUND ) {
-                return view('cash.init');
+        else    // Grab the current snapshot, or redirect if no one exists
+        {
+            try
+            {
+                $snapshot = $this->repository->current();
             }
+            catch (RepositoryException $e)
+            {
+                if ($e->getCode() == RepositoryException::RESOURCE_NOT_FOUND)
+                {
+                    return view('cash.init');
+                }
 
-            App::abort(500);
+                App::abort(500);
+            }
         }
 
-    	$cashArray = [ floatval($currentRepository->amount) ];
-    	$lastAmount = $currentRepository->amount;
+        $snapshotDetails = $this->detailsRepository->fromSnapshot($snapshot->cs_id);
+        $allSnapshots = $this->repository->all();
+
+    	$cashArray = [ floatval($snapshot->amount) ];
+    	$lastAmount = $snapshot->amount;
 
         $lastOperation = 0;
         $cashBySales = 0;
+        $salesCount = 0;
+        $operationsCount = 0;
 
     	foreach ($snapshotDetails as $detail) {
     		
@@ -49,17 +61,23 @@ class CashController extends Controller {
 
             if( $detail->type == 'CASH' ) {
                 $lastOperation = $detail->sum;
+                $operationsCount++;
             }
 
             if( $detail->type == 'SALE' ) {
                 $cashBySales += $detail->sum;
+                $salesCount++;
             }
     	}
 
-        return view('cash.app')->with('repository', $currentRepository)
+        return view('cash.app')->with('snapshot', $snapshot)
+                                        ->with('details', $snapshotDetails)
         								->with('amounts', $cashArray)
                                         ->with('lastOperation', $lastOperation)
-                                        ->with('cashBySales', $cashBySales);
+                                        ->with('cashBySales', $cashBySales)
+                                        ->with('allSnapshots', $allSnapshots)
+                                        ->with('salesCount', $salesCount)
+                                        ->with('operationsCount', $operationsCount);
     }
 
     public function operationForm()

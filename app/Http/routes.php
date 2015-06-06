@@ -50,7 +50,7 @@ Route::group(['prefix'=>'app', 'middleware'=>'manager'], function(){
 
 	// CASH MODULE
 
-	Route::get('cash', 'CashController@dashboard');
+	Route::get('cash/{snapshot?}', 'CashController@dashboard')->where('snapshot', '[0-9]+');;
 
 	Route::get('cash/register-operation', 'CashController@operationForm');
 
