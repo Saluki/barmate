@@ -67,7 +67,7 @@ class BarController extends Controller {
             }
 
             $this->snapshotDetailsRepository->store([   'type'        => 'SALE',
-                                                        'sum'         => $sale['price'],
+                                                        'sum'         => min($sale['price'], $sale['cash']),
                                                         'time'        => $sale['timestamp'],
                                                         'sale_id'     => $saleId,
                                                         'cs_id'       => $currentSnapshotId]);
