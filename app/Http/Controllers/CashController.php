@@ -3,11 +3,16 @@
 use App\Exceptions\RepositoryException;
 use App\Repositories\SnapshotDetailsRepository;
 use App\Repositories\SnapshotRepository;
+use Response;
 use Input;
 use Redirect;
 use Validator;
 
 class CashController extends Controller {
+
+    private $repository;
+
+    private $detailsRepository;
 
 	public function __construct(SnapshotRepository $repository, SnapshotDetailsRepository $detailsRepository)
 	{
@@ -64,11 +69,25 @@ class CashController extends Controller {
 
     public function registerOperation()
     {
-        $amount = Input::get('amount');
+        $amount = floatval(Input::get('amount'));
+        $currentSnapshotId = $this->repository->current()->cs_id;
 
-        // Validating and saving
+        $operationData = [  'type'    => 'CASH',
+                            'sum'     => $amount,
+                            'time'    => time(),
+                            'cs_id'   => $currentSnapshotId,
+                            'comment' => Input::get('comment') ];
 
-        return Redirect::to('app/cash')->with('success', "Cash operation saved: add $amount&euro; in drawer");
+        try {
+            $this->detailsRepository->store($operationData);
+        }
+        catch(RepositoryException $e) {
+            return Redirect::to('app/cash/register-operation')->with('error', 'Could not save operation: '.$e->getMessage())
+                                                                ->withInput();
+        }
+
+        $message = ($amount<0) ? 'removed '.abs($amount).'&euro; from drawer' : 'added '.$amount.'&euro; in drawer';
+        return Redirect::to('app/cash')->with('success', 'Cash operation saved: '.$message);
     }
 
     public function snapshotForm()

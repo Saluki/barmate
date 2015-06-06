@@ -55,8 +55,14 @@ class SnapshotDetailsRepository extends Repository {
             $detail->sum     = floatval($data['sum']);
             $detail->time    = date('Y-m-d G:i:s', $data['time']);
             $detail->user_id = Auth::id();
-            $detail->sale_id = $data['sale_id'];
             $detail->cs_id   = $data['cs_id'];
+
+            if( $data['type']==='SALE' ) {
+                $detail->sale_id = $data['sale_id'];
+            }
+            if( isset($data['comment']) ) {
+                $detail->comment = $data['comment'];
+            }
 
             $detail->save();
         }
@@ -67,13 +73,17 @@ class SnapshotDetailsRepository extends Repository {
 
     public function validate(array $data)
     {
+        // If it's a sale, it must be positive. Otherwise, it's a cash operation and it can't be 0
+        $sumExtraValidation = ( $data['type']==='SALE' ) ? '|min:0' : '|not_in:0';
+
         $validator = Validator::make($data,
             [
                 'type'    => 'required|in:SALE,CASH',
-                'sum'     => 'required|numeric|min:0',
+                'sum'     => 'required|numeric'.$sumExtraValidation,
                 'time'    => 'required|integer|min:0',
-                'sale_id' => 'required|integer|min:0',
-                'cs_id'   => 'required|integer|min:0'
+                'sale_id' => 'sometimes|integer|min:0',
+                'cs_id'   => 'required|integer|min:0',
+                'comment' => ''
             ]
         );
 

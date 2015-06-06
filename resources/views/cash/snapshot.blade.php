@@ -37,7 +37,12 @@
 
             {!! Form::open(['url'=>'app/cash/new-snapshot', 'method'=>'POST']) !!}
 
-                <div class="col-md-8 col-md-offset-2" style="margin-bottom:50px;margin-top:40px;">
+                <div class="col-md-12" style="margin-bottom:50px;margin-top:30px;">
+
+                    <div class="alert alert-info">
+                        <span class="fa fa-lightbulb-o"></span>&nbsp;
+                        Remember that creating a new cash snapshot will close the previous one.
+                    </div>
 
                     <label>Title</label>
                     <input type="text" class="form-control" name="title" placeholder="Snapshot Title" value="{{ old('title') }}">
@@ -47,12 +52,7 @@
 
                     <label>Current Amount</label>
                     <input type="text" class="form-control" name="amount" placeholder="0" value="{{ old('amount') }}">
-
-                    <div class="alert alert-info">
-                        <span class="fa fa-lightbulb-o"></span>&nbsp;
-                        Remember that creating a new cash snapshot will close the previous one.
-                    </div>
-
+                    <br>
                     <a href="{{ url('app/cash') }}" class="btn btn-default pull-left">Cancel</a>
                     <input type="submit" class="btn btn-success pull-right" value="Create new cash snapshot">
 
