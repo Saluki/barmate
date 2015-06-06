@@ -16,6 +16,8 @@ Modern and intuitive POS web application written with the Laravel framework.
 
 ![Menu screenshot](http://s2.postimg.org/rfsfeh8u1/barmate_S2.png)
 
+![Cash screenshot](http://s10.postimg.org/6srk73cyx/cash_component.png)
+
 ![Users screenshot](http://s2.postimg.org/eacx8deyh/barmate_S3.png)
 
 ## Quick start
