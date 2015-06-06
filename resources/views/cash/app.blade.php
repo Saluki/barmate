@@ -146,7 +146,14 @@
                                 <tbody>
                                     @foreach($details as $detail)
                                         <tr>
-                                            <td><div class="label label-default">{{ $detail->type }}</div></td>
+                                            <td><div class="label
+                                            @if( $detail->type === 'SALE' )
+                                                label-success
+                                            @elseif( $detail->type === 'CASH' )
+                                                label-warning
+                                            @else
+                                                label-default
+                                            @endif">{{ $detail->type }}</div></td>
                                             <td>{{ $detail->sum }}€</td>
                                             <td>{{ date('j F Y G:i', strtotime($detail->time)) }}</td>
                                             <td>#{{ $detail->user_id }}</td>
