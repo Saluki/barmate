@@ -43,7 +43,7 @@ class CashController extends Controller {
             }
         }
 
-        $snapshotDetails = $this->detailsRepository->fromSnapshot($snapshot->cs_id);
+        $snapshotDetails = $this->detailsRepository->fromSnapshot($snapshot->cs_id);		
         $allSnapshots = $this->repository->all();
 
     	$cashArray = [ floatval($snapshot->amount) ];

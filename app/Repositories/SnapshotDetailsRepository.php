@@ -19,6 +19,7 @@ class SnapshotDetailsRepository extends Repository {
 
 		try {
 			return $this->model->group( Session::get('groupID') )
+									->leftJoin('users', 'snapshot_details.user_id', '=', 'users.user_id')
 									->where('snapshot_details.cs_id', '=', $id)
 									->get();
 		}

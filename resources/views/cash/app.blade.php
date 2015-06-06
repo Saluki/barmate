@@ -42,7 +42,9 @@
 
                 <div class="row">
                     <div class="col-md-5">
-                        <h2>{{ $snapshot->snapshot_title }} <span class="text-primary">#{{ $snapshot->cs_id }}</span></h2>
+                        <h2>
+							{{ $snapshot->snapshot_title }} <span class="text-primary">#{{ $snapshot->cs_id }}</span>
+						</h2>
                     </div>
                     <div class="col-md-7" style="padding-top:20px;">
 
@@ -58,11 +60,19 @@
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                 @foreach($allSnapshots as $s)
-                                    <li role="presentation" @if($s->cs_id === $snapshot->cs_id) class="disabled" @endif>
-                                        <a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$s->cs_id) }}">
-                                            {{ $s->snapshot_title }}&nbsp;&nbsp;<span class="text-primary">#{{ $s->cs_id }}</span>
-                                        </a>
-                                    </li>
+									@if($s->cs_id === $snapshot->cs_id)
+										<li role="presentation" class="disabled">
+											<a role="menuitem" tabindex="-1" href="#">
+												{{ $s->snapshot_title }}&nbsp;&nbsp;<span class="text-primary">#{{ $s->cs_id }}</span>
+											</a>
+										</li>
+									@else
+										<li role="presentation">
+											<a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$s->cs_id) }}">
+												{{ $s->snapshot_title }}&nbsp;&nbsp;<span class="text-primary">#{{ $s->cs_id }}</span>
+											</a>
+										</li>
+									@endif
                                 @endforeach
                             </ul>
                         </div>
@@ -88,20 +98,20 @@
                             <div class="stat-title">Last Cash Operation</div>
                             <div class="stat-number">
                                 @if( $lastOperation>0 )
-                                    +{{ $lastOperation }}€
+                                    +{{ number_format($lastOperation,2) }}€
                                 @else
-                                    {{ $lastOperation }}€
+                                    {{ number_format($lastOperation,2) }}€
                                 @endif
                             </div>
                         </div>
                         <div class="stat-tile">
                             <div class="stat-title">Cash In Drawer</div>
-                            <div class="stat-number">{{ end($amounts) }}€</div>
+                            <div class="stat-number">{{ number_format(end($amounts),2) }}€</div>
                         </div>
 
                         <div class="stat-tile">
                             <div class="stat-title">Cash By Sales</div>
-                            <div class="stat-number">+{{ $cashBySales }}€</div>
+                            <div class="stat-number">+{{ number_format($cashBySales,2) }}€</div>
                         </div>
 
                     </div>
@@ -116,7 +126,15 @@
                     <div class="panel-body">
 
                         @if( count($details)==0 )
-                            <h4 class="text-muted" style="text-align: center;">This snapshot has no cash operations or sales.</h4>
+							
+							<div id="init-container">
+								<div class="fa fa-archive"></div>
+
+								<div class="intro-text">
+									This snapshot has no cash operations or sales.
+								</div>
+							</div>
+												
                         @else
                             <div class="row" style="margin:10px;text-align: center;">
                                 <div class="col-md-6">
@@ -156,7 +174,7 @@
                                             @endif">{{ $detail->type }}</div></td>
                                             <td>{{ $detail->sum }}€</td>
                                             <td>{{ date('j F Y G:i', strtotime($detail->time)) }}</td>
-                                            <td>#{{ $detail->user_id }}</td>
+                                            <td>{{ $detail->firstname }} {{ $detail->lastname }}</td>
                                             <td>{{ str_limit($detail->comment,20) }}</td>
                                         </tr>
                                     @endforeach

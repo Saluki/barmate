@@ -11,7 +11,7 @@ class SnapshotDetails extends Model {
 	public function scopeGroup($query, $groupID) {
 
     	$query->join('cash_snapshots', 'cash_snapshots.cs_id', '=', 'snapshot_details.cs_id')
-    			->where('group_id', $groupID);
+    			->where('cash_snapshots.group_id', $groupID);
     }
 	
 }
