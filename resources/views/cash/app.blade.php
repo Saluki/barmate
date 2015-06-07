@@ -43,7 +43,7 @@
                 <div class="row">
                     <div class="col-md-5">
                         <h2>
-							{{ $snapshot->snapshot_title }} <span class="text-primary">#{{ $snapshot->cs_id }}</span>
+							{{ str_limit($snapshot->snapshot_title,20) }} <span class="text-primary">#{{ $snapshot->cs_id }}</span>
 						</h2>
                     </div>
                     <div class="col-md-7" style="padding-top:20px;">

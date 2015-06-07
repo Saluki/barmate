@@ -32,10 +32,8 @@
         @endif
 
     	<div class="paper-body">
-    	
-    		<br>
-    	
-    		<a href="{{ url('app/users/register') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></a>
+    	    	
+    		<a href="{{ url('app/users/register') }}" class="btn btn-primary pull-right"><i class="fa fa-user"></i>&nbsp;&nbsp;Add user</a>
     	    	
     		<ul class="nav nav-tabs">
     			@if ($isActive)

@@ -47,7 +47,7 @@
                     <label>Title</label>
                     <input type="text" class="form-control" name="title" placeholder="Snapshot Title" value="{{ old('title') }}">
 
-                    <label>Description</label>
+                    <label>Description <i class="text-info">(optional)</i></label>
                     <input type="text" class="form-control" name="description" placeholder="Snapshot Description" value="{{ old('description') }}">
 
                     <label>Current Amount</label>
