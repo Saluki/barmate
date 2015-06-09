@@ -10,6 +10,7 @@ module.exports = function(grunt) {
 
 		jsSource:  'public/source/js',
 		jsBuild:   'public/build/js',
+
 		cssSource: 'public/source/css',
 		cssBuild:  'public/build/css',
 		
@@ -39,7 +40,13 @@ module.exports = function(grunt) {
 		    			'<%= jsSource %>/stock/views/*.js', 
 		    			'<%= jsSource %>/stock/*.js'],
 		    	dest: '<%= jsBuild %>/stock.js'
-		    }
+		    },
+
+            stats: {
+                src: ['<%= jsSource %>/stats/*.js'],
+                dest: '<%= jsBuild %>/stats.js'
+            }
+
 		},
         
 		uglify: {
@@ -59,7 +66,12 @@ module.exports = function(grunt) {
 		    stock: {
 		    	src: ['<%= jsBuild %>/stock.js'],
 		    	dest: '<%= jsBuild %>/stock.min.js'
-		    }
+		    },
+
+            stats: {
+                src: ['<%= jsBuild %>/stats.js'],
+                dest: '<%= jsBuild %>/stats.min.js'
+            }
 		},
 
 		less: {

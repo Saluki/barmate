@@ -2,8 +2,15 @@
 
 class StatsController extends Controller {
 
+    public function __construct()
+    {
+
+    }
+
     public function dashboard()
     {
+
+
         return view('stats.app');
     }
 

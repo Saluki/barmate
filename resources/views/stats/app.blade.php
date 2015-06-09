@@ -17,7 +17,8 @@
 
     	<div class="paper-body">
 
-    		Test
+            <div class="label label-danger">In progress...</div>
+
     	</div>
 
     </div>
@@ -25,5 +26,11 @@
 @stop
 
 @section('custom-js')
+
+    <!-- JS Dependencies -->
+    <script type="text/javascript" src="{{ url('bower_components/chartjs/Chart.min.js') }}"></script>
+
+    <!-- JS Statistics component -->
+    <script type="text/javascript" src="{{ url('build/js/stats.js') }}"></script>
 
 @stop

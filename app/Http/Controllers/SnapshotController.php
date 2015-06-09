@@ -39,12 +39,4 @@ class SnapshotController extends \Controller {
 		return Response::json($this->repository->APIFormat($snapshot), 200);
 	}
 
-	public function getDetails($id)
-	{
-		$repository = new SnapshotDetailsRepository();
-
-		$details = $repository->fromSnapshot($id);
-		return Response::json($repository->APIFormat($details), 200);
-	}
-
 }
