@@ -4,6 +4,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('bower_components/alertify-js/build/css/alertify.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('source/css/alertify-theme.css') }}" />
+
 @stop
 
 @section('content')
@@ -99,6 +102,7 @@
     <!-- EXTRA DEPENDENCIES -->
     <script src="{{ asset('bower_components/underscore/underscore.js') }}"></script>
     <script src="{{ asset('bower_components/backbone/backbone.js') }}"></script>
+    <script src="{{ asset('bower_components/alertify-js/build/alertify.min.js') }}"></script>
 
     <!-- RESETTING -->
     <script>

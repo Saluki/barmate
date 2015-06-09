@@ -147,11 +147,10 @@ var app = app || {};
             	
             	success: function(object, response) {
             		app.sync.reset();
-            		console.log('Sale saved');
             	},
             	
             	error: function(object, response) {
-            		console.error('Sale could not be saved');
+            		alertify.alert('Could not save sale', 'Sales could not be saved to the server.');
             	}
             	
             });

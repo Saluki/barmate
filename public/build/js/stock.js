@@ -46,13 +46,7 @@ app.collection.Categories = Backbone.Collection.extend({
 
 	resetCurrentID: function() {
 
-		if( this.length == 0 ) {
-			this.currentID = -1;
-		}
-		else {
-			this.currentID = this.last().id;
-		}
-
+        this.currentID = -1;
 		this.trigger('changed');
 	},
 
@@ -283,6 +277,9 @@ app.views.CategoryList = Backbone.View.extend({
         
         this.$el.html('');
         app.categories.each(this.addToView, this);
+
+        app.productList.render();
+
         return this;
     },
     
