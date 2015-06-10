@@ -58,4 +58,4 @@ password
 
 ## Copyright and license
 
-Barmate is released under the [MIT license](https://github.com/Saluki/Barmate/blob/master/LICENSE). Feel free to suggest a feature, report a bug, or ask something: [https://github.com/Saluki/Barmate/issues](https://github.com/Saluki/Barmate/issues)
+Barmate is released under the [GNU General Public License v3.0](https://github.com/Saluki/Barmate/blob/master/LICENSE). Feel free to suggest a feature, report a bug, or ask something: [https://github.com/Saluki/Barmate/issues](https://github.com/Saluki/Barmate/issues)
