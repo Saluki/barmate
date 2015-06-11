@@ -53,7 +53,7 @@
                     </div>
 
                     <label>Amount</label>
-                    <input type="text" class="form-control" name="amount" placeholder="0">
+                    <input type="text" class="form-control" name="amount" placeholder="0" autocomplete="off">
 
                     <label>Comment <i class="text-info">(optional)</i></label>
                     <textarea class="form-control" name="comment" placeholder="Describe this operation"></textarea>

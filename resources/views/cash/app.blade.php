@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-7" style="padding-top:20px;">
 
-                        <a href="{{ url('app/cash/new-snapshot') }}" class="btn btn-danger pull-right">
+                        <a href="{{ url('app/cash/new-snapshot') }}" class="btn btn-default pull-right">
                             <span class="fa fa-camera"></span>&nbsp;&nbsp;Create snapshot
                         </a>
 
@@ -78,7 +78,7 @@
                         </div>
 
                         @if( !$snapshot->is_closed )
-                            <a href="{{ url('app/cash/register-operation') }}" class="btn btn-primary pull-right" style="margin-right:20px;">
+                            <a href="{{ url('app/cash/register-operation') }}" class="btn btn-default pull-right" style="margin-right:20px;">
                                 <span class="fa fa-dollar"></span>&nbsp;&nbsp;Register operation
                             </a>
                         @else
@@ -97,11 +97,7 @@
                         <div class="stat-tile">
                             <div class="stat-title">Last Cash Operation</div>
                             <div class="stat-number">
-                                @if( $lastOperation>0 )
-                                    +{{ number_format($lastOperation,2) }}€
-                                @else
-                                    {{ number_format($lastOperation,2) }}€
-                                @endif
+                                @if( $lastOperation>0 )+@endif{{ number_format($lastOperation,2) }}€
                             </div>
                         </div>
                         <div class="stat-tile">
