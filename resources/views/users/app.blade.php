@@ -32,75 +32,88 @@
         @endif
 
     	<div class="paper-body">
-    	    	
-    		<a href="{{ url('app/users/register') }}" class="btn btn-primary pull-right"><i class="fa fa-user"></i>&nbsp;&nbsp;Add user</a>
-    	    	
-    		<ul class="nav nav-tabs">
-    			@if ($isActive)
-	    			<li class="active"><a href="#">Active Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
-	    			<li><a href="{{ url('app/users/disabled') }}">Disabled Users&nbsp;&nbsp;</a></li>
-    			@else
-    				<li><a href="{{ url('app/users') }}">Active Users</a></li>
-	    			<li class="active"><a href="#">Disabled Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
-    			@endif
-    		</ul>
-    		
-    		<br>
 
-            <table class="table" id="users-table"> 
-            	
-            	<tbody>
-	    		@foreach($users as $user)
-	
-	                <tr>
-	                    <td>{{ $user->firstname }} <b>{{ $user->lastname }}</b></td>
-	                    <td>{{ $user->email }}</td>
-	                    <td>
-	                        @if ($user->role=='ADMN')
-	                            <span class="label label-danger">Administrator</span></h3>
-	                        @elseif ($user->role=='MNGR')
-	                            <span class="label label-warning">Manager</span></h3>
-	                        @elseif ($user->role=='USER')
-	                            <span class="label label-success">User</span></h3>
-	                        @else
-	                            <span class="label label-default">Unknown</span></h3>
-	                        @endif
-	                    </td>
-	                    <td>
-	                    	@if ($user->role!='ADMN')
-	                    		<div class="btn-group pull-right">
-	                    			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-	                    				Actions <span class="caret"></span>
-	                    			</button>
-	                    			<ul class="dropdown-menu" role="menu">
-	                    				<li><a href="{{ url('app/users/change-role/'.$user->user_id) }}">
-	                    				@if ($user->role=='USER')
-	                    					Change role to 'Manager'
-	                    				@else
-	                    					Change role to 'User'
-	                    				@endif
-	                    				</a></li>
-	                    				<li><a href="{{ url('app/users/change-status/'.$user->user_id) }}">
-	                    				@if ($user->is_active)
-	                    					Disable account
-	                    				@else
-	                    					Enable account
-	                    				@endif
-	                    				</a></li>
-	                    				<li class="divider"></li>
-	                    				<li><a href="{{ url('app/users/delete/'.$user->user_id) }}"><span class="text-danger">Delete account</span></a></li>
-	                    			</ul>
-	                    		</div>
-		                    @else
-		                    	<a href="#" class="btn btn-default disabled pull-right">Actions <span class="caret"></span></a>
-		                    @endif
-	                    </td>
-	                </tr>
-	
-	            @endforeach
-            	</tbody>
-            	
-            </table>
+            <div class="col-md-6">
+                <h2>All users</h2>
+                <br>
+            </div>
+
+            <div class="col-md-6">
+    		    <a href="{{ url('app/users/register') }}" class="btn btn-primary pull-right" style="margin-top:20px;">
+                    <i class="fa fa-user-plus"></i>&nbsp;&nbsp;Add user
+                </a>
+    	    </div>
+
+            <div class="col-md-12">
+
+                <ul class="nav nav-tabs">
+                    @if ($isActive)
+                        <li class="active"><a href="#">Active Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
+                        <li><a href="{{ url('app/users/disabled') }}">Disabled Users&nbsp;&nbsp;</a></li>
+                    @else
+                        <li><a href="{{ url('app/users') }}">Active Users</a></li>
+                        <li class="active"><a href="#">Disabled Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
+                    @endif
+                </ul>
+
+                <br>
+
+                <table class="table" id="users-table">
+
+                    <tbody>
+                    @foreach($users as $user)
+
+                        <tr>
+                            <td>{{ $user->firstname }} <b>{{ $user->lastname }}</b></td>
+                            <td>{{ $user->email }}</td>
+                            <td>
+                                @if ($user->role=='ADMN')
+                                    <span class="label label-danger">Administrator</span></h3>
+                                @elseif ($user->role=='MNGR')
+                                    <span class="label label-warning">Manager</span></h3>
+                                @elseif ($user->role=='USER')
+                                    <span class="label label-success">User</span></h3>
+                                @else
+                                    <span class="label label-default">Unknown</span></h3>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($user->role!='ADMN')
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="fa fa-wrench"></span>&nbsp;&nbsp;Actions <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{ url('app/users/change-role/'.$user->user_id) }}">
+                                            @if ($user->role=='USER')
+                                                Change role to 'Manager'
+                                            @else
+                                                Change role to 'User'
+                                            @endif
+                                            </a></li>
+                                            <li><a href="{{ url('app/users/change-status/'.$user->user_id) }}">
+                                            @if ($user->is_active)
+                                                Disable account
+                                            @else
+                                                Enable account
+                                            @endif
+                                            </a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="{{ url('app/users/delete/'.$user->user_id) }}"><span class="text-danger">Delete account</span></a></li>
+                                        </ul>
+                                    </div>
+                                @else
+                                    <a href="#" class="btn btn-default disabled pull-right">Actions</a>
+                                @endif
+                            </td>
+                        </tr>
+
+                    @endforeach
+                    </tbody>
+
+                </table>
+
+            </div>
 
     	</div>
 

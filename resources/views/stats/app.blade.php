@@ -17,7 +17,72 @@
 
     	<div class="paper-body">
 
-            <div class="label label-danger">In progress...</div>
+            <div class="col-md-8">
+                <h2>Last 30 days</h2>
+                <br>
+            </div>
+
+            <div class="col-md-4">
+                <div class="dropdown pull-right" style="margin-top:20px;">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                        <span class="fa fa-calendar"></span>&nbsp;
+                        Change period
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="#">
+                                Yesterday
+                            </a>
+                            <a role="menuitem" tabindex="-1" href="#">
+                                Last week
+                            </a>
+                            <a role="menuitem" tabindex="-1" href="#">
+                                Last 30 days
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <span class="fa fa-line-chart"></span>&nbsp;&nbsp;Sales
+                        </h2>
+                    </div>
+                    <div class="panel-body" style="height:200px;">
+                        <!-- -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <span class="fa fa-user"></span>&nbsp;&nbsp;Users
+                        </h2>
+                    </div>
+                    <div class="panel-body" style="height:200px;">
+                        <!-- -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">
+                            <span class="fa fa-cube"></span>&nbsp;&nbsp;Products
+                        </h2>
+                    </div>
+                    <div class="panel-body" style="height:200px;">
+                        <!-- -->
+                    </div>
+                </div>
+            </div>
 
     	</div>
 
@@ -28,9 +93,10 @@
 @section('custom-js')
 
     <!-- JS Dependencies -->
-    <script type="text/javascript" src="{{ url('bower_components/chartjs/Chart.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/chartjs/Chart.min.js') }}"></script>
 
     <!-- JS Statistics component -->
-    <script type="text/javascript" src="{{ url('build/js/stats.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('build/js/stats.js') }}"></script>
 
 @stop

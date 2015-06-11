@@ -20,8 +20,6 @@
     			<a href="{{ url('app/cash') }}">Cash Management</a>
                 &nbsp;<span class="fa fa-angle-right"></span>&nbsp;
                 New Snapshot
-
-                <a href="{{ url('app/cash') }}" class="btn-back">Go Back</a>
     		</h2>
     	</div>
 
@@ -35,13 +33,23 @@
 
     	<div class="paper-body">
 
+            <div class="col-md-6">
+                <h2>Create a new snapshot</h2>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{{ url('app/cash') }}" class="btn btn-default pull-right" style="margin-top:20px;">
+                    <span class="fa fa-times"></span>&nbsp;&nbsp;Cancel
+                </a>
+            </div>
+
             {!! Form::open(['url'=>'app/cash/new-snapshot', 'method'=>'POST']) !!}
 
-                <div class="col-md-12" style="margin-bottom:50px;margin-top:30px;">
+                <div class="col-md-12" style="margin-bottom:50px;margin-top:20px;">
 
-                    <div class="alert alert-info">
-                        <span class="fa fa-lightbulb-o"></span>&nbsp;
-                        Remember that creating a new cash snapshot will close the previous one.
+                    <div class="alert alert-danger">
+                        <span class="fa fa-warning"></span>&nbsp;
+                        <b>Watch out.</b> Remember that creating a new cash snapshot will close the previous one.
                     </div>
 
                     <label>Title</label>
@@ -53,8 +61,7 @@
                     <label>Current Amount</label>
                     <input type="text" class="form-control" name="amount" placeholder="0" value="{{ old('amount') }}">
                     <br>
-                    <a href="{{ url('app/cash') }}" class="btn btn-default pull-left">Cancel</a>
-                    <input type="submit" class="btn btn-success pull-right" value="Create new cash snapshot">
+                    <input type="submit" class="btn btn-danger pull-right" value="Create new cash snapshot">
 
                 </div>
 

@@ -14,9 +14,7 @@
     			<a href="{{ url('app/users') }}">User Accounts</a>
     			 &nbsp;<span class="fa fa-angle-right"></span>&nbsp;
     			Add New Account
-    			
-    			<a href="{{ url('app/users') }}" class="btn-back">Go Back</a>
-    		</h2>
+            </h2>
     	</div>
     	
     	@if ( Session::has('error') )
@@ -35,39 +33,51 @@
 
     	<div class="paper-body">
 
-            {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
+            <div class="col-md-6">
+                <h2>Add a new user account</h2>
+                <br>
+            </div>
 
-                <div style="margin-top:30px;margin-bottom:40px;">
-                    <div class="col-md-6">
-                            <b>Firstname</b><br>
-                            <input type="text" name="firstname" class="form-control" placeholder="Firstname">
-                    </div>
-                    <div class="col-md-6">
-                            <b>Lastname</b><br>
-                            <input type="text" name="lastname" class="form-control" placeholder="Lastname">
-                    </div>
-                    <div class="col-md-12">
-                            <b>Email</b><br>
-                            <input type="text" name="email" class="form-control" placeholder="Email address">
+            <div class="col-md-6">
+                <a href="{{ url('app/users') }}" class="btn btn-default pull-right" style="margin-top:20px;">
+                    <span class="fa fa-times"></span>&nbsp;&nbsp;Cancel
+                </a>
+            </div>
 
-                            <b>Password</b><br>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+            <div class="col-md-12">
+                <div class="row">
+                    {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
 
-                            <b>Account role</b><br>
-                            <select class="form-control" name="role">
-                                <option value="USER">User Account - Only access to bar application</option>
-                                <option value="MNGR">Manager Account - Extended management rights</option>
-                            </select>
+                        <div class="col-md-6">
+                                <b>Firstname</b><br>
+                                <input type="text" name="firstname" class="form-control" placeholder="Firstname">
+                        </div>
+                        <div class="col-md-6">
+                                <b>Lastname</b><br>
+                                <input type="text" name="lastname" class="form-control" placeholder="Lastname">
+                        </div>
+                        <div class="col-md-12">
+                                <b>Email</b><br>
+                                <input type="text" name="email" class="form-control" placeholder="Email address">
 
-                            <br>
+                                <b>Password</b><br>
+                                <input type="password" name="password" class="form-control" placeholder="Password">
 
-                            <a href="{{ url('app/users') }}" class="btn btn-default pull-left">Cancel</a>
-                            <input type="submit" class="btn btn-success pull-right" value="Add new account">
+                                <b>Account role</b><br>
+                                <select class="form-control" name="role">
+                                    <option value="USER">User Account - Only access to bar application</option>
+                                    <option value="MNGR">Manager Account - Extended management rights</option>
+                                </select>
 
-                    </div>
+                                <br>
+
+                                <input type="submit" class="btn btn-success pull-right" value="Add new account">
+
+                        </div>
+
+                    </form>
                 </div>
-
-            </form>
+            </div>
     		
     	</div>
 

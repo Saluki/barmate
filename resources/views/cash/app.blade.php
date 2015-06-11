@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-md-7" style="padding-top:20px;">
 
-                        <a href="{{ url('app/cash/new-snapshot') }}" class="btn btn-success pull-right">
+                        <a href="{{ url('app/cash/new-snapshot') }}" class="btn btn-danger pull-right">
                             <span class="fa fa-camera"></span>&nbsp;&nbsp;Create snapshot
                         </a>
 
@@ -116,8 +116,6 @@
 
                     </div>
                 </div>
-
-                <br>
 
                 <div class="panel panel-default">
                     <div class="panel-heading">

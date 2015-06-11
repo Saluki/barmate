@@ -20,8 +20,6 @@
     			<a href="{{ url('app/cash') }}">Cash Management</a> 
                 &nbsp;<span class="fa fa-angle-right"></span>&nbsp;
                 New Operation
-
-                <a href="{{ url('app/cash') }}" class="btn-back">Go Back</a>
     		</h2>
     	</div>
 
@@ -35,13 +33,23 @@
 
     	<div class="paper-body">
 
+            <div class="col-md-6">
+                <h2>Register a new cash operation</h2>
+            </div>
+
+            <div class="col-md-6">
+                <a href="{{ url('app/cash') }}" class="btn btn-default pull-right" style="margin-top:20px;">
+                    <span class="fa fa-times"></span>&nbsp;&nbsp;Cancel
+                </a>
+            </div>
+
             {!! Form::open(['url'=>'app/cash/register-operation', 'method'=>'POST']) !!}
 
-                <div class="col-md-12" style="margin-top:30px;margin-bottom:50px;">
+                <div class="col-md-12" style="margin-top:20px;margin-bottom:30px;">
 
                     <div class="alert alert-info">
                         <span class="fa fa-lightbulb-o"></span>&nbsp;
-                        To remove money from the cash desk, enter a negative amount.
+                        <b>Pro tip.</b> To remove money from the cash desk, enter a negative amount.
                     </div>
 
                     <label>Amount</label>
@@ -50,7 +58,6 @@
                     <label>Comment <i class="text-info">(optional)</i></label>
                     <textarea class="form-control" name="comment" placeholder="Describe this operation"></textarea>
                     <br>
-                    <a href="{{ url('app/cash') }}" class="btn btn-default pull-left">Cancel</a>
                     <input type="submit" class="btn btn-success pull-right" value="Register Operation">
                
                 </div>

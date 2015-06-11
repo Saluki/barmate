@@ -21,6 +21,10 @@
     	</div>
 
     	<div class="paper-body">
+
+            <div class="col-md-12">
+                <h2>Manage stock</h2>
+            </div>
     		
     		<div class="col-md-4">
                 
