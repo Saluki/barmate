@@ -39,12 +39,12 @@
                 <!-- GENERAL INFORMATIONS -->
 
                 <div class="col-md-4">
-                    <label>Firstname</label>
+                    <label>First name</label>
                     <input type="text" class="form-control" name="firstname" value="{{ $user->firstname }}">
                 </div>
 
                 <div class="col-md-4">
-                    <label>Lastname</label>
+                    <label>Last name</label>
                     <input type="text" class="form-control" name="lastname" value="{{ $user->lastname }}">
                 </div>
 

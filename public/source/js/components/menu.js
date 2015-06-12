@@ -39,5 +39,13 @@ $(function(){
     
    // Load the main menu
     app.menuComponent.initialize();
+
+    // Showing menu when double click
+    // Perhaps better to replace with Hammer.js touch events?
+    /*$(document).dblclick(function(){
+
+        app.menuComponent.show();
+
+    });*/
  
 });

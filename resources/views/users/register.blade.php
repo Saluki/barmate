@@ -49,11 +49,11 @@
                     {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
 
                         <div class="col-md-6">
-                                <b>Firstname</b><br>
+                                <b>First name</b><br>
                                 <input type="text" name="firstname" class="form-control" placeholder="Firstname">
                         </div>
                         <div class="col-md-6">
-                                <b>Lastname</b><br>
+                                <b>Last name</b><br>
                                 <input type="text" name="lastname" class="form-control" placeholder="Lastname">
                         </div>
                         <div class="col-md-12">
