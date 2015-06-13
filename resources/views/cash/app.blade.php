@@ -167,7 +167,7 @@
                                                 label-default
                                             @endif">{{ $detail->type }}</div></td>
                                             <td>{{ $detail->sum }}€</td>
-                                            <td>{{ date('j F Y G:i', strtotime($detail->time)) }}</td>
+                                            <td>{{ date('j F Y G:i', strtotime($detail->timed)) }}</td>
                                             <td>{{ $detail->firstname }} {{ $detail->lastname }}</td>
                                             <td>{{ str_limit($detail->comment,20) }}</td>
                                         </tr>
