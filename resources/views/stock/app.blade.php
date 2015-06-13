@@ -46,25 +46,35 @@
 
             </div>
 
-            <div class="col-md-4">
-                
+            <div class="col-md-4" id="product-panel">
+
                 <div id="product-display"></div>
 
                 <div id="product-form">
 
-                    <label>Name</label>
-                    <input type="text" class="form-control" id="p-name">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
 
-                    <label>Description</label>
-                    <input type="text" class="form-control" id="p-description">
+                            <label>Name</label>
+                            <input type="text" class="form-control" id="p-name">
 
-                    <label>Price</label>
-                    <input type="text" class="form-control" id="p-price">
+                            <label>Description</label>
+                            <input type="text" class="form-control" id="p-description">
 
-                    <label>Quantity</label>
-                    <input type="text" class="form-control" id="p-quantity">
+                            <label>Price</label>
+                            <input type="text" class="form-control" id="p-price">
 
-                    <button class="btn btn-default pull-right" id="save-product-btn">Add Product</button>
+                            <label>Quantity</label>
+                            <input type="text" class="form-control" id="p-quantity">
+
+                            <br>
+
+                            <button class="btn btn-success pull-right" id="save-product-btn">
+                                <span class="fa fa-check"></span>&nbsp;Add Product
+                            </button>
+
+                        </div>
+                    </div>
 
                 </div>
 
@@ -115,18 +125,23 @@
     <script type="text/template" id="template-category-edit">
 
         <div class="category-item">
-            <input type="text" id="input-title" value="<%= title %>">
-            <input type="text" id="input-description" value="<%= description %>">
-            <br>
-            <button class="btn btn-default cancel">Cancel</button>
-            <button class="btn btn-success update">Update</button>
+            <input type="text" id="input-title" value="<%= title %>" class="form-control" placeholder="Title">
+            <input type="text" id="input-description" value="<%= description %>" class="form-control" placeholder="Description">
+            <button class="btn btn-default cancel">
+                <span class="fa fa-times"></span>&nbsp;Cancel
+            </button>
+            <button class="btn btn-success pull-right update">
+                <span class="fa fa-check"></span>&nbsp;Update
+            </button>
         </div>
 
     </script>
 
     <script type="text/template" id="template-product-list">
 
-        <button class="btn btn-success btn-block" id="add-product-btn">Add product</button>
+        <button class="btn btn-success btn-block" id="add-product-btn">
+            <span class="fa fa-plus"></span>&nbsp;&nbsp;Add product
+        </button>
         <br>
 
         <% _.each(products, function(product){ %>
@@ -141,33 +156,63 @@
 
     <script type="text/template" id="template-product-display">
 
-        <h3><%= name %></h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-        <% if( description == undefined || description == '' ){ %>
-            <i style="color:grey;">No description</i>
-        <% } else { %>
-            <i><%= description %></i>
-        <% } %>
+                <h3 style="margin-top: 5px;"><%= name %></h3>
 
-        <br><br>
-        <b><%= quantity %></b> items 
-        at <%= price %>€
+                <% if( description == undefined || description == '' ){ %>
+                    <i style="color:grey;">No description</i>
+                <% } else { %>
+                    <i><%= description %></i>
+                <% } %>
 
-        <br><br>
-        <button class="btn btn-default" id="edit-product">Edit</button>
-        <button class="btn btn-danger" id="remove-product">Remove</button>
+                <br><br>
+                <b><%= quantity %></b> items currently in stock
+                <br><br>
+                <b><%= price %>€</b> per product
+
+                <br><br>
+                <button class="btn btn-default" id="edit-product">
+                    <span class="fa fa-pencil"></span>&nbsp;Edit
+                </button>
+                <button class="btn btn-danger pull-right" id="remove-product">
+                    <span class="fa fa-trash"></span>&nbsp;Remove
+                </button>
+
+            </div>
+        </div>
 
     </script>
 
     <script type="text/template" id="template-product-edit">
 
-        Name<br><input type="text" id="product-update-name" value="<%= name %>"><br>
-        Description<br><input type="text" id="product-update-description" value="<%= description %>"><br>
-        Price<br><input type="text" id="product-update-price" value="<%= price %>"><br>
-        Quantity<br><input type="text" id="product-update-qt" value="<%= quantity %>"><br>
+        <div class="panel panel-default">
+            <div class="panel-body">
 
-        <button class="btn btn-default" id="cancel-edit">Cancel</button>
-        <button class="btn btn-success" id="update-product">Update</button>
+                <label>Name</label>
+                <input type="text" id="product-update-name" value="<%= name %>" class="form-control">
+
+                <label>Description</label>
+                <input type="text" id="product-update-description" value="<%= description %>" class="form-control">
+
+                <label>Price</label>
+                <input type="text" id="product-update-price" value="<%= price %>" class="form-control">
+
+                <label>Quantity</label>
+                <input type="text" id="product-update-qt" value="<%= quantity %>" class="form-control">
+
+                <br>
+
+                <button class="btn btn-default" id="cancel-edit">
+                    <span class="fa fa-times"></span>&nbsp;Cancel
+                </button>
+                <button class="btn btn-success pull-right" id="update-product">
+                    <span class="fa fa-check"></span>&nbsp;Update
+                </button>
+
+            </div>
+        </div>
 
     </script>
 

@@ -1,4 +1,7 @@
 /* STOCK APP STYLESHEET */
+input.form-control[type="text"] {
+  margin-bottom: 10px;
+}
 #category-list {
   margin-top: 15px;
   border: 1px solid lightgrey;
@@ -56,10 +59,10 @@
   padding: 10px;
   border-bottom: 1px solid lightgrey;
 }
-#product-list .product:last-child {
-  border-bottom: 0px;
-}
 #product-list .product.active {
   color: #0095dd;
   font-weight: bold;
+}
+#product-panel {
+  margin-top: 15px;
 }

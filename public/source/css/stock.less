@@ -1,96 +1,101 @@
-
 @import "variables";
 
 /* STOCK APP STYLESHEET */
 
+// Overriding other implementations
+input.form-control[type="text"] {
+
+    margin-bottom: 10px;
+}
+
 #category-list {
 
-	margin-top: 15px;
-	border: 1px solid lightgrey;
-	border-radius: 3px;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+  margin-top: 15px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .category-item {
-	
-	padding:5px;
-	border-bottom:1px solid lightgrey;
 
-	&.active {
+  padding: 5px;
+  border-bottom: 1px solid lightgrey;
 
-		background: @hoverGrey;
+  &.active {
 
-		.title {
+    background: @hoverGrey;
 
-			cursor: default;
-			color: @mainColor;
-		}
-	}
+    .title {
 
-	&:last-child {
+      cursor: default;
+      color: @mainColor;
+    }
+  }
 
-		border-bottom: 0px;
-	}
+  &:last-child {
 
-	.title {
+    border-bottom: 0px;
+  }
 
-		cursor: pointer;
-	}
+  .title {
+
+    cursor: pointer;
+  }
 }
 
 #new-category-form {
 
-	border: 1px solid lightgrey;
-	border-radius: 3px;
-	border-top-left-radius: 0px;
-	border-top-right-radius: 0px;
-	padding: 10px;
-	border-top:0px;
-	margin-bottom: 15px;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  padding: 10px;
+  border-top: 0px;
+  margin-bottom: 15px;
 
-	input[type="text"] {
+  input[type="text"] {
 
-		padding: 5px;
-		width: 75%;
-		height: 34px;
-		border: 1px solid lightgrey;
-		border-radius: 3px;
-		transition: all 0.3s ease;
+    padding: 5px;
+    width: 75%;
+    height: 34px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    transition: all 0.3s ease;
 
-		&:focus {
+    &:focus {
 
-			border: 1px solid @mainColor;
-		}
-	}
+      border: 1px solid @mainColor;
+    }
+  }
 
-	button {
+  button {
 
-		width: 20%;
-		float: right;
-		border-radius: 3px;
-	}
+    width: 20%;
+    float: right;
+    border-radius: 3px;
+  }
 }
 
 #product-list {
 
-	margin-top: 15px;
+  margin-top: 15px;
 
-	.product {
+  .product {
 
-		cursor: pointer;
-		padding:10px;
-		border-bottom:1px solid lightgrey;
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid lightgrey;
 
-		&:last-child {
+    &.active {
 
-			border-bottom: 0px;
-		}
+      color: @mainColor;
+      font-weight: bold;
+    }
+  }
+}
 
-		&.active {
+#product-panel {
 
-			color: @mainColor;
-			font-weight: bold;
-		}
-	}
+  margin-top: 15px;
 }
