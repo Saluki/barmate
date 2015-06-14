@@ -54,7 +54,7 @@ class SnapshotDetailsRepository extends Repository {
 
             $detail->type    = $data['type'];
             $detail->sum     = floatval($data['sum']);
-            $detail->time    = date('Y-m-d G:i:s', $data['time']);
+            $detail->timed   = date('Y-m-d G:i:s', $data['time']);
             $detail->user_id = Auth::id();
             $detail->cs_id   = $data['cs_id'];
 
@@ -104,7 +104,7 @@ class SnapshotDetailsRepository extends Repository {
 
 		$formatted->type        = $object->type;
 		$formatted->comment     = $object->comment;
-		$formatted->time        = $object->time;
+		$formatted->time        = $object->timed;
 
 		return $formatted;
 	}
