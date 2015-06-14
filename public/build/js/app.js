@@ -340,7 +340,7 @@ var app = app || {};
         
         updateRest: function(){
             
-            var sum = Number.parseFloat(this.sum);
+            var sum = parseFloat(this.sum);
             var rest = sum - app.ticket.getPrice();
             
             return Math.round(rest*100)/100;
