@@ -20,7 +20,7 @@ Route::group(['middleware'=>'guest'], function(){
 
 Route::group(['prefix'=>'app', 'middleware'=>'user'], function(){
 
-	// APP MODULE
+	// POS MODULE
 
     Route::get('/', 'BarController@app');
     
@@ -50,7 +50,7 @@ Route::group(['prefix'=>'app', 'middleware'=>'manager'], function(){
 
 	// CASH MODULE
 
-	Route::get('cash/{snapshot?}', 'CashController@dashboard')->where('snapshot', '[0-9]+');;
+	Route::get('cash/{snapshot?}', 'CashController@dashboard')->where('snapshot', '[0-9]+');
 
 	Route::get('cash/register-operation', 'CashController@operationForm');
 
@@ -82,11 +82,11 @@ Route::group(['prefix'=>'app', 'middleware'=>'administrator'], function(){
 			
 	Route::post('users/register', 'UsersController@registerNewUser');
 	
-	Route::get('users/change-status/{id}', 'UsersController@changeAccountStatus');
+	Route::get('users/change-status/{id}', 'UsersController@changeAccountStatus')->where('id', '[0-9]+');;
 	
-	Route::get('users/change-role/{id}', 'UsersController@changeAccountRole');
+	Route::get('users/change-role/{id}', 'UsersController@changeAccountRole')->where('id', '[0-9]+');;
 	
-	Route::get('users/delete/{id}', 'UsersController@deleteUser');
+	Route::get('users/delete/{id}', 'UsersController@deleteUser')->where('id', '[0-9]+');;
 
     // SETTINGS MODULE
 	
