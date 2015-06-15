@@ -441,7 +441,7 @@ var app = app || {};
             
             'click #clear-ticket' : 'clear', 
             'click #pay-ticket'   : 'pay',
-            'click #free-ticket'  : 'sendFree',
+            'click #free-ticket'  : 'confirmFree',
             'click .remove-item'  : 'removeItem'     },
         
         initialize: function(){
@@ -516,14 +516,19 @@ var app = app || {};
             
             app.paymentView.open();
         },
-        
-        sendFree: function() {
-            
-            if( this.freeze )
+
+        confirmFree: function() {
+
+            if( app.ticketView.freeze )
                 return;
-          
+
             if( app.ticket.length === 0 )
                 return;
+
+            alertify.confirm('Do you really want to register a free sale?', this.sendFree);
+        },
+        
+        sendFree: function() {
                         
             var resume = new app.TicketResume({
             
@@ -538,7 +543,7 @@ var app = app || {};
             
             app.sync.save();
                         
-            this.clear();
+            app.ticketView.clear();
         },
         
         clear: function() {
@@ -561,6 +566,10 @@ var ESC_KEY = 27;
 $(function () {
 
 	'use strict';
+
+    // Alertify settings
+    alertify.set('notifier','position', 'top-right');
+    alertify.defaults.glossary.title = 'Barmate';
 	
     // Used for development
     app.startTime = new Date();

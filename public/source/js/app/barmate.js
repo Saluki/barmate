@@ -7,6 +7,10 @@ var ESC_KEY = 27;
 $(function () {
 
 	'use strict';
+
+    // Alertify settings
+    alertify.set('notifier','position', 'top-right');
+    alertify.defaults.glossary.title = 'Barmate';
 	
     // Used for development
     app.startTime = new Date();
