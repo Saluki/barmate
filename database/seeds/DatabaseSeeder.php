@@ -24,13 +24,15 @@ class DatabaseSeeder extends Seeder {
 
 		DB::table('groups')->delete();
 
-		DB::statement('ALTER TABLE users AUTO_INCREMENT = 1');
-
 		$this->command->info('All data truncated');
 
 		$this->call('GroupTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('CategoryTableSeeder');
+        $this->call('CashSnapshotTableSeeder');
+
+        // Seeding can sometimes cause bugs for already logged users.
+        $this->command->info('Please flush the application cache by running cache:clear');
 	}
 
 }
