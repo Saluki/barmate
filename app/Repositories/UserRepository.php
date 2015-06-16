@@ -2,6 +2,8 @@
 
 use App\Exceptions\RepositoryException;
 use App\User;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use DB;
 use Exception;
 use Hash;

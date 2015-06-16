@@ -28,7 +28,7 @@ class StatsController extends Controller {
         $intervalData = $this->extractIntervalData($interval);
 
         $sales = $this->saleRepository->countByInterval($intervalData);
-        $users = $this->userRepository->all();
+        $users = $this->saleRepository->rankUsersByInterval($intervalData);
         $products = $this->productRepository->all();
 
         $title = $this->getTitleFromInterval($intervalData);

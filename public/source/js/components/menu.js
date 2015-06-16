@@ -36,16 +36,27 @@ var app = app || {};
 })(jQuery);
 
 $(function(){
+
+    app.HOME_KEY = 36;
+    app.KEY_LEFT = 37;
+    app.KEY_RIGHT = 39;
     
    // Load the main menu
     app.menuComponent.initialize();
 
-    // Showing menu when double click
     // Perhaps better to replace with Hammer.js touch events?
-    /*$(document).dblclick(function(){
+    $(document).keypress(function(event){
 
-        app.menuComponent.show();
+        if( event.keyCode == app.KEY_LEFT ) {
+            app.menuComponent.hide();
+        }
+        else if( event.keyCode == app.KEY_RIGHT ) {
+            app.menuComponent.show();
+        }
+        else if( event.keyCode == app.HOME_KEY ) {
+            window.location.href = "/app";
+        }
 
-    });*/
+    });
  
 });

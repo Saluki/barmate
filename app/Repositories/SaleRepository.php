@@ -42,14 +42,13 @@ class SaleRepository extends Repository
 
     public function countByInterval(CarbonInterval $interval)
     {
-        $beginDate = Carbon::now()->sub($interval);
+        $beginDate = Carbon::now()->sub($interval)->addHour();
 
         if( $interval->d>0 )
         {
             $beginDate = $beginDate->startOfDay();
         }
 
-        // TODO Currenly has size+1
         $intervals = [];
         $dateCounter = clone $beginDate;
         while($dateCounter <= Carbon::now())
@@ -90,6 +89,35 @@ class SaleRepository extends Repository
         }
 
         return $intervals;
+    }
+
+    public function rankUsersByInterval(CarbonInterval $interval)
+    {
+        $beginDate = Carbon::now()->sub($interval);
+
+        if( $interval->d>0 )
+        {
+            $beginDate = $beginDate->startOfDay();
+        }
+
+        try
+        {
+            $userRank = $this->model->select(['firstname', 'lastname', DB::raw('COUNT(*) as count')])
+                ->join('users', 'sales.user_id', '=', 'users.user_id')
+                ->where('sales.is_active', '=', true)
+                ->where('sales.time', '>=', $beginDate)
+                ->groupBy('sales.user_id')
+                ->orderBy('count', 'DESC')
+                ->take(10)
+                ->get();
+        }
+        catch(Exception $e)
+        {
+            throw $e;
+            throw new RepositoryException('Could not retrieve users', RepositoryException::DATABASE_ERROR);
+        }
+
+        return $userRank;
     }
 
     public function validate(array $data)

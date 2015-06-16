@@ -65,8 +65,29 @@
                             <span class="fa fa-user"></span>&nbsp;&nbsp;Users
                         </h2>
                     </div>
-                    <div class="panel-body" style="height:200px;">
-                        <!-- -->
+                    <div class="panel-body" style="min-height: 200px;">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width:30px;">#</th>
+                                    <th>User</th>
+                                    <th style="width:100px;">
+                                        Sales&nbsp;&nbsp;<span class="fa fa-sort-amount-desc"></span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $userRank=1; ?>
+                                @foreach($users as $rank)
+                                    <tr>
+                                        <td>{{ $userRank++ }}</td>
+                                        <td>{{ $rank->firstname }} {{ $rank->lastname }}</td>
+                                        <td>{{ $rank->count }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -115,7 +136,7 @@
                     @endforeach
                 ]
             }]
-        }
+        };
 
     </script>
 
