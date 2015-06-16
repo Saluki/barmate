@@ -46,10 +46,20 @@ class StatsController extends Controller {
 
         if( $type=='h' )
         {
+            if( $nb>24 )
+            {
+                $nb = 24;
+            }
+
             return CarbonInterval::hours($nb);
         }
         elseif( $type=='d' )
         {
+            if( $nb>30 )
+            {
+                $nb = 30;
+            }
+
             return CarbonInterval::days($nb);
         }
 
