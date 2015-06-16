@@ -18,7 +18,7 @@
     	<div class="paper-body">
 
             <div class="col-md-8">
-                <h2>Last 30 days</h2>
+                <h2>{{ $title }}</h2>
                 <br>
             </div>
 
@@ -31,13 +31,13 @@
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="#">
-                                Yesterday
+                            <a role="menuitem" tabindex="-1" href="{{ url('app/stats/24h') }}">
+                                24 hours
                             </a>
-                            <a role="menuitem" tabindex="-1" href="#">
-                                Last week
+                            <a role="menuitem" tabindex="-1" href="{{ url('app/stats/7d') }}">
+                                Last 7 days
                             </a>
-                            <a role="menuitem" tabindex="-1" href="#">
+                            <a role="menuitem" tabindex="-1" href="{{ url('app/stats/30d') }}">
                                 Last 30 days
                             </a>
                         </li>
@@ -49,11 +49,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h2 class="panel-title">
-                            <span class="fa fa-line-chart"></span>&nbsp;&nbsp;Sales
+                            <span class="fa fa-bar-chart"></span>&nbsp;&nbsp;Sales
                         </h2>
                     </div>
                     <div class="panel-body" style="height:200px;">
-                        <!-- -->
+                        <canvas id="salesChart" width="860" height="170"></canvas>
                     </div>
                 </div>
             </div>
@@ -95,6 +95,29 @@
     <!-- JS Dependencies -->
     <script type="text/javascript" src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/chartjs/Chart.min.js') }}"></script>
+
+    <script type="text/javascript">
+
+        var saleData = {
+
+            labels: [
+                @foreach($sales as $saleTime => $saleCount)
+                '{{ $saleTime }}',
+                @endforeach
+            ],
+
+            datasets: [{
+
+                fillColor: "#0088CC",
+                data: [
+                    @foreach($sales as $saleTime => $saleCount)
+                    {{ $saleCount }},
+                    @endforeach
+                ]
+            }]
+        }
+
+    </script>
 
     <!-- JS Statistics component -->
     <script type="text/javascript" src="{{ asset('build/js/stats.js') }}"></script>

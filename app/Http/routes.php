@@ -64,7 +64,7 @@ Route::group(['prefix'=>'app', 'middleware'=>'manager'], function(){
 
 	// STATS MODULE
 	
-	Route::get('stats', 'StatsController@dashboard');
+	Route::get('stats/{interval?}', 'StatsController@dashboard')->where('interval', '[0-9]+[hd]');
 	
 });
 
