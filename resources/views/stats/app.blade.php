@@ -31,6 +31,9 @@
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                         <li role="presentation">
+                            <a role="menuitem" tabindex="-1" href="{{ url('app/stats/12h') }}">
+                                12 hours
+                            </a>
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/24h') }}">
                                 24 hours
                             </a>
@@ -66,9 +69,12 @@
                     <div class="panel-heading">
                         <h2 class="panel-title">
                             <span class="fa fa-user"></span>&nbsp;&nbsp;Users
+                            <a href="{{ url('app/users') }}">
+                                <span class="fa fa-wrench pull-right" data-toggle="tooltip" data-placement="top" title="User accounts"></span>
+                            </a>
                         </h2>
                     </div>
-                    <div class="panel-body" style="min-height: 200px;">
+                    <div class="panel-body" style="height: 435px;">
 
                         <table class="table">
                             <thead>
@@ -100,9 +106,12 @@
                     <div class="panel-heading">
                         <h2 class="panel-title">
                             <span class="fa fa-cube"></span>&nbsp;&nbsp;Products
+                            <a href="{{ url('app/stock') }}">
+                                <span class="fa fa-wrench pull-right" data-toggle="tooltip" data-placement="top" title="Stock management"></span>
+                            </a>
                         </h2>
                     </div>
-                    <div class="panel-body" style="min-height:200px;">
+                    <div class="panel-body" style="height:435px;">
 
                         <table class="table">
                             <thead>

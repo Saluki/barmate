@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\CarbonInterval;
 use App\Repositories\ProductRepository;
 use App\Repositories\SaleRepository;
-use App\Repositories\UserRepository;
 use Exception;
 
 class StatsController extends Controller {
