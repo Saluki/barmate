@@ -35,7 +35,9 @@ class SaleRepository extends Repository
             $sale->save();
 
             return DB::getPdo()->lastInsertId();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             throw new RepositoryException('Could not save sale in database: ' . $e->getMessage(), RepositoryException::DATABASE_ERROR);
         }
     }
@@ -93,7 +95,7 @@ class SaleRepository extends Repository
 
     public function rankUsersByInterval(CarbonInterval $interval)
     {
-        $beginDate = Carbon::now()->sub($interval);
+        $beginDate = Carbon::now()->sub($interval)->addHour();
 
         if( $interval->d>0 )
         {
@@ -113,7 +115,6 @@ class SaleRepository extends Repository
         }
         catch(Exception $e)
         {
-            throw $e;
             throw new RepositoryException('Could not retrieve users', RepositoryException::DATABASE_ERROR);
         }
 

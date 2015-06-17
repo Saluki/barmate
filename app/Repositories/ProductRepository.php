@@ -2,6 +2,8 @@
 
 use App\Exceptions\RepositoryException;
 use App\Models\Products;
+use Carbon\CarbonInterval;
+use Carbon\Carbon;
 use DB;
 use Session;
 use stdClass;
@@ -139,6 +141,36 @@ class ProductRepository extends Repository {
 
 		return $product;
 	}
+
+    public function rankBySalesInInterval(CarbonInterval $interval)
+    {
+        $beginDate = Carbon::now()->sub($interval)->addHour();
+
+        if( $interval->d>0 )
+        {
+            $beginDate = $beginDate->startOfDay();
+        }
+
+        try
+        {
+            $productRank = $this->model->select(['products.*', DB::raw('SUM(sale_details.quantity) as sale_count')])
+                ->leftJoin('sale_details', 'products.product_id', '=', 'sale_details.product_id')
+                ->join('sales', 'sales.sale_id', '=', 'sale_details.sale_id')
+                ->where('sales.is_active', '=', true)
+                ->where('sales.time', '>=', $beginDate)
+                ->groupBy('sale_details.product_id')
+                ->orderBy('sale_count', 'DESC')
+                ->orderBy('products.product_name', 'ASC')
+                ->take(10)
+                ->get();
+        }
+        catch(\Exception $e)
+        {
+            throw new RepositoryException('Could not retrieve product ranking', RepositoryException::DATABASE_ERROR);
+        }
+
+        return $productRank;
+    }
 
 	/**
 	 * Format a Product object or an Eloquent Collection to a REST format

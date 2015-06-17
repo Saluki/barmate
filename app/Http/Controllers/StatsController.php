@@ -10,16 +10,14 @@ use Exception;
 
 class StatsController extends Controller {
     
-    const DEFAULT_INTERVAL = '30d';
+    const DEFAULT_INTERVAL = '15d';
 
     protected $saleRepository;
-    protected $userRepository;
     protected $productRepository;
 
-    public function __construct(SaleRepository $saleRepository, UserRepository $userRepository, ProductRepository $productRepository)
+    public function __construct(SaleRepository $saleRepository, ProductRepository $productRepository)
     {
         $this->saleRepository = $saleRepository;
-        $this->userRepository = $userRepository;
         $this->productRepository = $productRepository;
     }
 
@@ -29,7 +27,7 @@ class StatsController extends Controller {
 
         $sales = $this->saleRepository->countByInterval($intervalData);
         $users = $this->saleRepository->rankUsersByInterval($intervalData);
-        $products = $this->productRepository->all();
+        $products = $this->productRepository->rankBySalesInInterval($intervalData);
 
         $title = $this->getTitleFromInterval($intervalData);
 

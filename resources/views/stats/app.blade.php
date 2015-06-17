@@ -37,6 +37,9 @@
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/7d') }}">
                                 Last 7 days
                             </a>
+                            <a role="menuitem" tabindex="-1" href="{{ url('app/stats/15d') }}">
+                                Last 15 days
+                            </a>
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/30d') }}">
                                 Last 30 days
                             </a>
@@ -99,8 +102,30 @@
                             <span class="fa fa-cube"></span>&nbsp;&nbsp;Products
                         </h2>
                     </div>
-                    <div class="panel-body" style="height:200px;">
-                        <!-- -->
+                    <div class="panel-body" style="min-height:200px;">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th style="width:30px;">#</th>
+                                <th>Product</th>
+                                <th style="width:130px;">
+                                    Items sold&nbsp;&nbsp;<span class="fa fa-sort-amount-desc"></span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $productRank=1; ?>
+                            @foreach($products as $rank)
+                                <tr>
+                                    <td>{{ $productRank++ }}</td>
+                                    <td>{{ $rank->product_name }}</td>
+                                    <td>{{ $rank->sale_count }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>
