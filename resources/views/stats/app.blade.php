@@ -34,15 +34,23 @@
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/12h') }}">
                                 12 hours
                             </a>
+                        </li>
+                        <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/24h') }}">
                                 24 hours
                             </a>
+                        </li>
+                        <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/7d') }}">
                                 Last 7 days
                             </a>
+                        </li>
+                        <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/15d') }}">
                                 Last 15 days
                             </a>
+                        </li>
+                        <li role="presentation">
                             <a role="menuitem" tabindex="-1" href="{{ url('app/stats/30d') }}">
                                 Last 30 days
                             </a>
