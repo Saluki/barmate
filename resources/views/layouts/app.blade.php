@@ -9,7 +9,7 @@
     </title>
     
     <!-- CSS DEPENDENCIES & COMMON CSS -->
-    @include('app.css')
+    @include('includes.css')
 
     <!-- PAGE SPECIFIC CSS -->
     @yield('custom-css')
@@ -18,16 +18,16 @@
 <body>
     
     <!-- DEFAULT BARMATE HEADER -->
-    @include('app.header')
+    @include('includes.header')
     
     <!-- PAGE CONTENT -->
     @yield('content')
     
     <!-- LEFT SLIDING MENU -->
-    @include('app.menu')
+    @include('includes.menu')
 
     <!-- JS DEPENDENCIES & COMMON JS -->
-    @include('app.js')
+    @include('includes.js')
     
     <!-- PAGE SPECIFIC JS -->
     @yield('custom-js')

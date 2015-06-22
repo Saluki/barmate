@@ -9,7 +9,7 @@
     <body>
         
         <div class="container" style="margin-top:180px;">
-            @yield('content', '<i>Nothing to display</i>')
+            @yield('content')
         </div>
         
     </body>
