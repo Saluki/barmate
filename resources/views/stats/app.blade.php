@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+
+    Statistics - Barmate POS
+
+@stop
+
 @section('custom-css')
 
 @stop

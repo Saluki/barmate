@@ -5,8 +5,11 @@
     
     <meta charset="utf-8">
     <title>
-        @yield('title', 'Barmate')
+        @yield('title', 'Barmate POS')
     </title>
+
+    <link rel="shortcut icon" href="{{ url('images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url('images/favicon.ico') }}" type="image/x-icon">
     
     <!-- CSS DEPENDENCIES & COMMON CSS -->
     @include('includes.css')

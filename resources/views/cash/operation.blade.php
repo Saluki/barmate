@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Cash Management | Barmate
+    New Operation - Barmate POS
 @stop
 
 @section('custom-css')

@@ -2,7 +2,7 @@
 
 @section('title')
 
-    Barmate Account
+    Account Settings - Barmate POS
 
 @stop
 

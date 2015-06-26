@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+
+    User Accounts - Barmate POS
+
+@stop
+
 @section('custom-css')
 
 	<link rel="stylesheet" type="text/css" href="{{ url('build/css/users.css') }}">

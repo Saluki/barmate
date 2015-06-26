@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+
+    Stock Management - Barmate POS
+
+@stop
+
 @section('custom-css')
 
     <link rel="stylesheet" href="{{ asset('build/css/stock.css') }}" />

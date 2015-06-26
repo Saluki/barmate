@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+
+    New Account - Barmate POS
+
+@stop
+
 @section('custom-css')
 
 @stop

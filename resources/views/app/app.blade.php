@@ -1,5 +1,11 @@
 @extends('layouts.app')
 
+@section('title')
+
+    Barmate POS
+
+@stop
+
 @section('custom-css')
 
     <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
