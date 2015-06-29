@@ -51,32 +51,31 @@
             </div>
 
             <div class="col-md-12">
-                <div class="row">
+                <div class="row" style="padding-bottom:30px;">
                     {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
 
                         <div class="col-md-6">
-                                <b>First name</b><br>
+                                <label>First name</label>
                                 <input type="text" name="firstname" class="form-control" placeholder="Firstname">
                         </div>
                         <div class="col-md-6">
-                                <b>Last name</b><br>
+                                <label>Last name</label>
                                 <input type="text" name="lastname" class="form-control" placeholder="Lastname">
                         </div>
-                        <div class="col-md-12">
-                                <b>Email</b><br>
+                        <div class="col-md-12 clearfix">
+                                <label>Email</label>
                                 <input type="text" name="email" class="form-control" placeholder="Email address">
 
-                                <b>Password</b><br>
+                                <label>Password</label>
                                 <input type="password" name="password" class="form-control" placeholder="Password">
 
-                                <b>Account role</b><br>
+                                <label>Account role</label>
                                 <select class="form-control" name="role">
                                     <option value="USER">User Account - Only access to bar application</option>
                                     <option value="MNGR">Manager Account - Extended management rights</option>
                                 </select>
 
                                 <br>
-
                                 <input type="submit" class="btn btn-success pull-right" value="Add new account">
 
                         </div>

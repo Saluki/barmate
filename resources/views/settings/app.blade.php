@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-
     Barmate Settings - Barmate POS
-
 @stop
 
 @section('custom-css')
@@ -20,26 +18,15 @@
     			Barmate Settings
     		</h2>
     	</div>
-
-        @if ( Session::has('error') )
-
-            <div class="paper-notify error">
-                <i class="fa fa-exclamation-triangle"></i>&nbsp; {{ Session::get('error') }}
-            </div>
-
-        @elseif ( Session::has('success') )
-
-            <div class="paper-notify success">
-                <i class="fa fa-check"></i>&nbsp; {!! Session::get('success') !!}
-            </div>
-
-        @endif
-
     	<div class="paper-body">
 
-            <div class="col-md-12">
+            <div id="init-container">
 
-                <h2>Application Settings</h2>
+                <div class="fa fa-wrench"></div>
+
+                <div class="intro-text">
+                    Currently no application settings available.
+                </div>
 
             </div>
 
