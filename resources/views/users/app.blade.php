@@ -54,11 +54,35 @@
 
                 <ul class="nav nav-tabs">
                     @if ($isActive)
-                        <li class="active"><a href="#">Active Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
-                        <li><a href="{{ url('app/users/disabled') }}">Disabled Users&nbsp;&nbsp;</a></li>
+
+                        <li class="active">
+                            <a href="#">
+                                Active Users&nbsp;&nbsp;
+                                <span class="badge">{{ count($users) }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('app/users/disabled') }}">
+                                Disabled Users&nbsp;&nbsp;
+                                <span class="badge">{{ $otherUsersCount }}</span>
+                            </a>
+                        </li>
+
                     @else
-                        <li><a href="{{ url('app/users') }}">Active Users</a></li>
-                        <li class="active"><a href="#">Disabled Users&nbsp;&nbsp;<span class="badge">{{ count($users) }}</span></a></li>
+
+                        <li>
+                            <a href="{{ url('app/users') }}">
+                                Active Users&nbsp;&nbsp;
+                                <span class="badge">{{ $otherUsersCount }}</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                Disabled Users&nbsp;&nbsp;
+                                <span class="badge">{{ count($users) }}</span>
+                            </a>
+                        </li>
+
                     @endif
                 </ul>
 

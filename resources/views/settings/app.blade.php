@@ -21,9 +21,28 @@
     		</h2>
     	</div>
 
+        @if ( Session::has('error') )
+
+            <div class="paper-notify error">
+                <i class="fa fa-exclamation-triangle"></i>&nbsp; {{ Session::get('error') }}
+            </div>
+
+        @elseif ( Session::has('success') )
+
+            <div class="paper-notify success">
+                <i class="fa fa-check"></i>&nbsp; {!! Session::get('success') !!}
+            </div>
+
+        @endif
+
     	<div class="paper-body">
 
-    		Test
+            <div class="col-md-12">
+
+                <h2>Application Settings</h2>
+
+            </div>
+
     	</div>
 
     </div>

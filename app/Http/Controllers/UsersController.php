@@ -16,21 +16,23 @@ class UsersController extends Controller {
     public function getActiveUsers()
     {
     	$allUsers = $this->userRepository->allByStatus(true);
-    	$roleNames = ['ADMN'=>'Administrator','MNGR'=>'Manager','USER'=>'User'];
+        $otherUsersCount = count($this->userRepository->allByStatus(false));
 
         return view('users.app')->with('users', $allUsers)
-        						->with('roles', $roleNames)
-        						->with('isActive', true);
+        						->with('roles', $this->getRoleNames())
+        						->with('isActive', true)
+                                ->with('otherUsersCount', $otherUsersCount);
     }
     
     public function getDisabledUsers()
     {
     	$allUsers = $this->userRepository->allByStatus(false);
-    	$roleNames = ['ADMN'=>'Administrator','MNGR'=>'Manager','USER'=>'User'];
-    	
+        $otherUsersCount = count($this->userRepository->allByStatus(true));
+
     	return view('users.app')->with('users', $allUsers)
-    							->with('roles', $roleNames)
-    							->with('isActive', false);
+    							->with('roles', $this->getRoleNames())
+    							->with('isActive', false)
+                                ->with('otherUsersCount', $otherUsersCount);
     }
     
     public function getRegisterForm()
@@ -94,6 +96,11 @@ class UsersController extends Controller {
     	}
     	
     	return redirect('app/users')->with('success', 'User '.$user->firstname.' has been deleted');
+    }
+
+    private function getRoleNames()
+    {
+        return ['ADMN'=>'Administrator','MNGR'=>'Manager','USER'=>'User'];
     }
 
 }
