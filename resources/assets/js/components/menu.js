@@ -54,7 +54,7 @@ $(function(){
             app.menuComponent.show();
         }
         else if( event.keyCode == app.HOME_KEY ) {
-            window.location.href = "/app";
+            window.location.href = "/";
         }
 
     });

@@ -1,8 +1,165 @@
-@import "bootstrap/bootstrap";
 
-@btn-font-weight: 300;
-@font-family-sans-serif: "Roboto", Helvetica, Arial, sans-serif;
+@import "variables";
 
-body, label, .checkbox label {
-	font-weight: 300;
+// MAIN CONTAINER FOR THE APP
+
+#main-container {
+    
+    display: table;
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    padding-top: 100px;
+    
+    #groups-container {
+        
+        width: 230px;
+        display: table-cell;
+        vertical-align: top;
+        
+        #groups {
+            
+            background: #ffffff;
+            border-radius: 3px;
+            box-shadow: 0px 1px 3px lightgrey;
+            
+            .group-item {
+                
+                color: @darkBlueColor;
+                text-transform: uppercase;
+                font-weight: bold;
+                padding: 20px; 
+                cursor: pointer;
+                border-bottom: 1px solid @whiteGrey;
+                letter-spacing: 1px;
+                
+                &:last-child {
+
+                    border-bottom: 0px;
+                }
+            }
+        }
+    }
+    
+    #stock {
+        
+        display: table-cell;
+        padding-left: 15px;
+        padding-right: 15px;
+        
+        .stock-item {
+            
+            padding: 0px;
+            border: 0px;
+            
+            width: 120px;
+            height: 120px;
+                        
+            float: left;
+            
+            margin: 10px;
+            margin-top: 0px;
+            margin-bottom: 20px;
+            
+            background: rgba(116, 186, 255, 1);
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+            text-shadow: 1px 1px 1px @mainColor;
+            
+            border-radius: 3px;
+            box-shadow: 0px 1px 3px lightgrey;
+        }
+    }
+    
+    #ticket-container {
+        
+        width: 300px;
+        display: table-cell;
+        vertical-align: top;
+        
+        #ticket {
+            
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 3px;
+            box-shadow: 0px 1px 3px lightgrey;
+            
+            #ticket-header {
+                
+                padding-top: 10px;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                border-bottom: 1px solid @whiteGrey;
+                
+                h2 {
+                    
+                    font-size: 20px;
+                    color: @darkBlueColor;
+                    margin: 0px;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    
+                    #clear-ticket {
+                
+                        font-weight: normal;
+                        border-radius: 3px;
+                    }
+                }
+            }
+            
+            #ticket-body {
+                
+                .ticket-item {
+                    
+                    display: table;
+                    width: 100%;
+                    margin:15px 0px;
+                    
+                    .qt {
+                        
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: 30px;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                    
+                    .title {
+                        
+                        display: table-cell;
+                        vertical-align: middle;
+                        font-weight: bold;
+                    }
+                    
+                    .close {
+                        
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: 20px;
+                        text-align: right;
+                    }
+                }
+            }
+            
+            #ticket-footer {
+                                
+                #ticket-price {
+                    
+                    margin: 20px 0px;
+                    text-align: right;
+                    font-size: 30px;
+                }
+                
+                .btn {
+                    
+                    width: 48%;
+                    font-weight: bold;
+                    padding: 10px;
+                }
+            }
+        }
+    }
 }

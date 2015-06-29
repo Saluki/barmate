@@ -1,17 +1,12 @@
-/* 
- * Default Barmate GruntFile
- * -------------------------
- */
+
 module.exports = function(grunt) {
-	
-	// CONFIGURE TASKS
 
 	grunt.initConfig({
 
-		jsSource:  'public/source/js',
+		jsSource:  'resources/assets/js',
 		jsBuild:   'public/build/js',
 
-		cssSource: 'public/source/css',
+		cssSource: 'resources/assets/less',
 		cssBuild:  'public/build/css',
 		
         concat: {	
@@ -115,11 +110,9 @@ module.exports = function(grunt) {
 		cssmin: {
 		    
 		    default: {
-			
-				files: {
-				    
-				    'build/css/barmate.min.css': ['build/css/barmate.css']
-				}
+
+                src: ['<%= cssBuild %>/barmate.css'],
+                dest: '<%= cssBuild %>/barmate.min.css'
 		    }
 		}
 
