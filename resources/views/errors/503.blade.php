@@ -1,41 +1,25 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
+        <meta charset="utf-8">
+		<title>Barmate POS</title>
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/fontawesome/css/font-awesome.min.css') }}">
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+        <link rel="stylesheet" type="text/css" href="{{ asset('build/css/maintenance.css') }}">
 
-			.title {
-				font-size: 72px;
-				margin-bottom: 40px;
-			}
-		</style>
-	</head>
+    </head>
 	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Be right back.</div>
-			</div>
-		</div>
+
+		<div id="container">
+
+            <div class="fa fa-rocket" id="icon-lg"></div>
+            <h2>"Houston, we've had a problem."</h2>
+            <h3>Barmate is currently in maintenance, come back later</h3>
+
+        </div>
+
 	</body>
 </html>

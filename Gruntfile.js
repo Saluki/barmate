@@ -103,7 +103,12 @@ module.exports = function(grunt) {
 		    users:{
 		    	src: ['<%= cssSource %>/users.less'],
 		    	dest: '<%= cssBuild %>/users.css'
-		    }
+		    },
+
+            maintenance:{
+                src: ['<%= cssSource %>/maintenance.less'],
+                dest: '<%= cssBuild %>/maintenance.css'
+            }
 
 		},
 	
