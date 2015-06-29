@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('build/css/stock.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('bower_components/alertify-js/build/css/alertify.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('source/css/alertify-theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/alertify-theme.css') }}" />
 
 @stop
 
@@ -154,6 +154,13 @@
 
             <div class="product" data-product="<%= product.id %>">
                 <%= product.get('name') %>
+
+                <% if( product.get('quantity')<=0 ) { %>
+
+                    &nbsp;&nbsp;<span class="fa fa-warning text-danger"></span>
+
+                <% } %>
+
             </div>
 
         <% }) %>
@@ -174,7 +181,16 @@
                 <% } %>
 
                 <br><br>
+
+                <% if( quantity<=0 ) { %>
+                <span class="text-danger">
+                    <span class="fa fa-warning"></span>
+                    &nbsp;<b>Stock is currently empty</b>
+                </span>
+                <% } else { %>
                 <b><%= quantity %></b> items currently in stock
+                <% } %>
+
                 <br><br>
                 <b><%= price %>€</b> per product
 
@@ -227,31 +243,11 @@
     <script type="text/javascript" src="{{ asset('bower_components/underscore/underscore-min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/backbone/backbone.js') }}"></script>
 
-    <!-- MODELS, COLLECTIONS AND VIEWS -->
-    <script type="text/javascript" src="{{ asset('source/js/stock/models/category.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/models/product.js') }}"></script>
-
-    <script type="text/javascript" src="{{ asset('source/js/stock/collections/categories.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/collections/products.js') }}"></script>
-    
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/categorylist.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/categoryitem.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/categoryform.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/productlist.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/productdisplay.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('source/js/stock/views/productform.js') }}"></script>
-
-
     <script type="text/javascript">
-
         var categoryData = {!! json_encode($categories) !!};
-
     </script>
 
-    <!-- STOCK APP -->
-    <script type="text/javascript" src="{{ asset('source/js/stock/stock-app.js') }}"></script>
-
     <!-- STOCK BUILD -->
-    <!--<script type="text/javascript" src="{{ asset('build/js/stock.js') }}"></script>-->
+    <script type="text/javascript" src="{{ asset('build/js/stock.js') }}"></script>
 
 @stop

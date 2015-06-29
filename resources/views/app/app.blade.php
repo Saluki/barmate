@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
 
     <link rel="stylesheet" href="{{ asset('bower_components/alertify-js/build/css/alertify.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('source/css/alertify-theme.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/alertify-theme.css') }}" />
 
 @stop
 
