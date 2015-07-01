@@ -145,12 +145,16 @@ var app = app || {};
             
             this.sync("create", this, {
             	
-            	success: function(object, response) {
+            	success: function(object, response, jqxhr) {
+
             		app.sync.reset();
+                    app.sync.trigger('sync');
             	},
             	
-            	error: function(object, response) {
+            	error: function(jqxhr, textStatus, errorThrown) {
+
             		alertify.alert('Could not save sale', 'Sales could not be saved to the server.');
+                    app.sync.trigger('error');
             	}
             	
             });
@@ -540,7 +544,6 @@ var app = app || {};
             });
             
             app.sync.add(resume);
-            
             app.sync.save();
                         
             app.ticketView.clear();
@@ -556,6 +559,62 @@ var app = app || {};
     
     });
     
+})(jQuery);
+
+var app = app || {};
+
+(function($){
+
+    'use strict';
+
+    app.SyncView = Backbone.View.extend({
+
+        el: '#sync-status',
+
+        template: _.template( $('#template-sync-box').html() ),
+
+        events: {},
+
+        initialize: function(){
+
+            this.listenTo(app.sync, 'sync', this.render);
+            this.listenTo(app.sync, 'error', this.render);
+
+            this.hide();
+        },
+
+        render: function() {
+
+            if( app.sync.length <= 0 )
+            {
+                this.hide();
+                return;
+            }
+
+            var templateData = {
+                syncNumber: app.sync.length
+            };
+
+            var content = this.template(templateData);
+            this.$el.html(content);
+
+            this.show();
+
+            return this;
+        },
+
+        hide: function() {
+
+            this.$el.css('display','none');
+        },
+
+        show: function() {
+
+            this.$el.css('display', 'block');
+        }
+
+    });
+
 })(jQuery);
 
 var app = app || {};
@@ -579,8 +638,17 @@ $(function () {
 	app.stockView = new app.StockView();
     app.ticketView = new app.TicketView();
     app.paymentView = new app.PaymentView();
+    app.syncBox = new app.SyncView();
                 
     // Load server data in the stock
     app.currentStock.reset(serverData);
+
+    // Register event handlers
+    $(window).bind('beforeunload', function(){
+
+        if( app.sync.length>0 ) {
+            return 'Are you sure you want to leave?';
+        }
+    });
   
 });

@@ -28,6 +28,7 @@
         <div id="stock"></div>
         
         <div id="ticket-container">
+
             <div id="ticket">
             
                 <div id="ticket-header">
@@ -49,6 +50,9 @@
                 </div>
             
             </div>
+
+            <div id="sync-status"></div>
+
         </div>
         
     </div>
@@ -104,6 +108,21 @@
 @stop
 
 @section('custom-js')
+
+    <!-- TEMPLATES -->
+    <script type="text/template" id="template-sync-box">
+
+        <span class="fa fa-warning"></span>&nbsp;&nbsp;
+
+        <%= syncNumber %>
+
+        <% if( syncNumber==1 ) {%>
+            sale
+        <% } else { %>
+            sales
+        <% } %> must be synchronized
+
+    </script>
 
     <!-- EXTRA DEPENDENCIES -->
     <script src="{{ asset('bower_components/underscore/underscore.js') }}"></script>

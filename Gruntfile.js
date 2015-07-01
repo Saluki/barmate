@@ -24,6 +24,7 @@ module.exports = function(grunt) {
                         '<%= jsSource %>/app/views/paymentView.js',
                         '<%= jsSource %>/app/views/stockView.js',
                         '<%= jsSource %>/app/views/ticketView.js',
+                        '<%= jsSource %>/app/views/syncView.js',
                         '<%= jsSource %>/app/components/menu.js',
                         '<%= jsSource %>/app/barmate.js'],
 		    	dest: '<%= jsBuild %>/app.js'

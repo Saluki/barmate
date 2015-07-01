@@ -20,8 +20,17 @@ $(function () {
 	app.stockView = new app.StockView();
     app.ticketView = new app.TicketView();
     app.paymentView = new app.PaymentView();
+    app.syncBox = new app.SyncView();
                 
     // Load server data in the stock
     app.currentStock.reset(serverData);
+
+    // Register event handlers
+    $(window).bind('beforeunload', function(){
+
+        if( app.sync.length>0 ) {
+            return 'Are you sure you want to leave?';
+        }
+    });
   
 });

@@ -114,7 +114,6 @@ var app = app || {};
             });
             
             app.sync.add(resume);
-            
             app.sync.save();
                         
             app.ticketView.clear();

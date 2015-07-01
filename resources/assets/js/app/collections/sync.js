@@ -16,12 +16,16 @@ var app = app || {};
             
             this.sync("create", this, {
             	
-            	success: function(object, response) {
+            	success: function(object, response, jqxhr) {
+
             		app.sync.reset();
+                    app.sync.trigger('sync');
             	},
             	
-            	error: function(object, response) {
+            	error: function(jqxhr, textStatus, errorThrown) {
+
             		alertify.alert('Could not save sale', 'Sales could not be saved to the server.');
+                    app.sync.trigger('error');
             	}
             	
             });
