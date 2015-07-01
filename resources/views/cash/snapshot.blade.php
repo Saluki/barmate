@@ -49,7 +49,7 @@
 
                     <div class="alert alert-danger">
                         <span class="fa fa-warning"></span>&nbsp;
-                        <b>Watch out.</b> Remember that creating a new cash snapshot will close the previous one.
+                        <b>Watch out.</b> Remember that creating a new cash snapshot will close the current one.
                     </div>
 
                     <label>Title</label>
