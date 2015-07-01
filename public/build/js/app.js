@@ -153,7 +153,9 @@ var app = app || {};
             	
             	error: function(jqxhr, textStatus, errorThrown) {
 
-            		alertify.alert('Could not save sale', 'Sales could not be saved to the server.');
+                    var errorMessage = 'Check your network settings or report the problem to the administrator.';
+
+            		alertify.alert('Could not save sale to the server', errorMessage);
                     app.sync.trigger('error');
             	}
             	
