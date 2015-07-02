@@ -22,11 +22,13 @@ class DatabaseSeeder extends Seeder {
 		DB::table('reset_history')->delete();
 		DB::table('users')->delete();
 
+        DB::table('settings')->delete();
 		DB::table('groups')->delete();
 
 		$this->command->info('All data truncated');
 
 		$this->call('GroupTableSeeder');
+        $this->call('SettingTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('CategoryTableSeeder');
         $this->call('CashSnapshotTableSeeder');

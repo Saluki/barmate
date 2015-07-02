@@ -159,6 +159,10 @@
 
                     &nbsp;&nbsp;<span class="fa fa-warning text-danger"></span>
 
+                <% } else if( product.get('quantity')<=app.stockSettings.stockEmptyAlert ) { %>
+
+                    &nbsp;&nbsp;<span class="fa fa-warning text-warning"></span>
+
                 <% } %>
 
             </div>
@@ -183,12 +187,25 @@
                 <br><br>
 
                 <% if( quantity<=0 ) { %>
-                <span class="text-danger">
-                    <span class="fa fa-warning"></span>
-                    &nbsp;<b>Stock is currently empty</b>
-                </span>
+
+                    <span class="text-danger">
+                        <span class="fa fa-warning"></span>
+                        &nbsp;<b>Stock is currently empty</b>
+                    </span>
+
+                <% } else if( quantity<=app.stockSettings.stockEmptyAlert ) { %>
+
+                    <b><%= quantity %></b> items currently in stock
+                    <br>
+                    <span class="text-warning">
+                        <span class="fa fa-warning"></span>
+                        &nbsp;<b>Stock will soon be empty</b>
+                    </span>
+
                 <% } else { %>
-                <b><%= quantity %></b> items currently in stock
+
+                    <b><%= quantity %></b> items currently in stock
+
                 <% } %>
 
                 <br><br>
@@ -244,7 +261,14 @@
     <script type="text/javascript" src="{{ asset('bower_components/backbone/backbone.js') }}"></script>
 
     <script type="text/javascript">
+
+        app.stockSettings = {
+
+            stockEmptyAlert: {{ $stockEmptyAlert }}
+        }
+
         var categoryData = {!! json_encode($categories) !!};
+
     </script>
 
     <!-- STOCK BUILD -->

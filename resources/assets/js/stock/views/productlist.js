@@ -27,7 +27,6 @@ app.views.ProductList = Backbone.View.extend({
 		else {
 
 			var products = app.products.where({ category:app.categories.currentID });
-
 			var content = this.template( {'products':products} );
 		}
 
