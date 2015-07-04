@@ -1,6 +1,6 @@
 # Barmate
 
-[![Build Status](https://travis-ci.org/Saluki/Barmate.svg)](https://travis-ci.org/Saluki/Barmate)
+[![Build Status](https://travis-ci.org/Saluki/Barmate.svg)](https://travis-ci.org/Saluki/Barmate) [![Issues](https://img.shields.io/github/issues/Saluki/Barmate.svg)](https://github.com/Saluki/Barmate/issues) [![License](https://img.shields.io/github/license/Saluki/Barmate.svg)](https://github.com/Saluki/Barmate/blob/master/LICENSE)
 
 Modern and intuitive POS web application written with the Laravel framework.
 
