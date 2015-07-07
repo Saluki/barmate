@@ -1,4 +1,6 @@
-<?php namespace App\Repositories;
+<?php
+
+namespace App\Repositories;
 
 use App\Exceptions\RepositoryException;
 use App\User;
@@ -29,7 +31,6 @@ class UserRepository extends Repository
 
     public function allByStatus($isActive)
     {
-
         if (!is_bool($isActive))
             throw new RepositoryException('Must be a boolean', RepositoryException::INCORRECT_PARAMETER);
 
@@ -42,7 +43,6 @@ class UserRepository extends Repository
 
     public function get($id)
     {
-
         if (!is_numeric($id))
             throw new RepositoryException('Invalid user ID', RepositoryException::INCORRECT_PARAMETER);
 

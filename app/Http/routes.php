@@ -76,6 +76,8 @@ Route::group(['prefix'=>'app', 'middleware'=>'administrator'], function(){
 	
 	Route::get('users', 'UsersController@getActiveUsers');
 
+    Route::get('users/connections/{id}', 'UsersController@showConnections');
+
 	Route::get('users/disabled', 'UsersController@getDisabledUsers');
 	
 	Route::get('users/register', 'UsersController@getRegisterForm');

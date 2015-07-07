@@ -1,16 +1,19 @@
 <?php namespace App\Http\Controllers;
 
 use App\Exceptions\RepositoryException;
+use App\Repositories\ConnectRepository;
 use App\Repositories\UserRepository;
 use Input;
 
 class UsersController extends Controller {
 	
 	private $userRepository;
+    private $connectRepository;
 
-	public function __construct(UserRepository $repository) 
+	public function __construct(UserRepository $repository, ConnectRepository $connectRepository)
 	{
 		$this->userRepository = $repository;
+        $this->connectRepository = $connectRepository;
 	}
 
     public function getActiveUsers()
@@ -33,6 +36,15 @@ class UsersController extends Controller {
     							->with('roles', $this->getRoleNames())
     							->with('isActive', false)
                                 ->with('otherUsersCount', $otherUsersCount);
+    }
+
+    public function showConnections($userId)
+    {
+        $user = $this->userRepository->get($userId);
+        $connections = $this->connectRepository->forUser($userId);
+
+        return view('users.history')->with('user', $user)
+                                    ->with('connections', $connections);
     }
     
     public function getRegisterForm()

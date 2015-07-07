@@ -109,11 +109,13 @@
                             </td>
                             <td>
                                 @if ($user->role!='ADMN')
+
                                     <div class="btn-group pull-right">
                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                             <span class="fa fa-wrench"></span>&nbsp;&nbsp;Actions <span class="caret"></span>
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{ url('app/users/connections/'.$user->user_id) }}">Connection history</a></li>
                                             <li><a href="{{ url('app/users/change-role/'.$user->user_id) }}">
                                             @if ($user->role=='USER')
                                                 Change role to 'Manager'
@@ -132,9 +134,20 @@
                                             <li><a href="{{ url('app/users/delete/'.$user->user_id) }}"><span class="text-danger">Delete account</span></a></li>
                                         </ul>
                                     </div>
+
                                 @else
-                                    <a href="#" class="btn btn-default disabled pull-right">Actions</a>
+
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="fa fa-wrench"></span>&nbsp;&nbsp;Actions <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{ url('app/users/connections/'.$user->user_id) }}">Connection history</a></li>
+                                        </ul>
+                                    </div>
+
                                 @endif
+
                             </td>
                         </tr>
 
