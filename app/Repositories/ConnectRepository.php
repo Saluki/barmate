@@ -17,7 +17,7 @@ class ConnectRepository extends Repository {
 
         try
         {
-            $connections = $this->model->where('user_id', '=', $userId)->get();
+            $connections = $this->model->where('user_id', '=', $userId)->orderBy('connect_time', 'DESC')->get();
         }
         catch(\Exception $e)
         {

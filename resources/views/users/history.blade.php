@@ -43,7 +43,7 @@
                         <tr>
                             <th>Email address</th>
                             <th>IP address</th>
-                            <th>Login time</th>
+                            <th>Login time&nbsp;&nbsp;<span class="fa fa-caret-down"></span></th>
                         </tr>
                     </thead>
                     <tbody>
