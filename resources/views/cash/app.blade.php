@@ -89,29 +89,68 @@
                 </div>
                 <br>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title"><span class="fa fa-heartbeat"></span>&nbsp;&nbsp;Heartbeat</h2>
-                    </div>
-                    <div class="panel-body" style="padding-bottom:30px;">
-                        <div class="stat-tile">
-                            <div class="stat-title">Last Cash Operation</div>
-                            <div class="stat-number">
-                                @if( $lastOperation>0 )+@endif{{ number_format($lastOperation,2) }}€
+                @if( $snapshot->is_closed )
+
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            <h2 class="panel-title"><span class="fa fa-lock"></span>&nbsp;&nbsp;Closed snapshot summary</h2>
+                        </div>
+                        <div class="panel-body" style="padding-bottom:30px;">
+
+                            <div class="stat-tile">
+                                <div class="stat-title">Snapshot duration</div>
+                                <div class="stat-number">
+                                   {{ $duration }}
+                                </div>
                             </div>
-                        </div>
-                        <div class="stat-tile">
-                            <div class="stat-title">Cash In Drawer</div>
-                            <div class="stat-number">{{ number_format(end($amounts),2) }}€</div>
-                        </div>
 
-                        <div class="stat-tile">
-                            <div class="stat-title">Cash By Sales</div>
-                            <div class="stat-number">+{{ number_format($cashBySales,2) }}€</div>
-                        </div>
+                            <div class="stat-tile">
+                                <div class="stat-title">Next Snapshot Difference</div>
+                                <div class="stat-number">
+                                    @if( $delta<=0 )
+                                        {{ number_format($delta,2) }}€
+                                    @elseif( $delta>0 )
+                                        +{{ number_format($delta,2) }}€
+                                    @endif
 
+                                </div>
+                            </div>
+
+                            <div class="stat-tile">
+                                <div class="stat-title">Cash By Sales</div>
+                                <div class="stat-number">+{{ number_format($cashBySales,2) }}€</div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
+
+                @else
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title"><span class="fa fa-heartbeat"></span>&nbsp;&nbsp;Heartbeat</h2>
+                        </div>
+                        <div class="panel-body" style="padding-bottom:30px;">
+                            <div class="stat-tile">
+                                <div class="stat-title">Last Cash Operation</div>
+                                <div class="stat-number">
+                                    @if( $lastOperation>0 )+@endif{{ number_format($lastOperation,2) }}€
+                                </div>
+                            </div>
+                            <div class="stat-tile">
+                                <div class="stat-title">Cash In Drawer</div>
+                                <div class="stat-number">{{ number_format(end($amounts),2) }}€</div>
+                            </div>
+
+                            <div class="stat-tile">
+                                <div class="stat-title">Cash By Sales</div>
+                                <div class="stat-number">+{{ number_format($cashBySales,2) }}€</div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                @endif
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -127,7 +166,10 @@
 								<div class="intro-text">
 									This snapshot has no cash operations or sales.
 								</div>
-							</div>
+
+                                <a href="{{ url('app/cash/register-operation') }}" class="btn btn-primary btn-lg">Register a cash operation</a>
+
+                            </div>
 												
                         @else
                             <div class="row" style="margin:10px;text-align: center;">

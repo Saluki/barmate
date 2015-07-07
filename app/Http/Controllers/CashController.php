@@ -3,6 +3,7 @@
 use App\Exceptions\RepositoryException;
 use App\Repositories\SnapshotDetailsRepository;
 use App\Repositories\SnapshotRepository;
+use Carbon\Carbon;
 use Response;
 use Input;
 use Redirect;
@@ -10,13 +11,13 @@ use Validator;
 
 class CashController extends Controller {
 
-    private $repository;
+    private $snapshotRepository;
 
     private $detailsRepository;
 
 	public function __construct(SnapshotRepository $repository, SnapshotDetailsRepository $detailsRepository)
 	{
-		$this->repository = $repository;
+		$this->snapshotRepository = $repository;
 		$this->detailsRepository = $detailsRepository;
 	}
 
@@ -24,13 +25,13 @@ class CashController extends Controller {
     {
         if( isset($requestedSnapshot) )     // Search snapshot in history
         {
-            $snapshot = $this->repository->get($requestedSnapshot);
+            $snapshot = $this->snapshotRepository->get($requestedSnapshot);
         }
         else    // Grab the current snapshot, or redirect if no one exists
         {
             try
             {
-                $snapshot = $this->repository->current();
+                $snapshot = $this->snapshotRepository->current();
             }
             catch (RepositoryException $e)
             {
@@ -44,7 +45,7 @@ class CashController extends Controller {
         }
 
         $snapshotDetails = $this->detailsRepository->fromSnapshot($snapshot->cs_id);		
-        $allSnapshots = $this->repository->all();
+        $allSnapshots = $this->snapshotRepository->all();
 
     	$cashArray = [ floatval($snapshot->amount) ];
     	$lastAmount = $snapshot->amount;
@@ -70,14 +71,55 @@ class CashController extends Controller {
             }
     	}
 
+        // Enough data for current snapshot,
+        // return all data to the view
+        if( !$snapshot->is_closed )
+        {
+            return view('cash.app')->with('snapshot', $snapshot)
+                                    ->with('details', $snapshotDetails)
+                                    ->with('amounts', $cashArray)
+                                    ->with('lastOperation', $lastOperation)
+                                    ->with('cashBySales', $cashBySales)
+                                    ->with('allSnapshots', $allSnapshots)
+                                    ->with('salesCount', $salesCount)
+                                    ->with('operationsCount', $operationsCount);
+        }
+
+        // Other statistics for closed snapshot
+
+        $nextSnapshot = $this->snapshotRepository->getNext($snapshot->cs_id);
+
+        $snapshotTime = new Carbon($snapshot->time);
+        $nextSnapshotTime = new Carbon($nextSnapshot->time);
+        $duration = $this->approximateDuration($snapshotTime, $nextSnapshotTime);
+
+        $delta = $nextSnapshot->amount - $snapshot->predicted_amount;
+
         return view('cash.app')->with('snapshot', $snapshot)
-                                        ->with('details', $snapshotDetails)
-        								->with('amounts', $cashArray)
-                                        ->with('lastOperation', $lastOperation)
-                                        ->with('cashBySales', $cashBySales)
-                                        ->with('allSnapshots', $allSnapshots)
-                                        ->with('salesCount', $salesCount)
-                                        ->with('operationsCount', $operationsCount);
+                                ->with('details', $snapshotDetails)
+                                ->with('amounts', $cashArray)
+                                ->with('cashBySales', $cashBySales)
+                                ->with('allSnapshots', $allSnapshots)
+                                ->with('salesCount', $salesCount)
+                                ->with('operationsCount', $operationsCount)
+                                ->with('delta', $delta)
+                                ->with('duration', $duration);
+    }
+
+    private function approximateDuration(Carbon $oldSnapshotTime, Carbon $nextSnapshotTime)
+    {
+        $days = $oldSnapshotTime->diffInDays($nextSnapshotTime);
+        if( $days>0 ) {
+            return ($days==1) ? "1 day" : "$days days";
+        }
+
+        $hours = $oldSnapshotTime->diffInMonths($nextSnapshotTime);
+        if( $hours>0 ) {
+            return ($hours==1) ? "1 hour" : "$hours hours";
+        }
+
+        $minutes = $oldSnapshotTime->diffInMinutes($nextSnapshotTime);
+        return ($minutes==1) ? "1 minute" : "$minutes minutes";
     }
 
     public function operationForm()
@@ -88,7 +130,7 @@ class CashController extends Controller {
     public function registerOperation()
     {
         $amount = floatval(Input::get('amount'));
-        $currentSnapshotId = $this->repository->current()->cs_id;
+        $currentSnapshotId = $this->snapshotRepository->current()->cs_id;
 
         $operationData = [  'type'    => 'CASH',
                             'sum'     => $amount,
@@ -118,7 +160,7 @@ class CashController extends Controller {
         $title = Input::get('title');
 
         try {
-            $this->repository->store( Input::all() );
+            $this->snapshotRepository->store( Input::all() );
         }
         catch(RepositoryException $e) {
             return Redirect::to('app/cash/new-snapshot')->with('error', 'Error while creating snapshot: '.$e->getMessage())
@@ -131,7 +173,7 @@ class CashController extends Controller {
     public function showHistory()
     {
         try {
-            $snapshots = $this->repository->history();
+            $snapshots = $this->snapshotRepository->history();
         }
         catch(RepositoryException $e) {
             App::abort(500);

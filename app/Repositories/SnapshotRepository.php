@@ -60,6 +60,20 @@ class SnapshotRepository extends Repository {
 		return $snapshot;	
 	}
 
+    public function getNext($id)
+    {
+        $this->validateID($id);
+
+        try {
+            $snapshot = $this->model->where('cs_id', '>', $id)->orderBy('cs_id')->firstOrFail();
+        }
+        catch(Exception $e) {
+            throw new RepositoryException('Could not retrieve next record', RepositoryException::DATABASE_ERROR);
+        }
+
+        return $snapshot;
+    }
+
 	public function store(array $data)
 	{
 		$this->validate($data);
