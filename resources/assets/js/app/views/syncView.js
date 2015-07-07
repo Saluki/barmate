@@ -9,9 +9,12 @@ var app = app || {};
 
         el: '#sync-status',
 
+
         template: _.template( $('#template-sync-box').html() ),
 
-        events: {},
+        events: {
+            'click #sync-btn' : 'manualSync'
+        },
 
         initialize: function(){
 
@@ -22,6 +25,8 @@ var app = app || {};
         },
 
         render: function() {
+
+            $('#sync-icon').removeClass('fa-spin');
 
             if( app.sync.length <= 0 )
             {
@@ -39,6 +44,12 @@ var app = app || {};
             this.show();
 
             return this;
+        },
+
+        manualSync: function() {
+
+            app.sync.save();
+            $('#sync-icon').addClass('fa-spin');
         },
 
         hide: function() {

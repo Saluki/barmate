@@ -137,18 +137,24 @@ var app = app || {};
         url: 'app/register',
   
         model: app.TicketResume,
+
+        inSync: false,
         
         save: function() {
             
-            if( this.isEmpty() )
+            if( this.isEmpty() || this.inSync )
                 return;
-            
+
+            this.inSync = true;
+
             this.sync("create", this, {
             	
             	success: function(object, response, jqxhr) {
 
             		app.sync.reset();
                     app.sync.trigger('sync');
+
+                    app.sync.inSync = false;
             	},
             	
             	error: function(jqxhr, textStatus, errorThrown) {
@@ -157,6 +163,8 @@ var app = app || {};
 
             		alertify.alert('Could not save sale to the server', errorMessage);
                     app.sync.trigger('error');
+
+                    app.sync.inSync = false;
             	}
             	
             });
@@ -573,9 +581,12 @@ var app = app || {};
 
         el: '#sync-status',
 
+
         template: _.template( $('#template-sync-box').html() ),
 
-        events: {},
+        events: {
+            'click #sync-btn' : 'manualSync'
+        },
 
         initialize: function(){
 
@@ -586,6 +597,8 @@ var app = app || {};
         },
 
         render: function() {
+
+            $('#sync-icon').removeClass('fa-spin');
 
             if( app.sync.length <= 0 )
             {
@@ -603,6 +616,12 @@ var app = app || {};
             this.show();
 
             return this;
+        },
+
+        manualSync: function() {
+
+            app.sync.save();
+            $('#sync-icon').addClass('fa-spin');
         },
 
         hide: function() {

@@ -122,6 +122,13 @@
   box-shadow: 0px 1px 3px lightgrey;
   font-weight: bold;
 }
+#main-container #ticket-container #sync-status #sync-btn {
+  font-weight: bold;
+  padding: 10px;
+  background: #D43F3A;
+  margin-top: 15px;
+  border: 1px solid #AC2925;
+}
 
 #payment-container {
   display: none;

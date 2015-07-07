@@ -122,6 +122,11 @@
             sales
         <% } %> must be synchronized
 
+        <button class="btn btn-danger btn-xl btn-block" id="sync-btn">
+            <span class="fa fa-refresh" id="sync-icon"></span>&nbsp;
+            Synchronize now
+        </button>
+
     </script>
 
     <!-- EXTRA DEPENDENCIES -->
