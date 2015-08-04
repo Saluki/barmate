@@ -69,7 +69,9 @@ class SaleRepository extends Repository
 
         try
         {
-            $sales = $this->model->where('is_active', '=', true)->where('time', '>=', $beginDate)->get();
+            $sales = $this->model->where('is_active', '=', true)
+                                ->where('time', '>=', $beginDate)
+                                ->get();
         }
         catch(Exception $e)
         {

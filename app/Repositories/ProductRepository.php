@@ -142,6 +142,15 @@ class ProductRepository extends Repository {
 		return $product;
 	}
 
+    /**
+     * Returns a top-10 from the most sold product in a given interval.
+     *
+     * Watch out, deleted products are also taken in the results!
+     *
+     * @param CarbonInterval $interval
+     * @return mixed
+     * @throws RepositoryException
+     */
     public function rankBySalesInInterval(CarbonInterval $interval)
     {
         $beginDate = Carbon::now()->sub($interval)->addHour();
@@ -162,6 +171,7 @@ class ProductRepository extends Repository {
                 ->orderBy('sale_count', 'DESC')
                 ->orderBy('products.product_name', 'ASC')
                 ->take(10)
+                ->withTrashed()
                 ->get();
         }
         catch(\Exception $e)

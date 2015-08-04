@@ -140,9 +140,21 @@
                             <tbody>
                             <?php $productRank=1; ?>
                             @foreach($products as $rank)
-                                <tr>
+                                <tr
+                                @if( isset($rank->deleted_at) )
+                                    class="danger"
+                                @endif
+                                >
                                     <td>{{ $productRank++ }}</td>
-                                    <td>{{ $rank->product_name }}</td>
+                                    <td>
+                                        {{ $rank->product_name }}
+                                        @if( isset($rank->deleted_at) )
+                                            &nbsp;&nbsp;
+                                            <span class="text-danger">
+                                                <span class="fa fa-trash"></span> deleted
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td>{{ $rank->sale_count }}</td>
                                 </tr>
                             @endforeach

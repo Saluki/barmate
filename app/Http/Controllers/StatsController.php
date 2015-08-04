@@ -36,6 +36,13 @@ class StatsController extends Controller {
                                 ->with('products', $products);
     }
 
+    /**
+     * Extracts a Carbon interval from the short notation (30d, 4h, ...) used in the URL
+     *
+     * @param $intervalString
+     * @return CarbonInterval
+     * @throws Exception
+     */
     private function extractIntervalData($intervalString)
     {
         $type = substr($intervalString, -1);
@@ -63,6 +70,12 @@ class StatsController extends Controller {
         throw new Exception('Could not extract interval data from '.$intervalString);
     }
 
+    /**
+     * Transforms a Carbon interval in a readable string (last 8 hours, ...)
+     *
+     * @param CarbonInterval $interval
+     * @return string
+     */
     private function getTitleFromInterval(CarbonInterval $interval)
     {
         if( $interval->h>0 )
