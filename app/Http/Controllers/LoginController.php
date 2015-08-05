@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Hash;
 use Illuminate\Http\Request;
 use Input;
+use Session;
 use Validator;
 
 class LoginController extends Controller {
@@ -65,9 +66,9 @@ class LoginController extends Controller {
         
         Auth::loginUsingId($user->user_id);
 
-        session('groupID', $user->group_id);
-        session('role', $user->role);
-        
+        Session::put('groupID', $user->group_id);
+        Session::put('role', $user->role);
+
         return redirect('app');
     }
     

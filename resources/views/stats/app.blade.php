@@ -192,7 +192,7 @@
                 fillColor: "#0088CC",
                 data: [
                     @foreach($sales as $saleTime => $saleCount)
-                    {{ $saleCount }},
+                        {{ $saleCount }},
                     @endforeach
                 ]
             }]
