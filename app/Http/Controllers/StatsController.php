@@ -59,10 +59,10 @@ class StatsController extends Controller {
         }
         elseif( $type=='d' )
         {
-            if( $nb>30 )
+            /*if( $nb>30 )
             {
                 $nb = 30;
-            }
+            }*/
 
             return CarbonInterval::days($nb);
         }
