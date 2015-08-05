@@ -4,28 +4,29 @@ use App;
 use App\User;
 use Auth;
 use Hash;
-use Input;
-use Redirect;
+use Illuminate\Http\Request;
 use Validator;
 
 class AccountController extends Controller {
 
     public function index()
     {    
-        $userData = User::profileData( Auth::id() );
+        $userData = User::profileData(Auth::id());
         
         if( $userData == null )
+        {
             App::abort(500, 'User does not exist');
+        }
 
         $roles = ['USER'=>'User', 'MNGR'=>'Manager', 'ADMN'=>'Administrator'];
         $userData->role = $roles[ $userData->role ];
 
-        return view('account.main')->withUser($userData);
+        return view('account.main')->with('user', $userData);
     }
     
-    public function saveProfile()
+    public function saveProfile(Request $request)
     {
-        $validator = Validator::make(Input::all(), [
+        $validator = Validator::make($request->all(), [
            
             'firstname'       => 'required|name',
             'lastname'        => 'required|name',
@@ -33,43 +34,47 @@ class AccountController extends Controller {
             'npassword'       => 'password'
         ]);
         
-        if( $validator->fails() ) {
-
+        if( $validator->fails() )
+        {
             $messages = $validator->messages();
-
-            return Redirect::to('app/account')->withError( $messages->all()[0] );
+            return redirect('app/account')->with('error', $messages->all()[0] );
         }
 
-        $user = User::find( Auth::id() );
+        $user = User::find(Auth::id());
 
-        if( Input::get('npassword') != '' ) {
-
-            if( Input::get('npassword') != Input::get('npasswordrepeat') ) {
-                return Redirect::to('app/account')->withError('New passwords doesn\'t match');
+        if( $request->input('npassword') != '' )
+        {
+            if( $request->input('npassword') != $request->input('npasswordrepeat') )
+            {
+                return redirect('app/account')->with('error', 'New passwords doesn\'t match');
             }
 
-            $user->password_hash = Hash::make( Input::get('npassword') );
+            $user->password_hash = Hash::make($request->input('npassword'));
         }
 
         $user = User::find( Auth::id() );
-        $user->firstname = Input::get('firstname');
-        $user->lastname  = Input::get('lastname');
-        $user->email     = Input::get('email');
-        $user->notes     = Input::get('notes');
+        $user->firstname = $request->input('firstname');
+        $user->lastname  = $request->input('lastname');
+        $user->email     = $request->input('email');
+        $user->notes     = $request->input('notes');
 
-        try {
+        try
+        {
             $user->save();
         }
-        catch(Exception $e) {
-
+        catch(Exception $e)
+        {
             $errorMessage = 'Database error';
            
             if( $e->getCode() == 23000 )
+            {
                 $errorMessage = 'Email is already in use';
+            }
 
-            return Redirect::to('app/account')->withError($errorMessage);
+            return redirect('app/account')->with('error', $errorMessage);
         }
 
-        return Redirect::to('app/account')->withSuccess('Account settings updated');
+        return redirect('app/account')->with('success', 'Account settings updated');
     }
+
 }

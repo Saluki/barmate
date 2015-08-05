@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Exceptions\RepositoryException;
 use App\User;
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
 use DB;
 use Exception;
 use Hash;
@@ -21,22 +19,29 @@ class UserRepository extends Repository
 
     public function all()
     {
-
-        try {
+        try
+        {
             return $this->model->fromGroup()->get();
-        } catch (Exception $e) {
-            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
+        catch (Exception $e)
+        {
+            throw new RepositoryException('Database error occurred', RepositoryException::DATABASE_ERROR);
         }
     }
 
     public function allByStatus($isActive)
     {
-        if (!is_bool($isActive))
+        if(!is_bool($isActive))
+        {
             throw new RepositoryException('Must be a boolean', RepositoryException::INCORRECT_PARAMETER);
+        }
 
-        try {
+        try
+        {
             return $this->model->fromGroup()->where('is_active', $isActive)->orderBy('role', 'DESC')->get();
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
         }
     }
@@ -60,18 +65,27 @@ class UserRepository extends Repository
 
     public function findActive($email)
     {
-
         if (is_null($email) || !is_string($email))
-            throw new RepositoryException('Incorrect email adress', RepositoryException::VALIDATION_FAILED);
+        {
+            throw new RepositoryException('Incorrect email address', RepositoryException::VALIDATION_FAILED);
+        }
 
-        try {
-            $user = $this->model->activeGroup()->where('email', '=', $email)->where('users.is_active', true)->first();
-        } catch (Exception $e) {
-            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        try
+        {
+            $user = $this->model->activeGroup()
+                                ->where('email', '=', $email)
+                                ->where('users.is_active', true)
+                                ->first();
+        }
+        catch (Exception $e)
+        {
+            throw new RepositoryException('Database error occurred', RepositoryException::DATABASE_ERROR);
         }
 
         if ($user == null)
+        {
             throw new RepositoryException('User not found', RepositoryException::RESOURCE_NOT_FOUND);
+        }
 
         return $user;
     }

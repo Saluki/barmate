@@ -10,9 +10,9 @@
 
 Route::group(['middleware'=>'guest'], function(){
 
-    Route::get('/', 'LoginController@loginForm');
+    Route::get('/', 'LoginController@getLoginForm');
 
-    Route::post('/', 'LoginController@tryLogin');
+    Route::post('/', 'LoginController@loginAttempt');
 
 });
 

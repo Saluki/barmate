@@ -19,19 +19,21 @@
 						<input type="submit" value="Log in" class="btn btn-primary pull-right">
 
 					</form>
-
-					@if( Session::has('error') )
-				
-						<div class="clearfix" style="margin-top:50px;"></div>
-
-						<p class="alert alert-info">
-							{{ Session::get('error') }}
-						</p>
-
-					@endif
 				
 				</div>
-			</div>                
+			</div>
+
+            @if( Session::has('error') )
+
+                <div class="clearfix" style="margin-top:20px;"></div>
+
+                <p class="alert alert-info">
+                    <span class="fa fa-warning"></span>&nbsp;
+                    {{ Session::get('error') }}
+                </p>
+
+            @endif
+
         </div>
     </div>
 

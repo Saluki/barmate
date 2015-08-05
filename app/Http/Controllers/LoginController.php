@@ -1,18 +1,17 @@
 <?php namespace App\Http\Controllers;
 
-use App\Models\ConnectHistory;
 use App\Exceptions\RepositoryException;
+use App\Models\ConnectHistory;
 use App\Repositories\UserRepository;
 use Auth;
+use Carbon\Carbon;
 use Hash;
+use Illuminate\Http\Request;
 use Input;
-use Redirect;
-use Request;
-use Session;
 use Validator;
 
 class LoginController extends Controller {
-	
+
 	private $userRepository;
 	
 	public function __construct(UserRepository $repository)
@@ -20,25 +19,25 @@ class LoginController extends Controller {
 		$this->userRepository = $repository;
 	}
 
-	public function loginForm()
+	public function getLoginForm()
 	{
 		return view('public.login');	
 	}
     
-    public function tryLogin()
-    {        
-        $validator = Validator::make(Input::all(), [
+    public function loginAttempt(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
 
             'email'  => 'required|email',
             'password'  => 'required|password'
         ]);
 
-        $email = Input::get('email');
+        $email = $request->input('email');
                 
-        if( $validator->fails() ) {
-
-            return Redirect::to('/')->withError('Credentials have wrong format')
-                                        ->withEmail( $email );
+        if( $validator->fails() )
+        {
+            return redirect('/')->with('error', 'Credentials have invalid format')
+                                ->with('email', $email);
         }
 
         try 
@@ -47,36 +46,35 @@ class LoginController extends Controller {
         }
         catch (RepositoryException $e)
         {
-        	return Redirect::to('/')->withError('Incorrect credentials')
-        								->withEmail( $email );
+        	return redirect('/')->with('error', 'Incorrect credentials')
+                                ->with('email', $email);
         }
                         
         if( !Hash::check(Input::get('password'), $user->password_hash) ) 
         {
-            return Redirect::to('/')->withError('Incorrect credentials')
-                                        ->withEmail( $email );
+            return redirect('/')->with('error', 'Incorrect credentials')
+                                ->with('email', $email);
         }
         
         $connectRecord = new ConnectHistory;
         $connectRecord->user_id      = $user->user_id;
         $connectRecord->email        = $email;
-        $connectRecord->connect_ip   = Request::getClientIp();
-        $connectRecord->connect_time = date('Y-m-d G:i:s');
+        $connectRecord->connect_ip   = $request->getClientIp();
+        $connectRecord->connect_time = Carbon::now();
         $connectRecord->save();
         
-        Auth::loginUsingId( $user->user_id );
+        Auth::loginUsingId($user->user_id);
 
-        Session::set('groupID', $user->group_id);
-        Session::set('role', $user->role);
+        session('groupID', $user->group_id);
+        session('role', $user->role);
         
-        return Redirect::to('app');
+        return redirect('app');
     }
     
     public function logout()
     {
         Auth::logout();
-        
-        return Redirect::to('/');
+        return redirect('/');
     }
 
 }
