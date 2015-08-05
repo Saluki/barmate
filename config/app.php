@@ -136,6 +136,14 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
+        /*
+         * Since upgrade to 5.1
+         */
+        'Illuminate\Broadcasting\BroadcastServiceProvider',
+
+        /**
+         * Custom providers
+         */
 		'Illuminate\Html\HtmlServiceProvider',
 
 		/*

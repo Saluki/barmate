@@ -1,20 +1,20 @@
 {
 	"name": "Saluki/Barmate",
-	"description": "POS web application",
+	"description": "Modern and intuitive POS web application written with the Laravel framework",
 	"type": "project",
 
 	"require": {
-		"laravel/framework": "5.0.*",
-		"doctrine/dbal": "~2.3",
+		"laravel/framework": "~5.1",
+		"doctrine/dbal": "~2.5",
 		"illuminate/html": "~5.0",
-        "nesbot/carbon": "~1.14",
-		"fzaninotto/faker": "^1.5"
+        "nesbot/carbon": "~1.20",
+		"fzaninotto/faker": "~1.5"
 	},
 
 	"require-dev": {
-		"phpunit/phpunit": "~4.0",
-		"phpspec/phpspec": "~2.1",
-        "filp/whoops": "~1.0"
+		"phpunit/phpunit": "~4.7",
+		"phpspec/phpspec": "~2.2",
+        "filp/whoops": "~1.1"
 	},
 
 	"autoload": {
@@ -41,9 +41,5 @@
 			"php artisan clear-compiled",
 			"php artisan optimize"
 		]
-	},
-
-	"config": {
-		"preferred-install": "dist"
 	}
 }

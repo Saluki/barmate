@@ -183,7 +183,7 @@
 
             labels: [
                 @foreach($sales as $saleTime => $saleCount)
-                '{{ $saleTime }}',
+                    '{{ $saleTime }}',
                 @endforeach
             ],
 
