@@ -13,6 +13,18 @@ class SnapshotDetailsRepository extends Repository {
         return 'App\Models\SnapshotDetails';
     }
 
+    public function get($id)
+    {
+        $this->validateID($id);
+
+        try {
+            return $this->model->findOrFail($id);
+        }
+        catch(\Exception $e) {
+            throw new RepositoryException('Could not retrieve snapshot detail', RepositoryException::DATABASE_ERROR);
+        }
+    }
+
 	public function fromSnapshot($id)
 	{
 		$this->validateID($id);
@@ -69,6 +81,18 @@ class SnapshotDetailsRepository extends Repository {
         }
         catch(\Exception $e) {
             throw new RepositoryException('Could not save snapshot detail in database', RepositoryException::DATABASE_ERROR);
+        }
+    }
+
+    public function delete($id)
+    {
+        $this->validateID($id);
+
+        try {
+            $this->model->destroy($id);
+        }
+        catch(\Exception $e) {
+            throw new RepositoryException('Could not delete snapshot detail', RepositoryException::DATABASE_ERROR);
         }
     }
 

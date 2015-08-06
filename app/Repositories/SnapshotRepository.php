@@ -8,57 +8,55 @@ use Exception;
 use Session;
 use Validator;
 
-class SnapshotRepository extends Repository {
+class SnapshotRepository extends Repository
+{
 
     function getModelName()
     {
         return 'App\Models\CashSnapshots';
     }
 
-	public function all()
-	{
-		try {
-			return $this->model->where('group_id', '=', Session::get('groupID') )
-									->orderBy('time','desc')
-									->get();
-		}
-		catch(Exception $e) {
-			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
-		}
-	}
+    public function all()
+    {
+        try {
+            return $this->model->where('group_id', '=', Session::get('groupID'))
+                ->orderBy('time', 'desc')
+                ->get();
+        } catch (Exception $e) {
+            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
+    }
 
-	public function history()
-	{
-		try {
-			return $this->model->where('group_id', '=', Session::get('groupID') )
-									->where('is_closed',true)
-									->orderBy('time','desc')
-									->get();
-		}
-		catch(Exception $e) {
-			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
-		}
-	}
+    public function history()
+    {
+        try {
+            return $this->model->where('group_id', '=', Session::get('groupID'))
+                ->where('is_closed', true)
+                ->orderBy('time', 'desc')
+                ->get();
+        } catch (Exception $e) {
+            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
+    }
 
-	public function get($id)
-	{
-		$this->validateID($id);
+    public function get($id)
+    {
+        $this->validateID($id);
 
-		$snapshot = NULL;
-		try {
-			$snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
-										->where('cs_id', '=', $id)
-										->first();
-		}
-		catch(Exception $e) {
-			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
-		}
+        $snapshot = NULL;
+        try {
+            $snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
+                ->where('cs_id', '=', $id)
+                ->first();
+        } catch (Exception $e) {
+            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
 
-		if( $snapshot == NULL )
-			throw new RepositoryException('Snapshot with ID '.$id.' not found', RepositoryException::RESOURCE_NOT_FOUND);
-		
-		return $snapshot;	
-	}
+        if ($snapshot == NULL)
+            throw new RepositoryException('Snapshot with ID ' . $id . ' not found', RepositoryException::RESOURCE_NOT_FOUND);
+
+        return $snapshot;
+    }
 
     public function getNext($id)
     {
@@ -66,141 +64,155 @@ class SnapshotRepository extends Repository {
 
         try {
             $snapshot = $this->model->where('cs_id', '>', $id)->orderBy('cs_id')->firstOrFail();
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             throw new RepositoryException('Could not retrieve next record', RepositoryException::DATABASE_ERROR);
         }
 
         return $snapshot;
     }
 
-	public function store(array $data)
-	{
-		$this->validate($data);
+    public function store(array $data)
+    {
+        $this->validate($data);
 
-		$snapshot = new CashSnapshots();
+        $snapshot = new CashSnapshots();
 
-		$snapshot->snapshot_title = $data['title'];
-		$snapshot->description    = $data['description'];
-		$snapshot->amount         = $data['amount'];
-		$snapshot->time           = date('Y-m-d H:i:s');
-		$snapshot->group_id       = Session::get('groupID');
-		$snapshot->user_id        = Auth::id();
-		$snapshot->is_closed      = false;
+        $snapshot->snapshot_title = $data['title'];
+        $snapshot->description = $data['description'];
+        $snapshot->amount = $data['amount'];
+        $snapshot->time = date('Y-m-d H:i:s');
+        $snapshot->group_id = Session::get('groupID');
+        $snapshot->user_id = Auth::id();
+        $snapshot->is_closed = false;
 
-		try {
+        try {
 
-			$this->closeLastSnapshot();
+            $this->closeLastSnapshot();
 
-			$snapshot->save();
-			$snapshot->id = DB::getPdo()->lastInsertId();
-		}
-		catch(Exception $e) {
-			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
-		}
+            $snapshot->save();
+            $snapshot->id = DB::getPdo()->lastInsertId();
+        } catch (Exception $e) {
+            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
 
-		return $snapshot;
-	}
+        return $snapshot;
+    }
 
-	public function current()
-	{
-		$snapshot = NULL;
-		try {
-			$snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
-										->where('is_closed', '=', false)
-										->orderBy('time', 'desc')
-										->first();
-		}
-		catch(Exception $e) {
-			throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
-		}
+    public function current()
+    {
+        $snapshot = NULL;
+        try {
+            $snapshot = $this->model->where('group_id', '=', Session::get('groupID'))
+                ->where('is_closed', '=', false)
+                ->orderBy('time', 'desc')
+                ->first();
+        } catch (Exception $e) {
+            throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
+        }
 
-		if( $snapshot == NULL )
-			throw new RepositoryException('Current snapshot not found', RepositoryException::RESOURCE_NOT_FOUND);
+        if ($snapshot == NULL)
+            throw new RepositoryException('Current snapshot not found', RepositoryException::RESOURCE_NOT_FOUND);
 
-		return $snapshot;
-	}
+        return $snapshot;
+    }
 
-	private function closeLastSnapshot()
-	{
-		$lastSnapshot = $this->model->where('group_id','=',Session::get('groupID'))
-										->where('is_closed','=',false)
-										->orderBy('time','desc')
-										->first();
+    private function closeLastSnapshot()
+    {
+        $lastSnapshot = $this->model->where('group_id', '=', Session::get('groupID'))
+            ->where('is_closed', '=', false)
+            ->orderBy('time', 'desc')
+            ->first();
 
-		if( $lastSnapshot == NULL )
-			return;
+        if ($lastSnapshot == NULL)
+            return;
 
-		$lastSnapshot->is_closed = true;
-		$lastSnapshot->predicted_amount = $this->computePredictedAmount($lastSnapshot->cs_id, $lastSnapshot->amount);
+        $this->updatePredictedAmount($lastSnapshot->cs_id, true);
+    }
 
-		$lastSnapshot->save();
-	}
+    public function updatePredictedAmount($snapshotID, $closeSnapshot=false)
+    {
+        try {
+            $snapshot = $this->model->findOrFail($snapshotID);
+        } catch (Exception $e) {
+            throw new RepositoryException('Could not find snapshot', RepositoryException::DATABASE_ERROR);
+        }
 
-	private function computePredictedAmount($snapshotID, $originalAmount)
-	{
-		$details = $this->model->findOrFail($snapshotID)
-								->details()
-								->get();
+        if ($snapshot->is_closed) {
+            throw new RepositoryException('Could not update closed snapshot', RepositoryException::RESOURCE_DENIED);
+        }
 
-		$predictedAmount = $originalAmount;
-		foreach ($details as $detail) {
-			
-			$predictedAmount += $detail->sum;
-		}
+        $details = $this->model->findOrFail($snapshotID)
+            ->details()
+            ->get();
 
-		return $predictedAmount;
-	}
+        $predictedAmount = $snapshot->amount;
+        foreach ($details as $detail) {
 
-	public function APIFormat($object)
-	{
-		if( !is_object($object) )
-			return null;
+            $predictedAmount += $detail->sum;
+        }
 
-		if( get_class($object) === 'CashSnapshots' )
-			return $this->formatRecord( $object );
+        $snapshot->predicted_amount = $predictedAmount;
 
-		$responseArray = [];
-		foreach ($object as $record) {
+        if ($closeSnapshot) {
+            $snapshot->is_closed = true;
+        }
 
-			array_push($responseArray, $this->formatRecord( $record ));
-		}
+        try {
+            $snapshot->save();
+        } catch (Exception $e) {
+            throw new RepositoryException('Could not update snapshot', RepositoryException::DATABASE_ERROR);
+        }
+    }
 
-		return $responseArray;
-	}
+    public function APIFormat($object)
+    {
+        if (!is_object($object))
+            return null;
 
-	private function formatRecord($object) {
+        if (get_class($object) === 'CashSnapshots')
+            return $this->formatRecord($object);
 
-		$formatted = new stdClass();
-			
-		$formatted->id          = intval($object->cs_id);
-		$formatted->user        = intval($object->user_id);
-		$formatted->amount      = floatval($object->amount);
+        $responseArray = [];
+        foreach ($object as $record) {
 
-		$formatted->title       = $object->snapshot_title;
-		$formatted->description = $object->description;
-		$formatted->time        = $object->time;
+            array_push($responseArray, $this->formatRecord($record));
+        }
 
-		if( $object->predicted_amount == NULL ) {
-			$formatted->predicted = NULL;
-		}
-		else {
-			$formatted->predicted = floatval($object->predicted_amount);
-		}
+        return $responseArray;
+    }
 
-		$formatted->closed = (bool) $object->is_closed;
+    private function formatRecord($object)
+    {
 
-		return $formatted;
-	}
+        $formatted = new stdClass();
 
-	public function validate(array $data)
-	{
-		$rules = CashSnapshots::$validationRules;
+        $formatted->id = intval($object->cs_id);
+        $formatted->user = intval($object->user_id);
+        $formatted->amount = floatval($object->amount);
 
-		$validator = Validator::make($data, $rules);
+        $formatted->title = $object->snapshot_title;
+        $formatted->description = $object->description;
+        $formatted->time = $object->time;
 
-		if( $validator->fails() ) {
-			throw new RepositoryException('Validation failed', RepositoryException::VALIDATION_FAILED);
-		}
-	}
+        if ($object->predicted_amount == NULL) {
+            $formatted->predicted = NULL;
+        } else {
+            $formatted->predicted = floatval($object->predicted_amount);
+        }
+
+        $formatted->closed = (bool)$object->is_closed;
+
+        return $formatted;
+    }
+
+    public function validate(array $data)
+    {
+        $rules = CashSnapshots::$validationRules;
+
+        $validator = Validator::make($data, $rules);
+
+        if ($validator->fails()) {
+            throw new RepositoryException('Validation failed', RepositoryException::VALIDATION_FAILED);
+        }
+    }
 }

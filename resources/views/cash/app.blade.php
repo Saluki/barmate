@@ -195,10 +195,13 @@
                                         <th>Date</th>
                                         <th>User</th>
                                         <th>Comment</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                     @foreach($details as $detail)
+
                                         <tr>
                                             <td><div class="label
                                             @if( $detail->type === 'SALE' )
@@ -211,9 +214,20 @@
                                             <td>{{ $detail->sum }}€</td>
                                             <td>{{ date('j F Y G:i', strtotime($detail->timed)) }}</td>
                                             <td>{{ $detail->firstname }} {{ $detail->lastname }}</td>
-                                            <td>{{ str_limit($detail->comment,20) }}</td>
+                                            <td>{{ str_limit($detail->comment,30) }}</td>
+                                            <td>
+                                                @unless( $snapshot->is_closed )
+
+                                                    <a href="{{ url('app/cash/remove/'.$detail->csd_id) }}" class="btn btn-danger btn-xs pull-right" data-toggle="tooltip" data-placement="top" title="Definitely remove snapshot item">
+                                                        Remove
+                                                    </a>
+
+                                                @endif
+                                            </td>
                                         </tr>
+
                                     @endforeach
+
                                 </tbody>
                             </table>
                         @endif
@@ -232,5 +246,14 @@
 
     <script type="text/javascript" src="{{ url('bower_components/chartjs/Chart.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
+    <script>
+        $(function(){
+
+            // Initialize Bootstrap tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+        })
+    </script>
 
 @stop

@@ -60,6 +60,8 @@ Route::group(['prefix'=>'app', 'middleware'=>'manager'], function(){
 
 	Route::post('cash/new-snapshot', 'CashController@createSnapshot');
 
+    Route::get('cash/remove/{id}', 'CashController@removeDetail')->where('id', '[0-9]+');
+
 	Route::get('cash/history', 'CashController@showHistory');
 
 	// STATS MODULE
