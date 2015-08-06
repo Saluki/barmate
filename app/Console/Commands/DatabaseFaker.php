@@ -57,7 +57,7 @@ class DatabaseFaker extends Command {
         $this->info('This command will truncate all your Barmate data.');
         $this->info("Use this command only for testing purposes.\n");
 
-        if( $this->confirm('Are you sure you want to continue? [yes|no]', false)==false )
+        if( $this->confirm('Are you sure you want to continue? ', false)==false )
         {
             $this->info('Command aborted');
             die;
