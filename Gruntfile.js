@@ -38,6 +38,11 @@ module.exports = function(grunt) {
 		    	dest: '<%= jsBuild %>/stock.js'
 		    },
 
+            cash: {
+                src: ['<%= jsSource %>/cash/*.js'],
+                dest: '<%= jsBuild %>/cash.js'
+            },
+
             stats: {
                 src: ['<%= jsSource %>/stats/*.js'],
                 dest: '<%= jsBuild %>/stats.js'
@@ -63,6 +68,11 @@ module.exports = function(grunt) {
 		    	src: ['<%= jsBuild %>/stock.js'],
 		    	dest: '<%= jsBuild %>/stock.min.js'
 		    },
+
+            cash: {
+                src: ['<%= jsBuild %>/cash.js'],
+                dest: '<%= jsBuild %>/cash.min.js'
+            },
 
             stats: {
                 src: ['<%= jsBuild %>/stats.js'],

@@ -8,6 +8,9 @@
 
     <link rel="stylesheet" type="text/css" href="{{ url('build/css/cash.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('bower_components/alertify-js/build/css/alertify.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/alertify-theme.css') }}" />
+
 @stop
 
 @section('content')
@@ -59,21 +62,38 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                @foreach($allSnapshots as $s)
-									@if($s->cs_id === $snapshot->cs_id)
+
+                                @for($i=0; $i<10; $i++)
+
+									@if($allSnapshots[$i]->cs_id === $snapshot->cs_id)
 										<li role="presentation" class="disabled">
 											<a role="menuitem" tabindex="-1" href="#">
-												{{ $s->snapshot_title }}&nbsp;&nbsp;<span class="text-primary">#{{ $s->cs_id }}</span>
+												{{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
+                                                <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
 											</a>
 										</li>
 									@else
 										<li role="presentation">
-											<a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$s->cs_id) }}">
-												{{ $s->snapshot_title }}&nbsp;&nbsp;<span class="text-primary">#{{ $s->cs_id }}</span>
+											<a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$allSnapshots[$i]->cs_id) }}">
+												{{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
+                                                <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
 											</a>
 										</li>
 									@endif
-                                @endforeach
+
+                                @endfor
+
+                                @if( count($allSnapshots)>10 )
+
+                                    <li role="separator" class="divider"></li>
+                                    <li>
+                                        <a href="#" id="older-snapshots-btn">
+                                            Older snapshots
+                                        </a>
+                                    </li>
+
+                                @endif
+
                             </ul>
                         </div>
 
@@ -91,7 +111,7 @@
 
                 @if( $snapshot->is_closed )
 
-                    <div class="panel panel-danger">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <h2 class="panel-title"><span class="fa fa-lock"></span>&nbsp;&nbsp;Closed snapshot summary</h2>
                         </div>
@@ -167,7 +187,9 @@
 									This snapshot has no cash operations or sales.
 								</div>
 
-                                <a href="{{ url('app/cash/register-operation') }}" class="btn btn-primary btn-lg">Register a cash operation</a>
+                                @unless($snapshot->is_closed)
+                                    <a href="{{ url('app/cash/register-operation') }}" class="btn btn-primary btn-lg">Register a cash operation</a>
+                                @endunless
 
                             </div>
 												
@@ -244,16 +266,30 @@
 
 @section('custom-js')
 
-    <script type="text/javascript" src="{{ url('bower_components/chartjs/Chart.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('bower_components/chartjs/Chart.min.js') }}"></script>
+    <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/alertify-js/build/alertify.min.js') }}"></script>
 
-    <script>
-        $(function(){
+    <script type="text/template" id="snapshot-list">
 
-            // Initialize Bootstrap tooltips
-            $('[data-toggle="tooltip"]').tooltip();
+        <br>
+        <div class="list-group">
+            @foreach($allSnapshots as $sn)
 
-        })
+                <a href="{{ url('app/cash/'.$sn->cs_id) }}" class="list-group-item
+                @if($sn->cs_id==$snapshot->cs_id)
+                    disabled
+                @endif
+                ">
+                    {{ $sn->snapshot_title }}&nbsp;&nbsp;
+                    <span class="text-primary">#{{ $sn->cs_id }}</span>
+                </a>
+
+            @endforeach
+        </div>
+
     </script>
+
+    <script src="{{ url('build/js/cash.js') }}"></script>
 
 @stop
