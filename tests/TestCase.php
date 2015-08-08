@@ -1,14 +1,12 @@
 <?php
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase {
+class TestCase extends Illuminate\Foundation\Testing\TestCase
+{
+    const DEFAULT_IDENTIFIER = 1;
+    const DEFAULT_ROLE = 'ADMN';
 
     protected $baseUrl = 'http://localhost';
 
-	/**
-	 * Creates the application.
-	 *
-	 * @return \Illuminate\Foundation\Application
-	 */
 	public function createApplication()
 	{
 		$app = require __DIR__.'/../bootstrap/app.php';
@@ -18,4 +16,13 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 		return $app;
 	}
 
+    public function prepareForTests()
+    {
+        // Set database environment to SQLite
+        Config::set('database.default', 'sqlite');
+
+        // Migrate and seed the database
+        Artisan::call('migrate');
+        Artisan::call('db:seed');
+    }
 }

@@ -18,7 +18,6 @@ class CashSnapshotTableSeeder extends Seeder {
         $cashSnapshot->time = date('Y-m-d G:i:s');
         $cashSnapshot->user_id = $admin->user_id;
         $cashSnapshot->group_id = $admin->group_id;
-        $cashSnapshot->is_closed = false;
 
         $cashSnapshot->save();
     }
