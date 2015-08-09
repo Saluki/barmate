@@ -1,6 +1,6 @@
 # Barmate
 
-[![Build Status](https://travis-ci.org/Saluki/Barmate.svg)](https://travis-ci.org/Saluki/Barmate) [![Issues](https://img.shields.io/github/issues/Saluki/Barmate.svg)](https://github.com/Saluki/Barmate/issues) [![License](https://img.shields.io/github/license/Saluki/Barmate.svg)](https://github.com/Saluki/Barmate/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Saluki/Barmate.svg)](https://travis-ci.org/Saluki/Barmate) [![License](https://img.shields.io/github/license/Saluki/Barmate.svg)](https://github.com/Saluki/Barmate/blob/master/LICENSE)
 
 Modern and intuitive POS web application written with the Laravel framework.
 
@@ -12,26 +12,25 @@ Modern and intuitive POS web application written with the Laravel framework.
 
 ## Screenshots
 
-![Dashboard screenshots](http://s2.postimg.org/jobpfx4op/barmate_S1.png)
+![Bar screenshot](http://s11.postimg.org/i3bm8lr9v/barmate_v0_4_bar.png)
 
 ![Menu screenshot](http://s2.postimg.org/rfsfeh8u1/barmate_S2.png)
 
-![Cash screenshot](http://s10.postimg.org/6srk73cyx/cash_component.png)
+![Cash screenshot](http://s11.postimg.org/x0k39m4ib/barmate_v0_4_cash.png)
 
-![Users screenshot](http://s2.postimg.org/eacx8deyh/barmate_S3.png)
+![Users screenshot](http://s11.postimg.org/vzjukhnir/barmate_v0_4_users.png)
 
 ## Quick start
 
 Follow these instructions to install Barmate:
 
-* Install [Composer](https://getcomposer.org/), [Npm](https://www.npmjs.com/), [Bower](http://bower.io/) and [Grunt](http://gruntjs.com/)
+* Install [Composer](https://getcomposer.org/) and [Bower](http://bower.io/).
 * Install the dependencies with
 ```
 composer install
-npm install
 bower install
 ```
-* Copy **.env.example** to **.env** and adapt the values to your configuration (application URL and database)
+* Copy **.env.example** to **.env** and adapt the values (application URL and database credentials) to your configuration
 ```
 cp .env.example .env
 ```
@@ -55,6 +54,8 @@ That's it! You can now test Barmate by going to you application URL, go to the l
 admin@barmate.com
 password
 ```
+
+**Watch out!** Don't forget to change the administrator credentials.
 
 ## Copyright and license
 
