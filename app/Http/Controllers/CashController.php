@@ -102,20 +102,47 @@ class CashController extends Controller
             ->with('duration', $duration);
     }
 
+    /**
+     * Returns the "rough" duration (seconds, minutes, ...) between two Carbon dates.
+     *
+     * This function returns a human readable duration such as "5 minutes", "1 month"
+     * or "45 seconds". To approximate, it's always the biggest quantifier that is used:
+     * 2 months and 5 days would become "2 months".
+     *
+     * @param Carbon  $oldSnapshotTime    The first Carbon date
+     * @param Carbon  $nextSnapshotTime   The second Carbon date
+     *
+     * @return string
+     */
     private function approximateDuration(Carbon $oldSnapshotTime, Carbon $nextSnapshotTime)
     {
+        $years = $oldSnapshotTime->diffInYears($nextSnapshotTime);
+        if( $years > 0 ) {
+            return ($years == 1) ? "1 year" : "$years years";
+        }
+
+        $months = $oldSnapshotTime->diffInMonths($nextSnapshotTime);
+        if($months > 0 ) {
+            return ($months == 1) ? "1 month" : "$months months";
+        }
+
         $days = $oldSnapshotTime->diffInDays($nextSnapshotTime);
         if ($days > 0) {
             return ($days == 1) ? "1 day" : "$days days";
         }
 
-        $hours = $oldSnapshotTime->diffInMonths($nextSnapshotTime);
+        $hours = $oldSnapshotTime->diffInHours($nextSnapshotTime);
         if ($hours > 0) {
             return ($hours == 1) ? "1 hour" : "$hours hours";
         }
 
         $minutes = $oldSnapshotTime->diffInMinutes($nextSnapshotTime);
-        return ($minutes == 1) ? "1 minute" : "$minutes minutes";
+        if($minutes > 0) {
+            return ($minutes == 1) ? "1 minute" : "$minutes minutes";
+        }
+
+        $seconds = $oldSnapshotTime->diffInSeconds($nextSnapshotTime);
+        return ($seconds == 1) ? "1 second" : "$seconds seconds";
     }
 
     public function operationForm()

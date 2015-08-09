@@ -270,10 +270,10 @@
     <script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/alertify-js/build/alertify.min.js') }}"></script>
 
-    <script type="text/template" id="snapshot-list">
+    <script type="text/template" id="snapshot-modal-template">
 
         <br>
-        <div class="list-group">
+        <div class="list-group" id="snapshot-modal-list">
             @foreach($allSnapshots as $sn)
 
                 <a href="{{ url('app/cash/'.$sn->cs_id) }}" class="list-group-item

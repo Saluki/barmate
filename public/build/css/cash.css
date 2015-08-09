@@ -87,3 +87,7 @@
 .empty-announcement h2 {
   font-size: 30px;
 }
+#snapshot-modal-list {
+  height: 300px;
+  overflow-y: scroll;
+}

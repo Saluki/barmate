@@ -12,7 +12,7 @@ $(function(){
         alertify.alert().setting({
             'title': 'Snapshot History',
             'label': 'Cancel',
-            'message': $('#snapshot-list').html()
+            'message': $('#snapshot-modal-template').html()
         }).show();
 
     });
