@@ -1,7 +1,8 @@
 {
-	"name": "Saluki/Barmate",
+	"name": "saluki/barmate",
 	"description": "Modern and intuitive POS web application written with the Laravel framework",
 	"type": "project",
+    "license": "GNU General Public License v3.0",
 
 	"require": {
 		"laravel/framework": "~5.1",

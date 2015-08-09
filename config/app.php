@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug' => env('APP_DEBUG'),
+	'debug' => env('APP_DEBUG', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => env('APP_URL'),
+	'url' => env('APP_URL', 'http://localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone' => 'Europe/Brussels',
+	'timezone' => env('APP_TIMEZONE', 'Europe/Brussels'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -111,7 +111,7 @@ return [
 	'providers' => [
 
 		/*
-		 * Laravel Framework Service Providers...
+		 * Laravel Framework Service Providers
 		 */
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'Illuminate\Auth\AuthServiceProvider',
@@ -147,7 +147,7 @@ return [
 		'Illuminate\Html\HtmlServiceProvider',
 
 		/*
-		 * Application Service Providers...
+		 * Application Service Providers
 		 */
 		'App\Providers\AppServiceProvider',
 		'App\Providers\BusServiceProvider',
@@ -203,7 +203,6 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
-
 		'Form'      => 'Illuminate\Html\FormFacade',
         'Html'      => 'Illuminate\Html\HtmlFacade',
 
