@@ -8,7 +8,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-					{!! Form::open(['url'=>'/', 'method'=>'POST']) !!}
+					{!! Form::open(['action'=>'LoginController@loginAttempt', 'method'=>'POST']) !!}
 
 						<label>Email</label><br>
 						<input class="form-control" name="email" type="text" placeholder="Email" value="{{ Session::get('email') }}"><br>
