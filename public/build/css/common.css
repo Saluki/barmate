@@ -24,6 +24,11 @@ body {
   box-shadow: 0px 1px 3px #d3d3d3;
   padding: 0px;
 }
+.paper.paper-full {
+  width: 100%;
+  margin: 0px;
+  box-shadow: 0px 0px;
+}
 .paper .paper-header {
   background: #90CAF9;
   color: #ffffff;
@@ -74,6 +79,10 @@ body {
   padding: 15px;
   background: #fff;
   min-height: 500px;
+}
+.paper .paper-body.paper-body-960 {
+  width: 960px;
+  margin: 0px auto;
 }
 label {
   margin-top: 10px;
@@ -153,11 +162,11 @@ header a:hover {
 }
 header #title {
   font-family: Droid Sans;
-  font-size: 28px;
+  font-size: 38px;
   font-weight: bold;
   text-transform: uppercase;
   font-style: italic;
-  width: 100px;
+  color: #0095dd;
 }
 
 #menu-container {

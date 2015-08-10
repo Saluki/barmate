@@ -22,6 +22,10 @@ Route::group(['prefix'=>'install'], function(){
 
     Route::post('configuration', 'InstallController@registerConfiguration');
 
+    Route::get('account', 'InstallController@displayAccountForm');
+
+    Route::post('account', 'InstallController@registerAccount');
+
     Route::get('finished', 'InstallController@displayFinished');
 
 });

@@ -18,6 +18,9 @@
     <a href="#" class="list-group-item disabled">
         <span class="fa fa-wrench"></span>&nbsp;&nbsp;&nbsp;Configuration
     </a>
+    <a href="#" class="list-group-item disabled">
+        <span class="fa fa-user"></span>&nbsp;&nbsp;&nbsp;Account
+    </a>
     <a href="{{ url('install/finished') }}" class="list-group-item">
         <span class="fa fa-rocket"></span>&nbsp;&nbsp;&nbsp;Finished
     </a>

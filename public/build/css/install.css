@@ -1,8 +1,43 @@
-#wizard-content {
+body {
+  background: #ffffff;
+}
+.container {
+  width: 960px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.container .license-viewer {
+  height: 200px;
+  background: #f9f9f9;
+  overflow-y: scroll;
+  white-space: pre;
+  margin-top: 15px;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid #d3d3d3;
+}
+.container #wizard-content {
   margin-top: 30px;
   margin-bottom: 30px;
 }
-#finished-btn {
+.container #finished-btn {
   margin: 30px auto;
   text-align: center;
+}
+.container .wizard-header {
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+.container .wizard-header .logo-title {
+  font-family: Droid Sans;
+  font-size: 28px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+  color: #0095dd;
+}
+.container .wizard-header .logo-subtitle {
+  font-family: Droid Sans;
+  font-size: 28px;
 }

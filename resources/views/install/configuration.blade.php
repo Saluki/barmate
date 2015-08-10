@@ -6,17 +6,20 @@
 
 @section('side-menu')
 
-    <a href="{{ url('install') }}" class="list-group-item">
+    <a href="#" class="list-group-item disabled">
         <span class="fa fa-magic"></span>&nbsp;&nbsp;&nbsp;Welcome
     </a>
-    <a href="{{ url('install/requirements') }}" class="list-group-item">
+    <a href="#" class="list-group-item disabled">
         <span class="fa fa-server"></span>&nbsp;&nbsp;&nbsp;Requirements
     </a>
-    <a href="{{ url('install/database') }}" class="list-group-item">
+    <a href="#" class="list-group-item disabled">
         <span class="fa fa-database"></span>&nbsp;&nbsp;&nbsp;Database
     </a>
     <a href="{{ url('install/configuration') }}" class="list-group-item">
         <span class="fa fa-wrench"></span>&nbsp;&nbsp;&nbsp;Configuration
+    </a>
+    <a href="#" class="list-group-item disabled">
+        <span class="fa fa-user"></span>&nbsp;&nbsp;&nbsp;Account
     </a>
     <a href="#" class="list-group-item disabled">
         <span class="fa fa-rocket"></span>&nbsp;&nbsp;&nbsp;Finished
@@ -30,57 +33,10 @@
 
         <div class="row">
             <div class="col-md-4">
-                <label class="pull-right">First name</label>
+                <label class="pull-right">Application URL</label>
             </div>
             <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="admin@domain.com">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Last name</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="admin@domain.com">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Email address</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="admin@domain.com">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Password</label>
-            </div>
-            <div class="col-md-8">
-                <input type="password" class="form-control" placeholder="password">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Repeat password</label>
-            </div>
-            <div class="col-md-8">
-                <input type="password" class="form-control" placeholder="password">
-            </div>
-        </div>
-
-        <br>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Public folder</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="public">
+                <input type="text" class="form-control" placeholder="http://localhost">
             </div>
         </div>
 
@@ -144,8 +100,8 @@
 
 @section('button-bar')
 
-    <a href="{{ url('install/finished') }}" class="btn btn-primary pull-right">
-        Install application&nbsp;&nbsp;<span class="fa fa-caret-right"></span>
+    <a href="{{ url('install/account') }}" class="btn btn-primary pull-right">
+        Create administrator account&nbsp;&nbsp;<span class="fa fa-caret-right"></span>
     </a>
 
 @stop
