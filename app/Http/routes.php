@@ -6,6 +6,26 @@
 |--------------------------------------------------------------------------
 */
 
+// INSTALLATION ROUTES
+
+Route::group(['prefix'=>'install'], function(){
+
+    Route::get('/', 'InstallController@displayWelcome');
+
+    Route::get('requirements', 'InstallController@computeRequirements');
+
+    Route::get('database', 'InstallController@displayDatabaseForm');
+
+    Route::post('database', 'InstallController@validateDatabaseConnection');
+
+    Route::get('configuration', 'InstallController@displayConfigurationForm');
+
+    Route::post('configuration', 'InstallController@registerConfiguration');
+
+    Route::get('finished', 'InstallController@displayFinished');
+
+});
+
 // PUBLIC ROUTES
 
 Route::group(['middleware'=>'guest'], function(){

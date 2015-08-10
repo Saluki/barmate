@@ -1,0 +1,33 @@
+body {
+  background: #0095dd;
+  color: #ffffff;
+}
+#container {
+  width: 960px;
+  height: 350px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+#container #icon-lg {
+  font-size: 150px;
+  margin-bottom: 20px;
+  /*animation-name: rocket;
+    animation-delay: 1s;
+    animation-duration: 3s;
+    animation-iteration-count: 3;
+    animation-timing-function: ease-in-out;*/
+}
+#container h2 {
+  font-weight: bold;
+  margin: 40px;
+}
+@keyframes rocket {
+  50% {
+    transform: rotate(-90deg);
+  }
+}
