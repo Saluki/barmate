@@ -63,27 +63,27 @@
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 
-                                @for($i=0; $i<10; $i++)
-
-									@if($allSnapshots[$i]->cs_id === $snapshot->cs_id)
-										<li role="presentation" class="disabled">
-											<a role="menuitem" tabindex="-1" href="#">
-												{{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
-                                                <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
-											</a>
-										</li>
-									@else
-										<li role="presentation">
-											<a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$allSnapshots[$i]->cs_id) }}">
-												{{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
-                                                <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
-											</a>
-										</li>
-									@endif
-
-                                @endfor
-
                                 @if( count($allSnapshots)>10 )
+
+                                    @for($i=0; $i<10; $i++)
+
+                                        @if($allSnapshots[$i]->cs_id === $snapshot->cs_id)
+                                            <li role="presentation" class="disabled">
+                                                <a role="menuitem" tabindex="-1" href="#">
+                                                    {{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
+                                                    <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$allSnapshots[$i]->cs_id) }}">
+                                                    {{ $allSnapshots[$i]->snapshot_title }}&nbsp;&nbsp;
+                                                    <span class="text-primary">#{{ $allSnapshots[$i]->cs_id }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                    @endfor
 
                                     <li role="separator" class="divider"></li>
                                     <li>
@@ -91,6 +91,28 @@
                                             Older snapshots
                                         </a>
                                     </li>
+
+                                @else
+
+                                    @foreach($allSnapshots as $tempSnapshot)
+
+                                        @if($tempSnapshot->cs_id === $snapshot->cs_id)
+                                            <li role="presentation" class="disabled">
+                                                <a role="menuitem" tabindex="-1" href="#">
+                                                    {{ $tempSnapshot->snapshot_title }}&nbsp;&nbsp;
+                                                    <span class="text-primary">#{{ $tempSnapshot->cs_id }}</span>
+                                                </a>
+                                            </li>
+                                        @else
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="{{ url('app/cash/'.$tempSnapshot->cs_id) }}">
+                                                    {{ $tempSnapshot->snapshot_title }}&nbsp;&nbsp;
+                                                    <span class="text-primary">#{{ $tempSnapshot->cs_id }}</span>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                    @endforeach
 
                                 @endif
 
