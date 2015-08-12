@@ -29,23 +29,54 @@
 
 @section('content')
 
-    {!! Form::open(['url'=>'installer/database', 'method'=>'POST']) !!}
+    {!! Form::open(['url'=>'install/database', 'method'=>'POST']) !!}
+
+        @if( count($errors)>0 )
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="alert alert-warning">
+                        <span class="fa fa-warning"></span>&nbsp;&nbsp;
+                        @if( count($errors)==1 )
+                            {{ $errors->all()[0] }}
+                        @else
+                            The following <b>validation errors</b> have been found:
+                            <ul>
+                                @foreach($errors->all() as $validation_error)
+
+                                    <li>{{ $validation_error }}</li>
+
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
+
+                </div>
+            </div>
+            <br>
+        @endif
+
+        @if( session('error') )
+            <div class="row">
+                <div class="col-md-12">
+
+                    <br>
+                    <div class="alert alert-danger">
+                        <span class="fa fa-plug"></span>&nbsp;&nbsp;
+                        {{ session('error') }}
+                    </div>
+
+                </div>
+            </div>
+            <br>
+        @endif
 
         <div class="row">
             <div class="col-md-4">
                 <label class="pull-right">Database host</label>
             </div>
             <div class="col-md-8">
-                <input type="text" name="db_hostname" class="form-control" placeholder="http://localhost">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <label class="pull-right">Database name</label>
-            </div>
-            <div class="col-md-8">
-                <input type="text" name="db_name" class="form-control" placeholder="barmate">
+                <input type="text" name="database_host" value="{{ old('database_host') }}" class="form-control" placeholder="localhost">
             </div>
         </div>
 
@@ -54,7 +85,7 @@
                 <label class="pull-right">Username</label>
             </div>
             <div class="col-md-8">
-                <input type="text" name="db_username" class="form-control" placeholder="username">
+                <input type="text" name="username" value="{{ old('username') }}" class="form-control" placeholder="username">
             </div>
         </div>
 
@@ -63,30 +94,27 @@
                 <label class="pull-right">Password</label>
             </div>
             <div class="col-md-8">
-                <input type="password" name="db_password" class="form-control" placeholder="password">
+                <input type="password" name="password" value="{{ old('password') }}" class="form-control" placeholder="password">
             </div>
         </div>
 
-        <!--<div class="row">
-            <div class="col-md-12">
-
-                <br>
-                <div class="alert alert-danger">
-                    <span class="fa fa-warning"></span>&nbsp;&nbsp;
-                    Barmate can't connect to your database. Please check your settings again.
-                </div>
-
+        <div class="row">
+            <div class="col-md-4">
+                <label class="pull-right">Database name</label>
             </div>
-        </div>-->
+            <div class="col-md-8">
+                <input type="text" name="database_name" value="{{ old('database_name') }}" class="form-control" placeholder="barmate">
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary pull-right" style="margin-top:30px;">
+            Configure application&nbsp;&nbsp;<span class="fa fa-caret-right"></span>
+        </button>
 
     </form>
 
 @stop
 
 @section('button-bar')
-
-    <a href="{{ url('install/configuration') }}" class="btn btn-primary pull-right">
-        Configure application&nbsp;&nbsp;<span class="fa fa-caret-right"></span>
-    </a>
 
 @stop
