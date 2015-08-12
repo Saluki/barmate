@@ -19,6 +19,8 @@ class InstallController extends Controller
 
     const CONFIG_KEY = 'temp_settings';
 
+    const INSTALLATION_FILE = 'install.lock';
+
     public function displayWelcome()
     {
         return view('install.welcome');
@@ -265,6 +267,14 @@ class InstallController extends Controller
     {
         $request->session()->forget(self::CONFIG_KEY);
 
-        return view('install.finished');
+        try
+        {
+            unlink(base_path().'/'.self::INSTALLATION_FILE);
+            return view('install.finished');
+        }
+        catch(\ErrorException $e)
+        {
+            return view('install.finished')->with('lockError', true);
+        }
     }
 }

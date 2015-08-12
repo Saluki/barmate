@@ -8,7 +8,7 @@
 
 // INSTALLATION ROUTES
 
-Route::group(['prefix'=>'install'], function(){
+Route::group(['prefix'=>'install', 'middleware'=>'installed'], function(){
 
     Route::get('/', 'InstallController@displayWelcome');
 

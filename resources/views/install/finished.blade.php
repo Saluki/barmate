@@ -29,10 +29,29 @@
 
 @section('content')
 
-    <b>Congratulations!</b> The Barmate POS application is installed on your server and ready to use. You can now login into the application with your administrator account.
+    <div class="row">
+        <div class="col-md-12">
 
-    <div id="finished-btn">
-        <a href="{{ url(' ') }}" class="btn btn-primary">Login into Barmate POS</a>
+            <p>
+                <b>Congratulations!</b> The Barmate POS application is installed on your server and ready to use.
+                You can now login into the application with your administrator account.
+            </p>
+
+            @if( $lockError )
+
+                <br>
+                <div class="alert alert-warning">
+                    <span class="fa fa-warning"></span>&nbsp;&nbsp;
+                    Please delete the <b>install.lock</b> file at the root of your application folder.
+                </div>
+
+            @endif
+
+            <div id="finished-btn">
+                <a href="{{ url(' ') }}" class="btn btn-primary">Login into Barmate POS</a>
+            </div>
+
+        </div>
     </div>
 
 @stop

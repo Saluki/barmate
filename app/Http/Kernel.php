@@ -24,12 +24,13 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth' => 'App\Http\Middleware\Authenticate',
-		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
-        'user' => 'App\Http\Middleware\User',
-        'manager' => 'App\Http\Middleware\Manager',
+		'auth'          => 'App\Http\Middleware\Authenticate',
+		'auth.basic'    => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+		'guest'         => 'App\Http\Middleware\RedirectIfAuthenticated',
+        'user'          => 'App\Http\Middleware\User',
+        'manager'       => 'App\Http\Middleware\Manager',
         'administrator' => 'App\Http\Middleware\Administrator',
+        'installed'     => 'App\Http\Middleware\RedirectIfInstalled',
 	];
 
 }

@@ -1,0 +1,12 @@
+
+   ___                      __
+  / _ )___ _______ _  ___ _/ /____
+ / _  / _ `/ __/  ' \/ _ `/ __/ -_)
+/____/\_,_/_/ /_/_/_/\_,_/\__/\__/
+
+
+Installation Lock File
+======================
+
+You must delete this file once the installation process has finished to
+ensure that nobody could relaunch the Barmate installation on your server.

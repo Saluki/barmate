@@ -45,8 +45,7 @@
 
             <div class="alert alert-info">
                 Before continuing to the next step, please create a file named <b>.env</b>
-                at the root of your application ({{ base_path() }})
-                that contains the configuration text below.
+                at the root of your application folder that contains the configuration text below.
             </div>
 
         </div>

@@ -6,6 +6,8 @@ use Closure;
 
 class RedirectIfInstalled
 {
+    const INSTALLATION_FILE = 'install.lock';
+
     /**
      * Handle an incoming request.
      *
@@ -15,6 +17,11 @@ class RedirectIfInstalled
      */
     public function handle($request, Closure $next)
     {
+        if( !file_exists(base_path().'/'.self::INSTALLATION_FILE) )
+        {
+            return redirect('/');
+        }
+
         return $next($request);
     }
 }
