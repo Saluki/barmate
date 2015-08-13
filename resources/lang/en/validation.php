@@ -75,6 +75,8 @@ return [
 	"url"                  => "The :attribute format is invalid.",
 	"timezone"             => "The :attribute must be a valid zone.",
 
+    "name"                 => "The :attribute field can only contain alphabetic characters, spaces and dashes",
+
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines

@@ -54,29 +54,56 @@
                 <div class="row" style="padding-bottom:30px;">
                     {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
 
-                        <div class="col-md-6">
-                                <label>First name</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="Firstname">
-                        </div>
-                        <div class="col-md-6">
-                                <label>Last name</label>
-                                <input type="text" name="lastname" class="form-control" placeholder="Lastname">
-                        </div>
-                        <div class="col-md-12 clearfix">
-                                <label>Email</label>
-                                <input type="text" name="email" class="form-control" placeholder="Email address">
+                        <div class="col-md-12">
 
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                            <label>First name</label>
+                            @if( $errors->has('firstname') )
+                                <span class="text-danger">
+                                    &nbsp;&nbsp;
+                                    <span class="fa fa-warning"></span>
+                                    {{ $errors->first('firstname') }}
+                                </span>
+                            @endif
+                            <input type="text" name="firstname" value="{{ old('firstname') }}" class="form-control" placeholder="Firstname">
 
-                                <label>Account role</label>
-                                <select class="form-control" name="role">
-                                    <option value="USER">User Account - Only access to bar application</option>
-                                    <option value="MNGR">Manager Account - Extended management rights</option>
-                                </select>
+                            <label>Last name</label>
+                            @if( $errors->has('lastname') )
+                                <span class="text-danger">
+                                    &nbsp;&nbsp;
+                                    <span class="fa fa-warning"></span>
+                                    {{ $errors->first('lastname') }}
+                                </span>
+                            @endif
+                            <input type="text" name="lastname" value="{{ old('lastname') }}" class="form-control" placeholder="Lastname">
 
-                                <br>
-                                <input type="submit" class="btn btn-success pull-right" value="Add new account">
+                            <label>Email</label>
+                            @if( $errors->has('email') )
+                                <span class="text-danger">
+                                    &nbsp;&nbsp;
+                                    <span class="fa fa-warning"></span>
+                                    {{ $errors->first('email') }}
+                                </span>
+                            @endif
+                            <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email address">
+
+                            <label>Password</label>
+                            @if( $errors->has('password') )
+                                <span class="text-danger">
+                                    &nbsp;&nbsp;
+                                    <span class="fa fa-warning"></span>
+                                    {{ $errors->first('password') }}
+                                </span>
+                            @endif
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+
+                            <label>Account role</label>
+                            <select class="form-control" name="role">
+                                <option value="USER">User Account - Only access to bar application</option>
+                                <option value="MNGR">Manager Account - Extended management rights</option>
+                            </select>
+
+                            <br>
+                            <input type="submit" class="btn btn-success pull-right" value="Add new account">
 
                         </div>
 

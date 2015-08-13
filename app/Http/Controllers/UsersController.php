@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Exceptions\RepositoryException;
+use App\Exceptions\ValidationException;
 use App\Repositories\ConnectRepository;
 use App\Repositories\UserRepository;
 use Input;
@@ -57,8 +58,13 @@ class UsersController extends Controller {
     	try {
     		$user = $this->userRepository->store(Input::all());
     	}
+        catch(ValidationException $e) {
+            return redirect('app/users/register')->withInput()
+                                                 ->with('errors', $e->getMessageBag());
+        }
         catch (RepositoryException $e) {
-    		return redirect('app/users/register')->with('error', 'Could not add user: '.$e->getMessage());
+    		return redirect('app/users/register')->with('error', 'Could not add a new user account: '.strtolower($e->getMessage()))
+                                                 ->withInput();
     	}
     	    	
     	return redirect('app/users')->with('success', 'User account for '.$user->firstname.' created');

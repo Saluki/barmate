@@ -3,12 +3,14 @@
 namespace App\Repositories;
 
 use App\Exceptions\RepositoryException;
+use App\Exceptions\ValidationException;
 use App\User;
 use DB;
 use Exception;
 use Hash;
 use Session;
 use Validator;
+use Carbon\Carbon;
 
 class UserRepository extends Repository
 {
@@ -136,18 +138,19 @@ class UserRepository extends Repository
     {
         $this->validate($data);
 
-        if ($data['role'] != 'USER' && $data['role'] != 'MNGR')
+        if ($data['role'] != 'USER' && $data['role'] != 'MNGR') {
             throw new RepositoryException('Invalid role name', RepositoryException::VALIDATION_FAILED);
+        }
 
         $user = new User();
 
-        $user->firstname = $data['firstname'];
-        $user->lastname = $data['lastname'];
-        $user->group_id = Session::get('groupID');
-        $user->email = $data['email'];
-        $user->password_hash = Hash::make($data['password']);
-        $user->role = $data['role'];
-        $user->inscription_date = date('Y-m-d H:i:s');
+        $user->firstname        = $data['firstname'];
+        $user->lastname         = $data['lastname'];
+        $user->group_id         = Session::get('groupID');
+        $user->email            = $data['email'];
+        $user->password_hash    = Hash::make($data['password']);
+        $user->role             = $data['role'];
+        $user->inscription_date = Carbon::now()->toDateTimeString();
 
         try {
             $user->save();
@@ -183,7 +186,7 @@ class UserRepository extends Repository
         $validator = Validator::make($data, $rules);
 
         if ($validator->fails()) {
-            throw new RepositoryException('Validation failed', RepositoryException::VALIDATION_FAILED);
+            throw new ValidationException($validator->errors());
         }
     }
 

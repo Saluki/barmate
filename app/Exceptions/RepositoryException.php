@@ -5,7 +5,6 @@ use Response;
 
 class RepositoryException extends Exception
 {
-
     // Server Side
     const DATABASE_ERROR = 11;
 
