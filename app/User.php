@@ -23,10 +23,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     protected $guarded = ['user_id']; 
     
-    public static $validationRules = ['firstname'   =>'required|name',
-    									'lastname'  =>'required|name',
-                                        'email'     => 'required|email',
-                                        'password'  => 'required|password'];
+    public static $validationRules = [  'firstname'         => 'required|name',
+    									'lastname'          => 'required|name',
+                                        'email'             => 'required|email|unique:users,email',
+                                        'password'          => 'required|password',
+                                        'repeat_password'   => 'same:password'];
 
     public static function profileData($id) {
         

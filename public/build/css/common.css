@@ -149,7 +149,6 @@ header .item {
 header .icon {
   width: 50px;
   font-size: 23px;
-  cursor: pointer;
 }
 header .icon:hover {
   color: #ededed;
@@ -166,6 +165,9 @@ header #title {
   font-weight: bold;
   text-transform: uppercase;
   font-style: italic;
+}
+header #open-menu {
+  cursor: pointer;
 }
 
 #menu-container {

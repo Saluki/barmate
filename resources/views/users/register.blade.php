@@ -29,12 +29,6 @@
                 <i class="fa fa-exclamation-triangle"></i>&nbsp; {{ Session::get('error') }}
             </div>
 
-        @elseif ( Session::has('success') )
-
-            <div class="paper-notify success">
-                <i class="fa fa-check"></i>&nbsp; {{ Session::get('success') }}
-            </div>
-
         @endif
 
     	<div class="paper-body">
@@ -54,47 +48,37 @@
                 <div class="row" style="padding-bottom:30px;">
                     {!! Form::open(['method'=>'POST', 'url'=>'app/users/register']) !!}
 
-                        <div class="col-md-12">
+                        <div class="col-md-6">
 
                             <label>First name</label>
-                            @if( $errors->has('firstname') )
-                                <span class="text-danger">
-                                    &nbsp;&nbsp;
-                                    <span class="fa fa-warning"></span>
-                                    {{ $errors->first('firstname') }}
-                                </span>
-                            @endif
                             <input type="text" name="firstname" value="{{ old('firstname') }}" class="form-control" placeholder="Firstname">
 
+                        </div>
+                        <div class="col-md-6">
+
                             <label>Last name</label>
-                            @if( $errors->has('lastname') )
-                                <span class="text-danger">
-                                    &nbsp;&nbsp;
-                                    <span class="fa fa-warning"></span>
-                                    {{ $errors->first('lastname') }}
-                                </span>
-                            @endif
                             <input type="text" name="lastname" value="{{ old('lastname') }}" class="form-control" placeholder="Lastname">
 
+                        </div>
+                        <div class="col-md-12">
+
                             <label>Email</label>
-                            @if( $errors->has('email') )
-                                <span class="text-danger">
-                                    &nbsp;&nbsp;
-                                    <span class="fa fa-warning"></span>
-                                    {{ $errors->first('email') }}
-                                </span>
-                            @endif
                             <input type="text" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email address">
 
+                        </div>
+                        <div class="col-md-6">
+
                             <label>Password</label>
-                            @if( $errors->has('password') )
-                                <span class="text-danger">
-                                    &nbsp;&nbsp;
-                                    <span class="fa fa-warning"></span>
-                                    {{ $errors->first('password') }}
-                                </span>
-                            @endif
                             <input type="password" name="password" class="form-control" placeholder="Password">
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <label>Repeat password</label>
+                            <input type="password" name="repeat_password" class="form-control" placeholder="Password">
+
+                        </div>
+                        <div class="col-md-12">
 
                             <label>Account role</label>
                             <select class="form-control" name="role">

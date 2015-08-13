@@ -60,7 +60,7 @@ class UsersController extends Controller {
     	}
         catch(ValidationException $e) {
             return redirect('app/users/register')->withInput()
-                                                 ->with('errors', $e->getMessageBag());
+                                                 ->with('error', $e->getMessageBag()->first());
         }
         catch (RepositoryException $e) {
     		return redirect('app/users/register')->with('error', 'Could not add a new user account: '.strtolower($e->getMessage()))
