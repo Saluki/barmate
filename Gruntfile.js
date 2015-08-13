@@ -119,6 +119,11 @@ module.exports = function(grunt) {
             install: {
                 src: ['<%= cssSource %>/install.less'],
                 dest: '<%= cssBuild %>/install.css'
+            },
+
+            login: {
+                src: ['<%= cssSource %>/login.less'],
+                dest: '<%= cssBuild %>/login.css'
             }
 
 		},

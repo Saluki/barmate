@@ -1,40 +1,77 @@
 @extends('layouts.public')
 
+@section('title')
+    Login - Barmate POS
+@stop
+
+@section('custom-css')
+
+    <link rel="stylesheet" href="{{ url('build/css/common.css') }}">
+    <link rel="stylesheet" href="{{ url('build/css/login.css') }}">
+
+@stop
+
 @section('content')
 
     <div class="row">
-        <div class="col-md-4 col-md-offset-4"> 
-						
-			<div class="panel panel-default">
-				<div class="panel-body">
+        <div class="col-md-12">
 
-					{!! Form::open(['url'=>' ', 'method'=>'POST']) !!}
+            <div class="login-header">
+                <span class="logo-title">
+                    Barmate&nbsp;&nbsp;
+                </span>
+                <span class="logo-subtitle">
+                    Sign In
+                </span>
+            </div>
 
-						<label>Email</label><br>
-						<input class="form-control" name="email" type="text" placeholder="Email" value="{{ Session::get('email') }}"><br>
+            {!! Form::open(['url'=>' ', 'method'=>'POST']) !!}
 
-						<label>Password</label><br>
-						<input class="form-control" name="password" type="password" placeholder="Password"><br>
+                <label>Email</label><br>
+                <input class="form-control" id="email-input" name="email" type="text" placeholder="Email" value="{{ Session::get('email') }}">
 
-						<input type="submit" value="Log in" class="btn btn-primary pull-right">
+                <label>Password</label><br>
+                <input class="form-control" id="password-input" name="password" type="password" placeholder="Password">
 
-					</form>
-				
-				</div>
-			</div>
+                @if( Session::has('error') )
 
-            @if( Session::has('error') )
+                    <p class="alert alert-info">
+                        <span class="fa fa-warning"></span>&nbsp;
+                        {{ Session::get('error') }}
+                    </p>
 
-                <div class="clearfix" style="margin-top:20px;"></div>
+                @endif
 
-                <p class="alert alert-info">
-                    <span class="fa fa-warning"></span>&nbsp;
-                    {{ Session::get('error') }}
-                </p>
+                <button type="submit" class="btn btn-primary pull-right">
+                    <span class="fa fa-sign-in"></span>&nbsp;&nbsp;
+                    Sign in
+                </button>
 
-            @endif
+            </form>
 
         </div>
     </div>
+
+@stop
+
+@section('custom-js')
+
+    <script>
+
+        $(document).ready(function(){
+
+            var emailInput = $('#email-input');
+            var passwordInput = $('#password-input');
+
+            if( emailInput.val() == "" ) {
+                emailInput.focus();
+            }
+            else {
+                passwordInput.focus();
+            }
+
+        });
+
+    </script>
 
 @stop

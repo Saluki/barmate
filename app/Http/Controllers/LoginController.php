@@ -37,7 +37,7 @@ class LoginController extends Controller {
                 
         if( $validator->fails() )
         {
-            return redirect('/')->with('error', 'Credentials have invalid format')
+            return redirect('/')->with('error', 'Your credentials have an invalid format')
                                 ->with('email', $email);
         }
 
@@ -47,13 +47,13 @@ class LoginController extends Controller {
         }
         catch (RepositoryException $e)
         {
-        	return redirect('/')->with('error', 'Incorrect credentials')
+        	return redirect('/')->with('error', 'The email and password you entered don\'t match')
                                 ->with('email', $email);
         }
                         
         if( !Hash::check(Input::get('password'), $user->password_hash) ) 
         {
-            return redirect('/')->with('error', 'Incorrect credentials')
+            return redirect('/')->with('error', 'The email and password you entered don\'t match')
                                 ->with('email', $email);
         }
         
