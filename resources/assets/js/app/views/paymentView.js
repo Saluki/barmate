@@ -59,7 +59,7 @@ var app = app || {};
                 if( this.sum.charAt(this.sum.length-1) == '.' )
                     this.cutLast();
                 
-                if( this.sum.length == 0 )
+                if( this.sum.length === 0 )
                     this.sum = '0';
             }
             else if(action == '.') {

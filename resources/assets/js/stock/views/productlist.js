@@ -20,14 +20,14 @@ app.views.ProductList = Backbone.View.extend({
 
 	render: function() {
 
-		if( app.categories.currentID == -1 ) {
+        var content;
 
-			var content = '';
+		if( app.categories.currentID == -1 ) {
+			content = '';
 		}
 		else {
-
 			var products = app.products.where({ category:app.categories.currentID });
-			var content = this.template( {'products':products} );
+			content = this.template( {'products':products} );
 		}
 
 		app.productForm.hide();
@@ -40,7 +40,7 @@ app.views.ProductList = Backbone.View.extend({
 
 		var productID = $(e.target).data('product');
 
-		if( productID == undefined )
+		if( productID === undefined )
 			return;
 
 		app.products.currentID = productID;

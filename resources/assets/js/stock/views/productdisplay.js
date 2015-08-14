@@ -26,13 +26,15 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var product = app.products.get( app.products.currentID );
 
-		if( product == undefined )
+		if( product === undefined )
 			return;
 
-		if( this.editMode == false ) 
-			var content = this.templateDisplay( product.toJSON() );
+        var content;
+
+		if( this.editMode === false )
+			content = this.templateDisplay( product.toJSON() );
 		else
-			var content = this.templateEdit( product.toJSON() );
+			content = this.templateEdit( product.toJSON() );
 
 		this.editMode = false;
 
@@ -51,7 +53,7 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var productModel= app.products.get( app.products.currentID );
 
-		if( productModel == undefined )
+		if( productModel === undefined )
 			return;
 
 		productModel.destroy({
@@ -73,7 +75,7 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var productModel= app.products.get( app.products.currentID );
 
-		if( productModel == undefined )
+		if( productModel === undefined )
 			return;
 
 		var newName        = $('#product-update-name').val();
@@ -81,19 +83,21 @@ app.views.ProductDisplay = Backbone.View.extend({
 		var newPrice       = parseFloat( $('#product-update-price').val() );
 		var newQt          = parseInt( $('#product-update-qt').val() );
 
+        var errorMessage;
+
 		if( newName.length < 1 || newName.length > 50 )
-			var errorMessage = 'Product name must be between 1 and 50 characters';
+			errorMessage = 'Product name must be between 1 and 50 characters';
 
 		if( newDescription.length > 250 )
-			var errorMessage = 'Description may not be longer than 250 characters';
+			errorMessage = 'Description may not be longer than 250 characters';
 
 		if( isNaN(newPrice) || newPrice < 0 )
-			var errorMessage = 'Price must be a positive number';
+			errorMessage = 'Price must be a positive number';
 
 		if( isNaN(newQt) || newQt < 0 )
-			var errorMessage = 'Quantity must be a positive integer';
+			errorMessage = 'Quantity must be a positive integer';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return;
 		}

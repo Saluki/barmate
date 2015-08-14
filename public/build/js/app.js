@@ -116,7 +116,7 @@ var app = app || {};
             
             var groupName = item.get('group');
             
-            if( this.findWhere({name: groupName}) != undefined )
+            if( this.findWhere({name: groupName}) !== undefined )
                 return;
             
             this.add(new app.Group({name: groupName}));
@@ -319,7 +319,7 @@ var app = app || {};
                 if( this.sum.charAt(this.sum.length-1) == '.' )
                     this.cutLast();
                 
-                if( this.sum.length == 0 )
+                if( this.sum.length === 0 )
                     this.sum = '0';
             }
             else if(action == '.') {
@@ -417,7 +417,7 @@ var app = app || {};
         
         addOne: function(item) {
 
-            if (item.get('id') == null || item.get('name') == null || item.get('price') == null) {
+            if (item.get('id') === null || item.get('name') === null || item.get('price') === null) {
                 return;
             }
             

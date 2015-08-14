@@ -29,7 +29,7 @@ var app = app || {};
         
         addOne: function(item) {
 
-            if (item.get('id') == null || item.get('name') == null || item.get('price') == null) {
+            if (item.get('id') === null || item.get('name') === null || item.get('price') === null) {
                 return;
             }
             

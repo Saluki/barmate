@@ -44,22 +44,24 @@ app.views.ProductForm = Backbone.View.extend({
 		var pPrice = parseFloat( this.$inputPrice.val() );
 		var pQt = parseInt( this.$inputQt.val() );
 
-		if( app.categories.currentID == undefined || app.categories.currentID == -1 )
+		if( app.categories.currentID === undefined || app.categories.currentID == -1 )
 			return;
 
+        var errorMessage;
+
 		if( pName.length < 1 || pName.length > 50 )
-			var errorMessage = 'Product name must be between 1 and 50 characters';
+			errorMessage = 'Product name must be between 1 and 50 characters';
 
 		if( pDescription.length > 250 )
-			var errorMessage = 'Description may not be longer than 250 characters';
+			errorMessage = 'Description may not be longer than 250 characters';
 
 		if( isNaN(pPrice) || pPrice < 0 )
-			var errorMessage = 'Price must be a positive number';
+			errorMessage = 'Price must be a positive number';
 
 		if( isNaN(pQt) || pQt < 0 )
-			var errorMessage = 'Quantity must be a positive integer';
+			errorMessage = 'Quantity must be a positive integer';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return;
 		}

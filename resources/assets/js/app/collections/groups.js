@@ -25,7 +25,7 @@ var app = app || {};
             
             var groupName = item.get('group');
             
-            if( this.findWhere({name: groupName}) != undefined )
+            if( this.findWhere({name: groupName}) !== undefined )
                 return;
             
             this.add(new app.Group({name: groupName}));

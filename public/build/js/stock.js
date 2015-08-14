@@ -107,13 +107,15 @@ app.views.CategoryForm = Backbone.View.extend({
 		var title       = this.$inputTitle.val();
 		var description = this.$inputDescription.val();
 
+        var errorMessage;
+
 		if( title.length < 1 )
-			var errorMessage = 'Title may not be empty';
+			errorMessage = 'Title may not be empty';
 
 		if( title.length > 50 )
-			var errorMessage = 'Title may not be longer than 50 characters';
+			errorMessage = 'Title may not be longer than 50 characters';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return; 
 		}
@@ -173,10 +175,12 @@ app.views.CategoryItem = Backbone.View.extend({
 
 		this.$el.html();
 
-		if( this.editMode == false )
-			var content = this.templateDefault( this.model.toJSON() );
+        var content;
+
+		if( this.editMode === false )
+			content = this.templateDefault( this.model.toJSON() );
 		else
-			var content = this.templateEdit( this.model.toJSON() );
+			content = this.templateEdit( this.model.toJSON() );
 			
 		this.$el.html(content);
 		return this;
@@ -218,13 +222,15 @@ app.views.CategoryItem = Backbone.View.extend({
 		var newTitle       = $('#input-title').val();
 		var newDescription = $('#input-description').val();
 
+        var errorMessage;
+
 		if( newTitle.length < 1 )
-			var errorMessage = 'Title may not be empty';
+			errorMessage = 'Title may not be empty';
 
 		if( newTitle.length > 50 )
-			var errorMessage = 'Title may not be longer than 50 characters';
+			errorMessage = 'Title may not be longer than 50 characters';
 			
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return; 
 		}
@@ -318,13 +324,15 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var product = app.products.get( app.products.currentID );
 
-		if( product == undefined )
+		if( product === undefined )
 			return;
 
-		if( this.editMode == false ) 
-			var content = this.templateDisplay( product.toJSON() );
+        var content;
+
+		if( this.editMode === false )
+			content = this.templateDisplay( product.toJSON() );
 		else
-			var content = this.templateEdit( product.toJSON() );
+			content = this.templateEdit( product.toJSON() );
 
 		this.editMode = false;
 
@@ -343,7 +351,7 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var productModel= app.products.get( app.products.currentID );
 
-		if( productModel == undefined )
+		if( productModel === undefined )
 			return;
 
 		productModel.destroy({
@@ -365,7 +373,7 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 		var productModel= app.products.get( app.products.currentID );
 
-		if( productModel == undefined )
+		if( productModel === undefined )
 			return;
 
 		var newName        = $('#product-update-name').val();
@@ -373,19 +381,21 @@ app.views.ProductDisplay = Backbone.View.extend({
 		var newPrice       = parseFloat( $('#product-update-price').val() );
 		var newQt          = parseInt( $('#product-update-qt').val() );
 
+        var errorMessage;
+
 		if( newName.length < 1 || newName.length > 50 )
-			var errorMessage = 'Product name must be between 1 and 50 characters';
+			errorMessage = 'Product name must be between 1 and 50 characters';
 
 		if( newDescription.length > 250 )
-			var errorMessage = 'Description may not be longer than 250 characters';
+			errorMessage = 'Description may not be longer than 250 characters';
 
 		if( isNaN(newPrice) || newPrice < 0 )
-			var errorMessage = 'Price must be a positive number';
+			errorMessage = 'Price must be a positive number';
 
 		if( isNaN(newQt) || newQt < 0 )
-			var errorMessage = 'Quantity must be a positive integer';
+			errorMessage = 'Quantity must be a positive integer';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return;
 		}
@@ -473,22 +483,24 @@ app.views.ProductForm = Backbone.View.extend({
 		var pPrice = parseFloat( this.$inputPrice.val() );
 		var pQt = parseInt( this.$inputQt.val() );
 
-		if( app.categories.currentID == undefined || app.categories.currentID == -1 )
+		if( app.categories.currentID === undefined || app.categories.currentID == -1 )
 			return;
 
+        var errorMessage;
+
 		if( pName.length < 1 || pName.length > 50 )
-			var errorMessage = 'Product name must be between 1 and 50 characters';
+			errorMessage = 'Product name must be between 1 and 50 characters';
 
 		if( pDescription.length > 250 )
-			var errorMessage = 'Description may not be longer than 250 characters';
+			errorMessage = 'Description may not be longer than 250 characters';
 
 		if( isNaN(pPrice) || pPrice < 0 )
-			var errorMessage = 'Price must be a positive number';
+			errorMessage = 'Price must be a positive number';
 
 		if( isNaN(pQt) || pQt < 0 )
-			var errorMessage = 'Quantity must be a positive integer';
+			errorMessage = 'Quantity must be a positive integer';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return;
 		}
@@ -552,14 +564,14 @@ app.views.ProductList = Backbone.View.extend({
 
 	render: function() {
 
-		if( app.categories.currentID == -1 ) {
+        var content;
 
-			var content = '';
+		if( app.categories.currentID == -1 ) {
+			content = '';
 		}
 		else {
-
 			var products = app.products.where({ category:app.categories.currentID });
-			var content = this.template( {'products':products} );
+			content = this.template( {'products':products} );
 		}
 
 		app.productForm.hide();
@@ -572,7 +584,7 @@ app.views.ProductList = Backbone.View.extend({
 
 		var productID = $(e.target).data('product');
 
-		if( productID == undefined )
+		if( productID === undefined )
 			return;
 
 		app.products.currentID = productID;

@@ -27,13 +27,15 @@ app.views.CategoryForm = Backbone.View.extend({
 		var title       = this.$inputTitle.val();
 		var description = this.$inputDescription.val();
 
+        var errorMessage;
+
 		if( title.length < 1 )
-			var errorMessage = 'Title may not be empty';
+			errorMessage = 'Title may not be empty';
 
 		if( title.length > 50 )
-			var errorMessage = 'Title may not be longer than 50 characters';
+			errorMessage = 'Title may not be longer than 50 characters';
 
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return; 
 		}

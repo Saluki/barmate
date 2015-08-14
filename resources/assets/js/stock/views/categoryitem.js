@@ -27,10 +27,12 @@ app.views.CategoryItem = Backbone.View.extend({
 
 		this.$el.html();
 
-		if( this.editMode == false )
-			var content = this.templateDefault( this.model.toJSON() );
+        var content;
+
+		if( this.editMode === false )
+			content = this.templateDefault( this.model.toJSON() );
 		else
-			var content = this.templateEdit( this.model.toJSON() );
+			content = this.templateEdit( this.model.toJSON() );
 			
 		this.$el.html(content);
 		return this;
@@ -72,13 +74,15 @@ app.views.CategoryItem = Backbone.View.extend({
 		var newTitle       = $('#input-title').val();
 		var newDescription = $('#input-description').val();
 
+        var errorMessage;
+
 		if( newTitle.length < 1 )
-			var errorMessage = 'Title may not be empty';
+			errorMessage = 'Title may not be empty';
 
 		if( newTitle.length > 50 )
-			var errorMessage = 'Title may not be longer than 50 characters';
+			errorMessage = 'Title may not be longer than 50 characters';
 			
-		if( errorMessage != undefined ) {
+		if( errorMessage !== undefined ) {
 			alertify.error(errorMessage);
 			return; 
 		}

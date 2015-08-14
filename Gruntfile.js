@@ -175,7 +175,7 @@ module.exports = function (grunt) {
 
             all: {
 
-                src: ['Gruntfile.js', '<%= jsBuild %>/*.js', '!<%= jsBuild %>/*.min.js']
+                src: ['Gruntfile.js', '<%= jsSource %>/**']
             }
         }
 
