@@ -23,7 +23,8 @@
   font-size: 70px;
   text-align: center;
   height: 70%;
-  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
 }
 .action-tile .action-text {
   font-size: 15px;

@@ -36,8 +36,15 @@ body {
   font-weight: bold;
   margin: 40px;
 }
+@-webkit-keyframes rocket {
+  50% {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
 @keyframes rocket {
   50% {
-    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
   }
 }

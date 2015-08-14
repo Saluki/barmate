@@ -51,7 +51,8 @@ input.form-control[type="text"] {
   height: 34px;
   border: 1px solid lightgrey;
   border-radius: 3px;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+          transition: all 0.3s ease;
 }
 #new-category-form input[type="text"]:focus {
   border: 1px solid #0095dd;
