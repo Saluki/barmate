@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 /* USERS COMPONENTS STYLESHEET */
 #users-table tr:first-child td {
   border-top: 0px;

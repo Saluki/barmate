@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 #main-container {
   display: table;
   height: 100%;
@@ -130,6 +140,16 @@
   border: 1px solid #AC2925;
 }
 
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 #payment-container {
   display: none;
   position: fixed;

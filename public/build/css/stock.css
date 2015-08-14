@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 /* STOCK APP STYLESHEET */
 input.form-control[type="text"] {
   margin-bottom: 10px;

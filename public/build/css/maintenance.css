@@ -1,3 +1,13 @@
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 body {
   background: #0095dd;
   color: #ffffff;

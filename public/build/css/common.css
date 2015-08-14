@@ -1,4 +1,24 @@
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 body {
   background: #f2f2f2;
 }
@@ -127,6 +147,16 @@ select.form-control[disabled] {
   padding-left: 10px;
 }
 
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 header {
   position: absolute;
   top: 0px;
@@ -170,6 +200,16 @@ header #open-menu {
   cursor: pointer;
 }
 
+@font-face {
+  font-family: Droid Sans;
+  font-weight: normal;
+  src: url("../fonts/droid_sans.ttf");
+}
+@font-face {
+  font-family: Droid Sans;
+  font-weight: bold;
+  src: url("../fonts/droid_sans_bold.ttf");
+}
 #menu-container {
   display: none;
   position: fixed;

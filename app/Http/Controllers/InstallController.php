@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use PDO;
+use URL;
 use PDOException;
 
 class InstallController extends Controller
@@ -26,7 +27,7 @@ class InstallController extends Controller
         return view('install.welcome');
     }
 
-    public function computeRequirements()
+    public function computeRequirements(Request $request)
     {
         $requirements = [   'PHP_VERSION'           => false,
                             'OPENSSL_EXTENSION'     => false,
