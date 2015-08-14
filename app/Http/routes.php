@@ -1,11 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-*/
-
 // INSTALLATION ROUTES
 
 Route::group(['prefix'=>'install', 'middleware'=>'installed'], function(){

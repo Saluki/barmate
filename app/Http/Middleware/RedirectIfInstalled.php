@@ -11,14 +11,14 @@ class RedirectIfInstalled
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if( !file_exists(base_path().'/'.self::INSTALLATION_FILE) )
-        {
+        // Installation lock disabled, we can't run the install process anymore
+        if (!file_exists(base_path() . '/' . self::INSTALLATION_FILE)) {
             return redirect('/');
         }
 
