@@ -10,6 +10,9 @@
 
 	<link rel="stylesheet" type="text/css" href="{{ url('build/css/users.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('bower_components/alertify-js/build/css/alertify.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/css/alertify-theme.css') }}" />
+
 @stop
 
 @section('content')
@@ -166,6 +169,9 @@
 
 @section('custom-js')
 
-	<script type="text/javascript" src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+	<script src="{{ url('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/alertify-js/build/alertify.min.js') }}"></script>
+
+    <script src="{{ url('build/js/users.js') }}"></script>
 
 @stop

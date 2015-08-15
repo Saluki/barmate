@@ -45,6 +45,11 @@ module.exports = function (grunt) {
             stats: {
                 src: ['<%= jsSource %>/stats/*.js'],
                 dest: '<%= jsBuild %>/stats.js'
+            },
+
+            users: {
+                src: ['<%= jsSource %>/users/*.js'],
+                dest: '<%= jsBuild %>/users.js'
             }
 
         },

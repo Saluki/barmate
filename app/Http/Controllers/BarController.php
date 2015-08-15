@@ -12,7 +12,6 @@ use DB;
 
 class BarController extends Controller
 {
-
     private $categoryRepository;
 
     private $saleRepository;
@@ -40,16 +39,17 @@ class BarController extends Controller
     {
         $stock = $this->categoryRepository->allWithProducts();
 
-        return view('app.app')->withStock($stock);
+        return view('app.app')->with('stock', $stock);
     }
 
     public function registerSale(Request $request, ProductRepository $productRepository)
     {
-        DB::beginTransaction();
-
         $currentSnapshotId = $this->snapshotRepository->current()->cs_id;
 
         foreach ($request->all() as $sale) {
+
+            DB::beginTransaction();
+
             $formattedSaleDate = ['time' => $sale['timestamp'],
                 'sum' => $sale['price'],
                 'paid' => $sale['cash']];
@@ -72,9 +72,9 @@ class BarController extends Controller
                 'time' => $sale['timestamp'],
                 'sale_id' => $saleId,
                 'cs_id' => $currentSnapshotId]);
-        }
 
-        DB::commit();
+            DB::commit();
+        }
 
         return Response::json(['status' => 1], 200);
     }

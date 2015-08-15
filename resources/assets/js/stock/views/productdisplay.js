@@ -46,7 +46,7 @@ app.views.ProductDisplay = Backbone.View.extend({
 
 	askRemove: function() {
 
-		alertify.confirm('Confirm that you want to delete the product', this.removeProduct);
+		alertify.confirm('Please confirm that you want to delete this product.', this.removeProduct);
 	},
 
 	removeProduct: function() {

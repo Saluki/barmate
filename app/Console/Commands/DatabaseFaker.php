@@ -31,7 +31,8 @@ class DatabaseFaker extends Command {
 	{
         $this->displayWarning();
 
-        Artisan::call('db:seed', []);
+        Artisan::call('db:seed', ['--force'=>true]);
+        $this->info('Created administrator account \'admin@barmate.com\' with password \'password\'.');
 
         $groupId = Groups::firstOrFail()->group_id;
 
@@ -68,17 +69,21 @@ class DatabaseFaker extends Command {
     {
         for($i=0; $i<self::NB_USERS; $i++)
         {
-            User::create([  'firstname'         => $this->faker->firstName,
-                            'lastname'          => $this->faker->lastName,
+            $firstName = $this->faker->firstName;
+            $lastName = $this->faker->lastName;
+            $email = strtolower($firstName.'.'.$lastName.'@'.$this->faker->domainName);
+
+            User::create([  'firstname'         => $firstName,
+                            'lastname'          => $lastName,
                             'group_id'          => $groupId,
-                            'email'             => strtolower($this->faker->email),
+                            'email'             => $email,
                             'password_hash'     => Hash::make('password'),
                             'role'              => ( $i%2 == 0 ) ? 'USER' : 'MNGR',
                             'inscription_date'  => $this->faker->dateTime,
                             'is_active'         => ( $i%5 == 0 ) ? false : true ]);
         }
 
-        $this->info('Added '.self::NB_USERS.' users to the application.');
+        $this->info('Added '.self::NB_USERS.' users to the application with password \'password\'.');
     }
 
     private function seedCategories($groupId)
