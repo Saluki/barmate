@@ -88,6 +88,7 @@
 #main-container #ticket-container #ticket #ticket-header h2 #clear-ticket {
   font-weight: normal;
   border-radius: 3px;
+  margin-top: -8px;
 }
 #main-container #ticket-container #ticket #ticket-body .ticket-item {
   display: table;

@@ -1,80 +1,52 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App;
+use App\Repositories\UserRepository;
+use App\Exceptions\ValidationException;
+use App\Exceptions\RepositoryException;
 use App\User;
-use Auth;
 use Hash;
 use Illuminate\Http\Request;
 use Validator;
+use Exception;
 
-class AccountController extends Controller {
+class AccountController extends Controller
+{
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
 
     public function index()
-    {    
-        $userData = User::profileData(Auth::id());
-        
-        if( $userData == null )
-        {
-            App::abort(500, 'User does not exist');
-        }
-
-        $roles = ['USER'=>'User', 'MNGR'=>'Manager', 'ADMN'=>'Administrator'];
-        $userData->role = $roles[ $userData->role ];
+    {
+        $userData = $this->userRepository->get(auth()->id());
+        $userData->role = $this->getRoleName($userData->role);
 
         return view('account.main')->with('user', $userData);
     }
-    
+
     public function saveProfile(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-           
-            'firstname'       => 'required|name',
-            'lastname'        => 'required|name',
-            'email'           => 'required|email',
-            'npassword'       => 'password'
-        ]);
-        
-        if( $validator->fails() )
-        {
-            $messages = $validator->messages();
-            return redirect('app/account')->with('error', $messages->all()[0] );
+        try {
+            $this->userRepository->updateAccount(auth()->id(), $request->all());
         }
-
-        $user = User::find(Auth::id());
-
-        if( $request->input('npassword') != '' )
-        {
-            if( $request->input('npassword') != $request->input('npasswordrepeat') )
-            {
-                return redirect('app/account')->with('error', 'New passwords doesn\'t match');
-            }
-
-            $user->password_hash = Hash::make($request->input('npassword'));
+        catch(ValidationException $e) {
+            return redirect('app/account')->with('error', $e->getMessageBag()->first());
         }
-
-        $user = User::find( Auth::id() );
-        $user->firstname = $request->input('firstname');
-        $user->lastname  = $request->input('lastname');
-        $user->email     = $request->input('email');
-        $user->notes     = $request->input('notes');
-
-        try
-        {
-            $user->save();
-        }
-        catch(Exception $e)
-        {
-            $errorMessage = 'Database error';
-           
-            if( $e->getCode() == 23000 )
-            {
-                $errorMessage = 'Email is already in use';
-            }
-
-            return redirect('app/account')->with('error', $errorMessage);
+        catch(RepositoryException $e) {
+            return redirect('app/account')->with('error', 'Could not update settings: '.strtolower($e->getMessage()));
         }
 
         return redirect('app/account')->with('success', 'Account settings updated');
     }
 
+    private function getRoleName($roleName)
+    {
+        $roles = ['USER' => 'User', 'MNGR' => 'Manager', 'ADMN' => 'Administrator'];
+        return $roles[$roleName];
+    }
 }

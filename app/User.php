@@ -28,23 +28,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                                         'email'             => 'required|email|unique:users,email',
                                         'password'          => 'required|password',
                                         'repeat_password'   => 'same:password'];
-
-    public static function profileData($id) {
-        
-        if( is_null($id) || !is_numeric($id) )
-            return null;
-        
-        $user = DB::select('SELECT u.firstname, u.lastname, u.email, u.role, u.inscription_date, 
-                            u.notes, g.group_name
-                            FROM users u, groups g
-                            WHERE g.group_id = u.group_id
-                            AND u.user_id = ?', [ $id ]);
-        
-        if( count($user) == 0 )
-            return null;
-        
-        return $user[0];
-    }
     
     public function scopeActiveGroup($query) {
     	

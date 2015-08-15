@@ -63,25 +63,25 @@
                 <!-- PASSWORD -->
 
                 <div class="col-md-4">
-                    <label>Current Password</label>
+                    <label>Current password</label>
                     <input type="password" class="form-control" disabled value="password">
                 </div>
 
                 <div class="col-md-4">
-                    <label>New Password</label>
-                    <input type="password" name="npassword" class="form-control">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control">
                 </div>
 
                 <div class="col-md-4">
-                    <label>Repeat New Password</label>
-                    <input type="password" name="npasswordrepeat" class="form-control">
+                    <label>Repeat password</label>
+                    <input type="password" name="repeat_password" class="form-control">
                 </div>
 
                 <!-- NOTES -->
 
                 <div class="col-md-12">
 
-                    <label>About Me</label>
+                    <label>About me</label>
                     <textarea class="form-control" name="notes">{{ $user->notes }}</textarea>
                     <br>
 

@@ -34,7 +34,7 @@
                 <div id="ticket-header">
                     <h2>
                         Ticket
-                        <button id="clear-ticket" class="btn btn-default btn-xs pull-right">Clear</button>
+                        <button id="clear-ticket" class="btn btn-default pull-right">Clear</button>
                     </h2>
                 </div>
                 
