@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
 
-    // Users component
+    console.log('Users component');
 
 });

@@ -159,9 +159,9 @@ var app = app || {};
             	
             	error: function(jqxhr, textStatus, errorThrown) {
 
-                    var errorMessage = 'Check your network settings or report the problem to the administrator.';
+                    var errorMessage = 'We could not save the sales to the Barmate server. Please check your network settings or report the problem to an administrator.';
 
-            		alertify.alert('Could not save sale to the server', errorMessage);
+            		alertify.alert('Oups, something went wrong...', errorMessage);
                     app.sync.trigger('error');
 
                     app.sync.inSync = false;
