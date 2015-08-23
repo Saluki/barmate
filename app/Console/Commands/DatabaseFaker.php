@@ -29,7 +29,15 @@ class DatabaseFaker extends Command {
 
 	public function fire()
 	{
-        $this->displayWarning();
+        $this->error("\nWatch out!");
+        $this->info('This command will truncate all your Barmate data.');
+        $this->info("Use this command only for testing purposes.\n");
+
+        if( $this->confirm('Are you sure you want to continue? ', false)==false )
+        {
+            $this->info('Command aborted');
+            return 1;
+        }
 
         Artisan::call('db:seed', ['--force'=>true]);
         $this->info('Created administrator account \'admin@barmate.com\' with password \'password\'.');
@@ -51,19 +59,6 @@ class DatabaseFaker extends Command {
 	{
 		return [];
 	}
-
-    private function displayWarning()
-    {
-        $this->error("\nWatch out!");
-        $this->info('This command will truncate all your Barmate data.');
-        $this->info("Use this command only for testing purposes.\n");
-
-        if( $this->confirm('Are you sure you want to continue? ', false)==false )
-        {
-            $this->info('Command aborted');
-            die;
-        }
-    }
 
     private function seedUsers($groupId)
     {
