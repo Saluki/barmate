@@ -5,6 +5,7 @@ use App\Models\CashSnapshots;
 use Auth;
 use DB;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Session;
 use Validator;
 
@@ -164,17 +165,10 @@ class SnapshotRepository extends Repository
         }
     }
 
-    public function APIFormat($object)
+    public function APIFormat(Collection $object)
     {
-        if (!is_object($object))
-            return null;
-
-        if (get_class($object) === 'CashSnapshots')
-            return $this->formatRecord($object);
-
         $responseArray = [];
         foreach ($object as $record) {
-
             array_push($responseArray, $this->formatRecord($record));
         }
 

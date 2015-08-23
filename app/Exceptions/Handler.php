@@ -2,7 +2,10 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use App\Exceptions\RepositoryException;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run as RunWhoops;
 
 class Handler extends ExceptionHandler
 {
@@ -68,14 +71,14 @@ class Handler extends ExceptionHandler
      */
     protected function renderExceptionWithWhoops(Exception $e)
     {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
+        $whoops = new RunWhoops();
+        $whoops->pushHandler(new PrettyPageHandler());
 
-        return new \Illuminate\Http\Response(
-            $whoops->handleException($e),
-            $e->getStatusCode(),
-            $e->getHeaders()
-        );
+        if ($e instanceof HttpException) {
+            return new Response($whoops->handleException($e), $e->getStatusCode(), $e->getHeaders());
+        }
+
+        return new Response($whoops->handleException($e));
     }
 
 }

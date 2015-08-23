@@ -2,9 +2,10 @@
 
 use App\Exceptions\RepositoryException;
 use App\Models\Products;
-use Carbon\CarbonInterval;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use DB;
+use Illuminate\Database\Eloquent\Collection;
 use Session;
 use stdClass;
 use Validator;
@@ -185,22 +186,13 @@ class ProductRepository extends Repository {
 	/**
 	 * Format a Product object or an Eloquent Collection to a REST format
 	 *
-	 * @param  	object 	$product 	MUST be a Product object or an Eloquent Collection
-	 * @return 	mixed 				In the case of a Collection, an array of REST object. 
-	 *								Otherwise a REST object.
+	 * @param  	object 	$products 	MUST be a Product object or an Eloquent Collection
+	 * @return 	array
 	 */
-	public function APIFormat($products) {
-
-		if( !is_object($products) )
-			return null;
-
-		// If it's simply a Product class
-		if( strpos(get_class($products), 'Products') != FALSE )
-			return $this->formatRecord( $products );
-
+	public function APIFormat(Collection $products)
+    {
 		$responseArray = [];
 		foreach ($products as $product) {
-
 			array_push($responseArray, $this->formatRecord( $product ));
 		}
 
@@ -215,8 +207,8 @@ class ProductRepository extends Repository {
 	 * @return 	void
 	 * @throws 	RepositoryException 	If the validation failed
 	 */
-	public function validate(array $data, $required=true) {
-
+	public function validate(array $data, $required=true)
+    {
 		$rules = Products::$validationRules;
 
 		if( $required === false ) {
@@ -241,8 +233,8 @@ class ProductRepository extends Repository {
 	 * @param  	object  $model  Existing Eloquent model to update. If NULL, a new model will be created
 	 * @return  null|$object 	The new or updated Eloquent model
 	 */
-	private function createModel($data, $model=NULL) {
-
+	private function createModel($data, $model=NULL)
+    {
 		if( $model == NULL )
 			$model = new Products();
 
@@ -270,8 +262,8 @@ class ProductRepository extends Repository {
 	 * @param  	object  $product  	An Eloquent object that represents a record 
 	 * @return  object 				A stdObject which contains some casted attributes
 	 */
-	private function formatRecord($product) {
-
+	private function formatRecord($product)
+    {
 		$productObject = new stdClass();
 			
 		$productObject->id       = intval($product->product_id);

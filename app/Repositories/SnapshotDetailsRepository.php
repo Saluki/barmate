@@ -3,6 +3,7 @@
 use App\Exceptions\RepositoryException;
 use App\Models\SnapshotDetails;
 use Session;
+use Exception;
 use Auth;
 use Validator;
 
