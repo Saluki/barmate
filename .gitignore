@@ -4,3 +4,4 @@
 .env
 /public/bower_components
 /.idea
+/_ide_helper.php

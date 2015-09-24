@@ -30,32 +30,14 @@ Follow these instructions to install Barmate:
 composer install
 bower install
 ```
-* Copy **.env.example** to **.env** and adapt the values (application URL and database credentials) to your configuration
-```
-cp .env.example .env
-```
-* Set the application key with
-```
-php artisan key:generate
-```
-* Install the database by running
-```
-php artisan migrate
-php artisan db:seed
-```
+* Go to **http://domain.com/install** and follow the installation wizard
 
 Note that on some configurations, you need to specify the correct rights for the storage folder:
 ```
 chmod -R 777 storage/
 ```
 
-That's it! You can now test Barmate by going to you application URL, go to the login page and enter the following credentials: 
-```
-admin@barmate.com
-password
-```
-
-**Watch out!** Don't forget to change the administrator credentials.
+That's it! You can now test Barmate by going to you application URL, go to the login page and enter your credentials: 
 
 ## Copyright and license
 
