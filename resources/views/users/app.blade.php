@@ -42,12 +42,7 @@
 
     	<div class="paper-body">
 
-            <div class="col-md-6">
-                <h2>All users</h2>
-                <br>
-            </div>
-
-            <div class="col-md-6">
+            <div class="col-md-6 col-md-offset-6">
     		    <a href="{{ url('app/users/register') }}" class="btn btn-default pull-right" style="margin-top:20px;">
                     <i class="fa fa-user-plus"></i>&nbsp;&nbsp;Add user
                 </a>

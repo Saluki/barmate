@@ -206,7 +206,7 @@
 								<div class="fa fa-archive"></div>
 
 								<div class="intro-text">
-									This snapshot has no cash operations or sales.
+									This snapshot has neither cash operation nor sale.
 								</div>
 
                                 @unless($snapshot->is_closed)

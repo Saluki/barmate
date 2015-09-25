@@ -27,10 +27,6 @@
     	</div>
 
     	<div class="paper-body">
-
-            <div class="col-md-12">
-                <h2>Manage stock</h2>
-            </div>
     		
     		<div class="col-md-4">
                 
@@ -38,7 +34,7 @@
 
                 <div id="new-category-form">
 
-                    <input type="text" id="c-title" placeholder="Category title">
+                    <input type="text" id="c-title" placeholder="Category">
                     <!--<input type="text" id="c-description" placeholder="Description">-->
                     <button class="btn btn-success" id="btn-save-category">Add</button>
 
@@ -209,7 +205,7 @@
                 <% } %>
 
                 <br><br>
-                <b><%= price %>€</b> per product
+                <b>€ <%= price %></b> / item
 
                 <br><br>
                 <button class="btn btn-default" id="edit-product">
@@ -229,17 +225,13 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
-                <label>Name</label>
-                <input type="text" id="product-update-name" value="<%= name %>" class="form-control">
+                <input type="text" id="product-update-name" value="<%= name %>" class="form-control" placeholder="Name">
 
-                <label>Description</label>
-                <input type="text" id="product-update-description" value="<%= description %>" class="form-control">
+                <input type="text" id="product-update-description" value="<%= description %>" class="form-control" placeholder="Description">
 
-                <label>Price</label>
-                <input type="text" id="product-update-price" value="<%= price %>" class="form-control">
+                <input type="text" id="product-update-price" value="<%= price %>" class="form-control" placeholder="Price">
 
-                <label>Quantity</label>
-                <input type="text" id="product-update-qt" value="<%= quantity %>" class="form-control">
+                <input type="text" id="product-update-qt" value="<%= quantity %>" class="form-control" placeholder="Quantity">
 
                 <br>
 

@@ -63,26 +63,26 @@ class UsersController extends Controller {
                                                  ->with('error', $e->getMessageBag()->first());
         }
         catch (RepositoryException $e) {
-    		return redirect('app/users/register')->with('error', 'Could not add a new user account: '.strtolower($e->getMessage()))
+    		return redirect('app/users/register')->with('error', 'Could not add new user: '.strtolower($e->getMessage()))
                                                  ->withInput();
     	}
     	    	
-    	return redirect('app/users')->with('success', 'User account for '.$user->firstname.' created');
+    	return redirect('app/users')->with('success', $user->firstname.' account added');
     }
     
     public function changeAccountStatus($userId)
     {    	
     	try {
-    		$isActive = $this->userRepository->changeStatus($userId);
+    		$user = $this->userRepository->changeStatus($userId);
     	}
     	catch(RepositoryException $e) {
-    		return redirect('app/users')->with('error', 'Could not change status of account');
+    		return redirect('app/users')->with('error', 'Could not change account status');
     	}
     	
-    	if($isActive)
-    		return redirect('app/users/disabled')->with('success', 'Account is now enabled');
+    	if($user->is_active)
+    		return redirect('app/users/disabled')->with('success', 'User <b>'.$user->firstname.'</b> enabled');
     	else
-    		return redirect('app/users')->with('success', 'Account is now disabled');
+    		return redirect('app/users')->with('success', 'User <b>'.$user->firstname.'</b> disabled');
     }
     
     public function changeAccountRole($userId)
@@ -101,7 +101,7 @@ class UsersController extends Controller {
     	$roleNames = ['ADMN'=>'administrator','MNGR'=>'manager','USER'=>'user'];
     	$roleName = $roleNames[$user->role];
     	
-    	return redirect($redirectUrl)->with('success', $user->firstname.' has now the role <i>'.$roleName.'</i>');
+    	return redirect($redirectUrl)->with('success', 'User <b>'.$user->firstname.'</b> is now <i>'.$roleName.'</i>');
     }
     
     public function deleteUser($userId)
@@ -113,7 +113,7 @@ class UsersController extends Controller {
     		return redirect('app/users')->with('error', 'User could not be deleted: '.$e->getMessage());
     	}
     	
-    	return redirect('app/users')->with('success', 'User '.$user->firstname.' has been deleted');
+    	return redirect('app/users')->with('success', 'User <b>'.$user->firstname.'</b> deleted');
     }
 
     private function getRoleNames()

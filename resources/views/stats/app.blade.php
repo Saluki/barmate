@@ -32,7 +32,7 @@
                 <div class="dropdown pull-right" style="margin-top:20px;">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
                         <span class="fa fa-calendar"></span>&nbsp;
-                        Change period
+                        Period
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">

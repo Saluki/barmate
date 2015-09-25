@@ -95,7 +95,7 @@ class UserRepository extends Repository
             throw new RepositoryException('Database error', RepositoryException::DATABASE_ERROR);
         }
 
-        return $user->is_active;
+        return $user;
     }
 
     public function changeRole($userId)

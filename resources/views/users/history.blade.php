@@ -26,7 +26,7 @@
     	<div class="paper-body">
 
             <div class="col-md-10">
-                <h2>Connection history for {{ $user->firstname }} {{ $user->lastname }}</h2>
+                <h2>{{ $user->firstname }} {{ $user->lastname }}</h2>
                 <br>
             </div>
 
@@ -41,9 +41,9 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Email address</th>
-                            <th>IP address</th>
-                            <th>Login time&nbsp;&nbsp;<span class="fa fa-caret-down"></span></th>
+                            <th>E-mail</th>
+                            <th>IP</th>
+                            <th>Login&nbsp;&nbsp;<span class="fa fa-caret-down"></span></th>
                         </tr>
                     </thead>
                     <tbody>

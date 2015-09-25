@@ -34,7 +34,7 @@
     	<div class="paper-body">
 
             <div class="col-md-6">
-                <h2>Add a new user account</h2>
+                <h2>New user</h2>
                 <br>
             </div>
 
@@ -51,13 +51,13 @@
                         <div class="col-md-6">
 
                             <label>First name</label>
-                            <input type="text" name="firstname" value="{{ old('firstname') }}" class="form-control" placeholder="Firstname">
+                            <input type="text" name="firstname" value="{{ old('firstname') }}" class="form-control" placeholder="First name">
 
                         </div>
                         <div class="col-md-6">
 
                             <label>Last name</label>
-                            <input type="text" name="lastname" value="{{ old('lastname') }}" class="form-control" placeholder="Lastname">
+                            <input type="text" name="lastname" value="{{ old('lastname') }}" class="form-control" placeholder="Last name">
 
                         </div>
                         <div class="col-md-12">
