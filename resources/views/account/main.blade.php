@@ -68,12 +68,12 @@
                 </div>
 
                 <div class="col-md-4">
-                    <label>Password</label>
+                    <label>New password</label>
                     <input type="password" name="password" class="form-control">
                 </div>
 
                 <div class="col-md-4">
-                    <label>Repeat password</label>
+                    <label>Repeat new password</label>
                     <input type="password" name="repeat_password" class="form-control">
                 </div>
 

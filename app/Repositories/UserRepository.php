@@ -156,12 +156,12 @@ class UserRepository extends Repository
         $this->validateID($userId);
 
         $validator = Validator::make($userData, [
-            'firstname' => 'required|name',
-            'lastname' => 'required|name',
-            'email' => 'required|email',
-            'password' => 'password',
-            'repeat_password' => 'same:password',
-            'notes' => '',
+            'firstname'       => 'required|name',
+            'lastname'        => 'required|name',
+            'email'           => 'required|email',
+            'password'        => 'password',
+            'repeat_password' => 'required_with:password|same:password',
+            'notes'           => '',
         ]);
 
         if ($validator->fails()) {
