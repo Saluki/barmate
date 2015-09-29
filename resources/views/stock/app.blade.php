@@ -117,8 +117,8 @@
                 </i>
 
             </span>
-            <i class="fa fa-trash remove pull-right text-danger" style="padding:5px;margin-top:-10px;cursor:pointer;"></i>
-            <i class="fa fa-pencil edit pull-right" style="padding:5px;margin-top:-10px;cursor:pointer;"></i>
+            <i class="fa fa-trash remove pull-right text-danger" style="padding:5px;margin-top:-13px;cursor:pointer;font-size:20px;"></i>
+            <i class="fa fa-pencil edit pull-right" style="padding:5px;margin-top:-13px;cursor:pointer;font-size:20px;"></i>
         </div>
 
     </script>
@@ -225,12 +225,16 @@
         <div class="panel panel-default">
             <div class="panel-body">
 
+                <label>Name</label>
                 <input type="text" id="product-update-name" value="<%= name %>" class="form-control" placeholder="Name">
 
+                <label>Description</label>
                 <input type="text" id="product-update-description" value="<%= description %>" class="form-control" placeholder="Description">
 
+                <label>Price</label>
                 <input type="text" id="product-update-price" value="<%= price %>" class="form-control" placeholder="Price">
 
+                <label>Quantity</label>
                 <input type="text" id="product-update-qt" value="<%= quantity %>" class="form-control" placeholder="Quantity">
 
                 <br>

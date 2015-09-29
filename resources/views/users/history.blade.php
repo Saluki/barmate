@@ -32,7 +32,7 @@
 
             <div class="col-md-2">
                 <a href="{{ url('app/users') }}" class="btn btn-default pull-right" style="margin-top:20px;">
-                    <span class="fa fa-times"></span>&nbsp;&nbsp;Back
+                    <span class="fa fa-arrow-left"></span>&nbsp;&nbsp;Back
                 </a>
             </div>
 
