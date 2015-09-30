@@ -189,8 +189,12 @@ class ProductRepository extends Repository {
 	 * @param  	object 	$products 	MUST be a Product object or an Eloquent Collection
 	 * @return 	array
 	 */
-	public function APIFormat(Collection $products)
+	public function APIFormat($products)
     {
+        if($products instanceof Products) {
+            return [$this->formatRecord($products)];
+        }
+
 		$responseArray = [];
 		foreach ($products as $product) {
 			array_push($responseArray, $this->formatRecord( $product ));
