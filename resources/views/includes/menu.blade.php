@@ -53,4 +53,8 @@
 
     </div>
 
+    <div id="close-glass">
+
+    </div>
+
 </div>

@@ -9,6 +9,8 @@ var app = app || {};
 
             $('#open-menu').click(this.show);
             $('#close-menu').click(this.hide);
+
+            $('#close-glass').click(this.hide);
         },
 
         show: function(){

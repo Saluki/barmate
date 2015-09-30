@@ -285,3 +285,10 @@ header #open-menu {
 #menu-container #menu .entry:last-child {
   border-bottom: 0px;
 }
+#menu-container #close-glass {
+  position: absolute;
+  top: 0px;
+  left: 300px;
+  width: 100%;
+  height: 100%;
+}
