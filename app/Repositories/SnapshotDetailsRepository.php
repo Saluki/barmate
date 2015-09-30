@@ -9,7 +9,7 @@ use Validator;
 
 class SnapshotDetailsRepository extends Repository {
 
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\SnapshotDetails';
     }

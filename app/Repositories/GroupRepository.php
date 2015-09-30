@@ -7,7 +7,7 @@ use Exception;
 
 class GroupRepository extends Repository {
 
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\Groups';
     }

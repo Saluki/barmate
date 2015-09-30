@@ -14,7 +14,7 @@ use Carbon\Carbon;
 
 class UserRepository extends Repository
 {
-    function getModelName()
+    public function getModelName()
     {
         return 'App\User';
     }

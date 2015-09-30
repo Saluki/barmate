@@ -12,8 +12,7 @@ use Validator;
 
 class SaleRepository extends Repository
 {
-
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\Sales';
     }

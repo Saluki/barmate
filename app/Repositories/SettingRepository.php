@@ -8,7 +8,7 @@ class SettingRepository extends Repository {
 
     const STOCK_EMPTY_ALERT = 'stock_empty_alert';
 
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\Settings';
     }

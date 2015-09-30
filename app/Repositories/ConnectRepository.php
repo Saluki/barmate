@@ -6,7 +6,7 @@ use App\Exceptions\RepositoryException;
 
 class ConnectRepository extends Repository {
 
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\ConnectHistory';
     }

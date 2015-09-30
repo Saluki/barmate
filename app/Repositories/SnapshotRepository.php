@@ -11,8 +11,7 @@ use Validator;
 
 class SnapshotRepository extends Repository
 {
-
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\CashSnapshots';
     }

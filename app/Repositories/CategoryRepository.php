@@ -6,7 +6,7 @@ use Session;
 
 class CategoryRepository extends Repository
 {
-    function getModelName()
+    public function getModelName()
     {
         return 'App\Models\Categories';
     }

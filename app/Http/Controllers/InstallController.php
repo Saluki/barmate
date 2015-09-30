@@ -63,7 +63,7 @@ class InstallController extends Controller
 
         $accepted = true;
         foreach ($requirements as $requirement => $status) {
-            if ($status == false) {
+            if ($status === false) {
                 $accepted = false;
                 break;
             }
