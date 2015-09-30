@@ -129,6 +129,21 @@
 
     </script>
 
+    <script type="text/template" id="template-stock">
+
+        <% _.each(products, function(product){ %>
+
+            <button class="stock-item" data-id="<%= product.id %>">
+                <%= product.get('name') %>
+                <div class="stock-item-price">
+                    <span class="fa fa-eur"></span> <%= product.get('price') %>
+                </div>
+            </button>
+
+        <% }) %>
+
+    </script>
+
     <!-- EXTRA DEPENDENCIES -->
     <script src="{{ asset('bower_components/underscore/underscore.js') }}"></script>
     <script src="{{ asset('bower_components/backbone/backbone.js') }}"></script>

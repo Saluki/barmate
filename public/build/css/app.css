@@ -61,6 +61,12 @@
   border-radius: 3px;
   box-shadow: 0px 1px 3px lightgrey;
 }
+#main-container #stock .stock-item .stock-item-price {
+  background: #0095dd;
+  margin-top: 15px;
+  padding: 5px;
+  font-size: 14px;
+}
 #main-container #ticket-container {
   width: 300px;
   display: table-cell;
