@@ -30,7 +30,10 @@ Follow these instructions to install Barmate:
 composer install
 bower install
 ```
-* Go to **http://domain.com/install** and follow the installation wizard
+* Go to the following URL and follow the installation wizard
+```
+http://path-to-barmate/install
+```
 
 Note that on some configurations, you need to specify the correct rights for the storage folder:
 ```
