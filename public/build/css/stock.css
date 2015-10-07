@@ -66,13 +66,25 @@ input.form-control[type="text"] {
   margin-top: 15px;
 }
 #product-list .product {
+  padding-top: 25px;
+  border: 0;
+  width: 120px;
+  height: 80px;
+  float: left;
+  margin: 10px;
+  background: #ffffff;
+  text-align: center;
   cursor: pointer;
-  padding: 10px;
-  border-bottom: 1px solid lightgrey;
+  font-size: 17px;
+  border-radius: 3px;
+  border: 1px solid #d3d3d3;
 }
 #product-list .product.active {
   color: #0095dd;
   font-weight: bold;
+}
+#product-list .product:hover {
+  background: #f9f9f9;
 }
 #product-panel {
   margin-top: 15px;

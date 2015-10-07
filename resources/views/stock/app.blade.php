@@ -153,11 +153,11 @@
 
                 <% if( product.get('quantity')<=0 ) { %>
 
-                    &nbsp;&nbsp;<span class="fa fa-warning text-danger"></span>
+                    &nbsp;<span class="fa fa-warning text-danger"></span>
 
                 <% } else if( product.get('quantity')<=app.stockSettings.stockEmptyAlert ) { %>
 
-                    &nbsp;&nbsp;<span class="fa fa-warning text-warning"></span>
+                    &nbsp;<span class="fa fa-warning text-warning"></span>
 
                 <% } %>
 

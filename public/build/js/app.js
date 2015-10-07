@@ -410,7 +410,6 @@ var app = app || {};
             
             this.$el.html('');
 
-
             var products = app.currentStock.where({
                 'group': app.groupView.currentGroup
             });
