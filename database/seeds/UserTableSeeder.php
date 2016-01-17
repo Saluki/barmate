@@ -11,13 +11,31 @@ class UserTableSeeder extends Seeder {
 
 		$default = Groups::firstOrFail();
 
+        User::create([  'firstname'        => 'Nathan',
+            'lastname'     	   => 'Ingram',
+            'group_id'         => $default->group_id,
+            'email'            => 'user@barmate.com',
+            'password_hash'    => Hash::make('password'),
+            'role'             => 'USER',
+            'inscription_date' => Carbon::now()->toDateTimeString(),
+            'is_active'        => true ]);
+
         User::create([  'firstname'        => 'John',
-                        'lastname'     	   => 'Doe',
-                        'group_id'         => $default->group_id,
-                        'email'            => 'admin@barmate.com',
-                        'password_hash'    => Hash::make('password'),
-                        'role'             => 'ADMN',
-                        'inscription_date' => Carbon::now()->toDateTimeString(),
-                        'is_active'        => true ]);
+            'lastname'     	   => 'Reese',
+            'group_id'         => $default->group_id,
+            'email'            => 'manager@barmate.com',
+            'password_hash'    => Hash::make('password'),
+            'role'             => 'MNGR',
+            'inscription_date' => Carbon::now()->toDateTimeString(),
+            'is_active'        => true ]);
+
+        User::create([  'firstname'        => 'Harold',
+            'lastname'     	   => 'Finch',
+            'group_id'         => $default->group_id,
+            'email'            => 'administrator@barmate.com',
+            'password_hash'    => Hash::make('password'),
+            'role'             => 'ADMN',
+            'inscription_date' => Carbon::now()->toDateTimeString(),
+            'is_active'        => true ]);
 	}
 }

@@ -235,7 +235,7 @@ class ProductRepository extends Repository {
 	 *
 	 * @param  	array 	$data  	Data array with the new data
 	 * @param  	object  $model  Existing Eloquent model to update. If NULL, a new model will be created
-	 * @return  null|$object 	The new or updated Eloquent model
+	 * @return  null|object 	The new or updated Eloquent model
 	 */
 	private function createModel($data, $model=NULL)
     {

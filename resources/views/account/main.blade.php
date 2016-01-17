@@ -50,7 +50,7 @@
 
                 <div class="col-md-4">
                     <label>Role</label>
-                    <input type="text" class="form-control" disabled value="{{ $user->role }}">
+                    <input type="text" class="form-control" disabled value="{{ $roleDescription }}">
                 </div>
 
                 <!-- EMAIL -->

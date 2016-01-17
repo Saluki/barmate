@@ -12,13 +12,14 @@ abstract class Repository implements RepositoryInterface {
     {
         $model = $app->make($this->getModelName());
 
-        if( !$model instanceof Model )
+        if( !$model instanceof Model ) {
             throw new RepositoryException('Model must be an instance of Illuminate\\Database\\Eloquent\\Model');
+        }
 
         $this->model = $model;
     }
 
-    abstract function getModelName();
+    public abstract function getModelName();
 
     public function all()
     {
@@ -57,7 +58,7 @@ abstract class Repository implements RepositoryInterface {
 
     public function validateID($id)
     {
-        if( (bool) preg_match('/^[0-9]{1,10}$/', $id) == false )
+        if( (bool) preg_match('/^[0-9]{1,10}$/', $id) === false )
         {
             throw new RepositoryException('Parameter must be a positive integer', RepositoryException::INCORRECT_PARAMETER);
         }

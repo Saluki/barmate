@@ -24,9 +24,10 @@ class AccountController extends Controller
     public function index()
     {
         $userData = $this->userRepository->get(auth()->id());
-        $userData->role = $this->getRoleName($userData->role);
 
-        return view('account.main')->with('user', $userData);
+        return view('account.main')
+            ->with('user', $userData)
+            ->with('roleDescription', $this->getRoleName($userData->role));
     }
 
     public function saveProfile(Request $request)
