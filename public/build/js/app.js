@@ -410,9 +410,10 @@ var app = app || {};
             
             this.$el.html('');
 
-            var products = app.currentStock.where({
-                'group': app.groupView.currentGroup
+            var products = app.currentStock.filter(function(product){
+                return product.id != null && product.get('group') == app.groupView.currentGroup;
             });
+
             var content = this.template({
                'products': products
             });
@@ -655,7 +656,7 @@ $(function () {
     app.ticketView = new app.TicketView();
     app.paymentView = new app.PaymentView();
     app.syncBox = new app.SyncView();
-                
+
     // Load server data in the stock
     app.currentStock.reset(serverData);
 

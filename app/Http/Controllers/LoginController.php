@@ -22,7 +22,7 @@ class LoginController extends Controller {
 
 	public function getLoginForm()
 	{
-		return view('public.login');	
+		return view('public.login');
 	}
     
     public function loginAttempt(Request $request)
@@ -56,7 +56,7 @@ class LoginController extends Controller {
             return redirect('/')->with('error', 'The email and password you entered don\'t match')
                                 ->with('email', $email);
         }
-        
+
         $connectRecord = new ConnectHistory;
         $connectRecord->user_id      = $user->user_id;
         $connectRecord->email        = $email;

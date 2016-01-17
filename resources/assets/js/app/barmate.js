@@ -21,7 +21,7 @@ $(function () {
     app.ticketView = new app.TicketView();
     app.paymentView = new app.PaymentView();
     app.syncBox = new app.SyncView();
-                
+
     // Load server data in the stock
     app.currentStock.reset(serverData);
 

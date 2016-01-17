@@ -22,9 +22,10 @@ var app = app || {};
             
             this.$el.html('');
 
-            var products = app.currentStock.where({
-                'group': app.groupView.currentGroup
+            var products = app.currentStock.filter(function(product){
+                return product.id != null && product.get('group') == app.groupView.currentGroup;
             });
+
             var content = this.template({
                'products': products
             });
