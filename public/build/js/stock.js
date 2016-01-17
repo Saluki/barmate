@@ -134,7 +134,12 @@ app.views.CategoryForm = Backbone.View.extend({
 			},
 			error: function(model, response) {
 
-				alertify.error('Problem on the server');
+                if( response.responseJSON.error ) {
+                    alertify.error(response.responseJSON.error);
+                }
+                else {
+                    alertify.error('Problem on the server');
+                }
 			}
 		});
 	},

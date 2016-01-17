@@ -14,6 +14,7 @@ class Categories extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $guarded = ['category_id'];
+    protected $fillable = ['group_id', 'category_title', 'description', 'is_active'];
 
 	public function getKeyName(){
 

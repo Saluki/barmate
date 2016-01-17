@@ -17,16 +17,38 @@ class CategoryRepository extends Repository
 
         try {
             $category = $this->model->find($id);
-        }
-        catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new RepositoryException('Could not retrieve category', RepositoryException::DATABASE_ERROR);
         }
 
-        if( $category==NULL ) {
+        if ($category == NULL) {
             throw new RepositoryException('Category not found', RepositoryException::RESOURCE_NOT_FOUND);
         }
 
         return $category;
+    }
+
+    public function store(array $data)
+    {
+        try {
+
+            $this->model->create([
+                'group_id' => session('groupID'),
+                'category_title' => $data['title'],
+                'description' => $data['description'],
+                'is_active' => true
+            ]);
+
+        } catch (\Exception $e) {
+            throw new RepositoryException($e->getMessage(), RepositoryException:: DATABASE_ERROR);
+        }
+    }
+
+    public function contains($categoryTitle)
+    {
+        $category = $this->model->where('category_title', '=', $categoryTitle)->first();
+
+        return $category != null;
     }
 
     public function allWithProducts()
@@ -38,6 +60,6 @@ class CategoryRepository extends Repository
 					AND c.deleted_at IS NULL
 					AND c.group_id = ?';
 
-        return DB::select($query, [ Session::get('groupID') ]);
+        return DB::select($query, [Session::get('groupID')]);
     }
 }

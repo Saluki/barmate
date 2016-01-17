@@ -1,13 +1,22 @@
 <?php namespace App\Http\Controllers;
 
+use App\Exceptions\RepositoryException;
 use App\Models\Categories;
+use App\Repositories\CategoryRepository;
 use DB;
+use Illuminate\Http\Request;
 use Input;
 use Response;
-use Session;
 use Validator;
 
-class CategoryController extends Controller {
+class CategoryController extends Controller
+{
+    protected $categoryRepository;
+
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -26,31 +35,35 @@ class CategoryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{		
-    	$validator = Validator::make(Input::all(), [
-    		'title'        => 'required|alpha|between:1,50',
-    		'description'  => ''
+    	$validator = Validator::make($request->all(), [
+    		'title' => 'required|name|between:1,50',
     	]);
 
     	if( $validator->fails() ) {
-    		return Response::json( ['code'=>1, 'error'=>'Validation failed'], 400);
+    		return response()
+                ->json(['code'=>1, 'error'=>'Validation failed'])
+                ->setStatusCode(400);
     	}
 
-		$category = new Categories();
-		$category->group_id  = Session::get('groupID');
-		$category->category_title = Input::get('title');
-		$category->description = Input::get('description');
-		$category->is_active = true;
+        if( $this->categoryRepository->contains($request->input('title')) ) {
+            return response()
+                ->json(['code'=>2, 'error'=>'Category name already exists'])
+                ->setStatusCode(400);
+        }
 
-		if( !$category->save() ) {
+        try {
+            $this->categoryRepository->store($request->all());
+        }
+        catch(RepositoryException $e) {
+            return response()
+                ->json(['code'=>2, 'error'=>'Database error'])
+                ->setStatusCode(400);
+        }
 
-			return Response::json( ['code'=>2, 'error'=>'Database error'], 400);
-		}
-
-    	return Response::json( ['id' => DB::getPdo()->lastInsertId() ], 200);
+    	return response()->json(['id' => DB::getPdo()->lastInsertId()]);
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -71,14 +84,13 @@ class CategoryController extends Controller {
 		return Response::json($category, 200);
 	}
 
-
 	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, Request $request)
 	{
 		$validator = Validator::make(Input::all(), [
     		'title'        => 'required|alpha|between:1,50',
@@ -89,8 +101,15 @@ class CategoryController extends Controller {
     		return Response::json( ['code'=>3, 'error'=>'Validation failed'], 400);
     	}
 
-		if( !$this->isID($id) )
-			return Response::json(['code'=>1, 'error'=>'Parameter must be numeric'], 400);
+		if( !$this->isID($id) ) {
+            return Response::json(['code' => 1, 'error' => 'Parameter must be numeric'], 400);
+        }
+
+        if( $this->categoryRepository->contains($request->input('title')) ) {
+            return response()
+                ->json(['code'=>2, 'error'=>'Category name already exists'])
+                ->setStatusCode(400);
+        }
 
 		$category = Categories::fromGroup()->find($id);
 
