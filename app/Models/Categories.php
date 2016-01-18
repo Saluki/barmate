@@ -21,17 +21,6 @@ class Categories extends Model {
         return 'category_id';
     }
 
-    public static function allAPI() {
-
-    	$query = 'SELECT c.category_id as "id", c.category_title as "title", 
-    				c.description, c.is_active as "active", c.created_at as "created"
-					FROM categories c
-					WHERE c.group_id = ?
-					AND c.deleted_at IS NULL';
-
-		return DB::select($query, [ Session::get('groupID') ]);
-    }
-
 	/**
 	 * Selects all the categories from the current group
 	 *

@@ -30,6 +30,10 @@ class CategoryRepository extends Repository
 
     public function store(array $data)
     {
+        if ($this->contains($data['title'])) {
+            throw new RepositoryException('Category name already exists', RepositoryException::DATABASE_ERROR);
+        }
+
         try {
 
             $this->model->create([
@@ -42,6 +46,8 @@ class CategoryRepository extends Repository
         } catch (\Exception $e) {
             throw new RepositoryException($e->getMessage(), RepositoryException:: DATABASE_ERROR);
         }
+
+        return DB::getPdo()->lastInsertId();
     }
 
     public function contains($categoryTitle)
@@ -61,5 +67,16 @@ class CategoryRepository extends Repository
 					AND c.group_id = ?';
 
         return DB::select($query, [Session::get('groupID')]);
+    }
+
+    public function allAPI()
+    {
+        $query = 'SELECT c.category_id as "id", c.category_title as "title",
+    				c.description, c.is_active as "active", c.created_at as "created"
+					FROM categories c
+					WHERE c.group_id = ?
+					AND c.deleted_at IS NULL';
+
+        return DB::select($query, [ Session::get('groupID') ]);
     }
 }

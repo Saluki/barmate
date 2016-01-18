@@ -1,55 +1,62 @@
 <?php
 
 use App\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class AccountControllerTest extends TestCase
 {
-    /**
-     * @dataProvider roleProvider
-     */
-    public function testIndex($role, $roleDescription)
-    {
-        $user = $this->getUser($role);
-        $pageVisit = $this->visitPageAs($user, 'app/account');
+    use WithoutMiddleware;
 
-        $pageVisit->assertResponseOk();
-        $pageVisit->assertViewHas('user', $user);
-        $pageVisit->assertViewHas('roleDescription', $roleDescription);
+    protected $userRepositoryMock;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->userRepositoryMock = $this->mock('App\Repositories\UserRepository');
+
+        // To avoid problems with the auth() helper
+        $this->be(new User);
     }
 
-    public function roleProvider()
+    public function tearDown()
     {
-        return [
-            ['USER', 'User'],
-            ['MNGR', 'Manager'],
-            ['ADMN', 'Administrator']
-        ];
+        Mockery::close();
     }
 
-    public function testIndexAsVisitor()
+    public function testIndex()
     {
-        $this->visit('app/account')
-            ->see('Sign In');
+        $this->userRepositoryMock
+            ->shouldReceive('get')
+            ->once()
+            ->andReturn(new User(['role'=>'USER']));
+
+        $this->get('/app/account');
+
+        $this->assertResponseOk();
+        $this->assertViewHas('user');
+        $this->assertViewHas('roleDescription');
     }
 
-    private function getUser($role = 'USER')
+    public function testSaveProfile()
     {
-        $email = 'user@barmate.com';
+        $this->userRepositoryMock
+            ->shouldReceive('updateAccount')
+            ->once();
 
-        if( $role=='MNGR' ) {
-            $email = 'manager@barmate.com';
-        }
-        elseif( $role=='ADMN' ) {
-            $email = 'administrator@barmate.com';
-        }
+        $this->post('/app/account');
 
-        return User::where('email', '=', $email)->firstOrFail();
+        $this->assertRedirectedTo('/app/account');
     }
 
-    private function visitPageAs($user, $pageUrl)
+    public function mock($className)
     {
-        return $this->actingAs($user)
-            ->withSession(['groupID' => $user->group_id, 'role' => $user->role])
-            ->visit($pageUrl);
+        // Creating a new mock
+        $mock = Mockery::mock($className);
+
+        // Ask Laravel IoC to return mocked object when asking for 'className'
+        $this->app->instance($className, $mock);
+
+        return $mock;
     }
 }
